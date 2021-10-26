@@ -1,0 +1,35 @@
+import 'package:flutter/material.dart';
+
+class AppColors {
+  static const Color primaryBlue = Color.fromRGBO(37, 95, 133, 1);
+  static const Color success = Color.fromRGBO(133, 185, 77, 1);
+
+  static final Map<int, Color> _colorCodesForBlue = {
+    50: Color.fromRGBO(37, 95, 133, .1),
+    100: Color.fromRGBO(37, 95, 133, .2),
+    200: Color.fromRGBO(37, 95, 133, .3),
+    300: Color.fromRGBO(37, 95, 133, .4),
+    400: Color.fromRGBO(37, 95, 133, .5),
+    500: Color.fromRGBO(37, 95, 133, .6),
+    600: Color.fromRGBO(37, 95, 133, .7),
+    700: Color.fromRGBO(37, 95, 133, .8),
+    800: Color.fromRGBO(37, 95, 133, .9),
+    900: Color.fromRGBO(37, 95, 133, 1),
+  };
+
+  static final Map<int, Color> _colorCodesForWarning = {
+    50: Color.fromRGBO(255, 190, 11, .1),
+    100: Color.fromRGBO(255, 190, 11, .2),
+    200: Color.fromRGBO(255, 190, 11, .3),
+    300: Color.fromRGBO(255, 190, 11, .4),
+    400: Color.fromRGBO(255, 190, 11, .5),
+    500: Color.fromRGBO(255, 190, 11, .6),
+    600: Color.fromRGBO(255, 190, 11, .7),
+    700: Color.fromRGBO(255, 190, 11, .8),
+    800: Color.fromRGBO(255, 190, 11, .9),
+    900: Color.fromRGBO(255, 190, 11, 1),
+  };
+
+  static MaterialColor blue = MaterialColor(0xFF255f85, _colorCodesForBlue);
+  static MaterialColor yellow = MaterialColor(0xFFFFBE0B, _colorCodesForWarning);
+}
