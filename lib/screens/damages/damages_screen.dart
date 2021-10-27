@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/drawer/app_drawer.dart';
+import 'package:moj_student/screens/widgets/not_supported.dart';
 
 class DamagesScreen extends StatefulWidget {
   DamagesScreen({Key? key}) : super(key: key);
@@ -20,6 +21,7 @@ class _DamagesScreenState extends State<DamagesScreen> {
         elevation: 0,
       ),
       drawer: AppDrawer(),
+      body: NotSupported()
     );
   }
 }

@@ -30,6 +30,23 @@ class AppColors {
     900: Color.fromRGBO(255, 190, 11, 1),
   };
 
+  static final Map<int, Color> _colorCodesForSuccess = {
+    50: Color.fromRGBO(133, 185, 77, .1),
+    100: Color.fromRGBO(133, 185, 77, .2),
+    200: Color.fromRGBO(133, 185, 77, .3),
+    300: Color.fromRGBO(133, 185, 77, .4),
+    400: Color.fromRGBO(133, 185, 77, .5),
+    500: Color.fromRGBO(133, 185, 77, .6),
+    600: Color.fromRGBO(133, 185, 77, .7),
+    700: Color.fromRGBO(133, 185, 77, .8),
+    800: Color.fromRGBO(133, 185, 77, .9),
+    900: Color.fromRGBO(133, 185, 77, 1),
+  };
+
   static MaterialColor blue = MaterialColor(0xFF255f85, _colorCodesForBlue);
-  static MaterialColor yellow = MaterialColor(0xFFFFBE0B, _colorCodesForWarning);
+  
+  static MaterialColor yellow =
+      MaterialColor(0xFFFFBE0B, _colorCodesForWarning);
+
+  static MaterialColor green = MaterialColor(0xFF85b94d, _colorCodesForSuccess);
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/drawer/app_drawer.dart';
+import 'package:moj_student/screens/widgets/not_supported.dart';
 
 class FailuresScreen extends StatefulWidget {
   FailuresScreen({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _FailuresScreenState extends State<FailuresScreen> {
         backgroundColor: AppColors.blue,
         child: Icon(Icons.add),
       ),
+      body: NotSupported(),
     );
   }
 }

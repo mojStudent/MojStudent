@@ -2,136 +2,76 @@ import 'dart:math';
 // EXCLUDE_FROM_GALLERY_DOCS_END
 import 'package:flutter/material.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:moj_student/constants/colors.dart';
+import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 
-class GroupedBarChart extends StatelessWidget {
-  final List<charts.Series<dynamic, String>> seriesList;
+class InternetTrafficChart extends StatelessWidget {
+  final List<charts.Series<dynamic, String>> chartData;
   final bool animate;
 
-  GroupedBarChart(this.seriesList, {this.animate = false});
+  static const int gigabyte = 1000000000;
 
-  factory GroupedBarChart.withSampleData() {
-    return new GroupedBarChart(
-      _createSampleData(),
-      // Disable animations for image tests.
-      animate: false,
+  const InternetTrafficChart(
+      {Key? key, required this.chartData, required this.animate})
+      : super(key: key);
+
+  factory InternetTrafficChart.createChart(InternetTrafficModel data) {
+    return InternetTrafficChart(
+      chartData: _generateData(data),
+      animate: true,
     );
   }
-
-  // EXCLUDE_FROM_GALLERY_DOCS_START
-  // This section is excluded from being copied to the gallery.
-  // It is used for creating random series data to demonstrate animation in
-  // the example app only.
-  factory GroupedBarChart.withRandomData() {
-    return new GroupedBarChart(_createRandomData());
-  }
-
-  /// Create random data.
-  static List<charts.Series<OrdinalSales, String>> _createRandomData() {
-    final random = new Random();
-
-    final desktopSalesData = [
-      new OrdinalSales('2014', random.nextInt(100)),
-      new OrdinalSales('2015', random.nextInt(100)),
-      new OrdinalSales('2016', random.nextInt(100)),
-      new OrdinalSales('2017', random.nextInt(100)),
-    ];
-
-    final tableSalesData = [
-      new OrdinalSales('2014', random.nextInt(100)),
-      new OrdinalSales('2015', random.nextInt(100)),
-      new OrdinalSales('2016', random.nextInt(100)),
-      new OrdinalSales('2017', random.nextInt(100)),
-    ];
-
-    final mobileSalesData = [
-      new OrdinalSales('2014', random.nextInt(100)),
-      new OrdinalSales('2015', random.nextInt(100)),
-      new OrdinalSales('2016', random.nextInt(100)),
-      new OrdinalSales('2017', random.nextInt(100)),
-    ];
-
-    return [
-      new charts.Series<OrdinalSales, String>(
-        id: 'Desktop',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: desktopSalesData,
-      ),
-      new charts.Series<OrdinalSales, String>(
-        id: 'Tablet',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: tableSalesData,
-      ),
-      new charts.Series<OrdinalSales, String>(
-        id: 'Mobile',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: mobileSalesData,
-      ),
-    ];
-  }
-  // EXCLUDE_FROM_GALLERY_DOCS_END
 
   @override
   Widget build(BuildContext context) {
-    return new charts.BarChart(
-      seriesList,
+    return charts.BarChart(
+      chartData,
       animate: animate,
       barGroupingType: charts.BarGroupingType.grouped,
+      vertical: false,
     );
   }
 
-  /// Create series list with multiple series
-  static List<charts.Series<OrdinalSales, String>> _createSampleData() {
-    final desktopSalesData = [
-      new OrdinalSales('2014', 5),
-      new OrdinalSales('2015', 25),
-      new OrdinalSales('2016', 100),
-      new OrdinalSales('2017', 75),
-    ];
+  static List<charts.Series<_TrafficDataChart, String>> _generateData(
+      InternetTrafficModel data) {
+    var dates = data.days.data.labels;
+    var upTraffic = data.days.data.datasets[0].data;
+    var downTraffic = data.days.data.datasets[1].data;
 
-    final tableSalesData = [
-      new OrdinalSales('2014', 25),
-      new OrdinalSales('2015', 50),
-      new OrdinalSales('2016', 10),
-      new OrdinalSales('2017', 20),
-    ];
+    List<charts.Series<_TrafficDataChart, String>> chartData = [];
 
-    final mobileSalesData = [
-      new OrdinalSales('2014', 10),
-      new OrdinalSales('2015', 15),
-      new OrdinalSales('2016', 50),
-      new OrdinalSales('2017', 45),
-    ];
+    List<_TrafficDataChart> upTrafficChartData = [];
+    List<_TrafficDataChart> downTrafficChartData = [];
+    for (int i = 0; i < dates.length; i++) {
+      upTrafficChartData.add(
+          _TrafficDataChart(name: dates[i], value: upTraffic[i] / gigabyte));
+      downTrafficChartData.add(
+          _TrafficDataChart(name: dates[i], value: downTraffic[i] / gigabyte));
+    }
 
     return [
-      new charts.Series<OrdinalSales, String>(
-        id: 'Desktop',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: desktopSalesData,
+      charts.Series<_TrafficDataChart, String>(
+        id: 'up',
+        domainFn: (_TrafficDataChart data, _) => data.name,
+        measureFn: (_TrafficDataChart data, _) => data.value,
+        data: upTrafficChartData,
+        fillColorFn: (_, __) => charts.ColorUtil.fromDartColor(Colors.red),
       ),
-      new charts.Series<OrdinalSales, String>(
-        id: 'Tablet',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: tableSalesData,
-      ),
-      new charts.Series<OrdinalSales, String>(
-        id: 'Mobile',
-        domainFn: (OrdinalSales sales, _) => sales.year,
-        measureFn: (OrdinalSales sales, _) => sales.sales,
-        data: mobileSalesData,
-      ),
+      charts.Series<_TrafficDataChart, String>(
+        id: 'down',
+        domainFn: (_TrafficDataChart data, _) => data.name,
+        measureFn: (_TrafficDataChart data, _) => data.value,
+        data: downTrafficChartData,
+        fillColorFn: (_, __) =>
+            charts.ColorUtil.fromDartColor(AppColors.success),
+      )
     ];
   }
 }
 
-/// Sample ordinal data type.
-class OrdinalSales {
-  final String year;
-  final int sales;
+class _TrafficDataChart {
+  final String name;
+  final double value;
 
-  OrdinalSales(this.year, this.sales);
+  _TrafficDataChart({required this.name, required this.value});
 }
