@@ -15,13 +15,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var loginModelFromSharedPreferences = LoginModelSharedPreferences.getUserFromSharedPreferences();
-    if(loginModelFromSharedPreferences != null) {
-      
-    }
-
-
-
     return Scaffold(
       backgroundColor: AppColors.success,
       body: BlocProvider(

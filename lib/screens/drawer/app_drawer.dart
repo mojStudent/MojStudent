@@ -32,10 +32,9 @@ class AppDrawer extends StatelessWidget {
           _drawerItem("Škodni zapisniki", Icons.houseboat_outlined,
               onClick: () =>
                   Navigator.of(context).pushReplacementNamed("/damages")),
-          _drawerItem(
-            "Profil",
-            Icons.person_outline,
-          ),
+          _drawerItem("Profil", Icons.person_outline,
+              onClick: () =>
+                  Navigator.of(context).pushReplacementNamed("/profile")),
           _drawerItem("Odjava", Icons.exit_to_app_outlined, onClick: () {
             var auth = AuthRepository();
             auth.logOut().then((value) =>

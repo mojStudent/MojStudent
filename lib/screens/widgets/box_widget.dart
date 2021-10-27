@@ -6,13 +6,13 @@ class BoxWidget extends StatelessWidget {
   final Color backgroundColor;
   final Icon? icon;
 
-  const BoxWidget({
-    Key? key,
-    required this.cardBody,
-    required this.title,
-    this.backgroundColor = Colors.white,
-    this.icon,
-  }) : super(key: key);
+  const BoxWidget(
+      {Key? key,
+      required this.cardBody,
+      required this.title,
+      this.backgroundColor = Colors.white,
+      this.icon,})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -52,8 +52,8 @@ class BoxWidget extends StatelessWidget {
                     Flexible(
                       child: Text(
                         title,
-                        style:
-                            TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
+                        style: TextStyle(
+                            fontWeight: FontWeight.w700, fontSize: 22),
                       ),
                     )
                   ]),

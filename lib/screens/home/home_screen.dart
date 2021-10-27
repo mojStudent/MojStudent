@@ -4,6 +4,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/screens/drawer/app_drawer.dart';
+import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/services/home/home_bloc.dart';
 import 'package:moj_student/services/home/home_event.dart';
 import 'package:moj_student/services/home/home_state.dart';
@@ -53,7 +54,6 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-
   Widget _buildView(BuildContext context) {
     final state = context.watch<HomeBloc>().state;
     print(state);
@@ -95,33 +95,29 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(top: 0),
           ),
           SliverToBoxAdapter(
-            child: _box(
-              context,
-              _profileCardBody(context),
-              "Osnovni podatki",
+            child: BoxWidget(
+              cardBody: _profileCardBody(context),
+              title: "Osnovni podatki",
             ),
           ),
           SliverToBoxAdapter(
-            child: _box(
-              context,
-              Center(
+            child: BoxWidget(
+              cardBody: Center(
                 child: Text("Neprebrana obvestila"),
               ),
-              user.notifications.toString(),
+              title: user.notifications.toString(),
             ),
           ),
           SliverToBoxAdapter(
-            child: _box(
-              context,
-              _activeNotificationCardBody(context),
-              "Naročila na obvestila",
+            child: BoxWidget(
+              cardBody: _activeNotificationCardBody(context),
+              title: "Naročila na obvestila",
             ),
           ),
           SliverToBoxAdapter(
-            child: _box(
-              context,
-              _profileDetailedCardBody(context),
-              "Napredni podatki profila",
+            child: BoxWidget(
+              cardBody: _profileDetailedCardBody(context),
+              title: "Napredni podatki profila",
             ),
           ),
           SliverPadding(
@@ -134,70 +130,38 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  Widget _box(BuildContext context, Widget cardBody, String title,
-      {backgroundColor = Colors.white, Icon? icon}) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.width * 0.04,
-          horizontal: MediaQuery.of(context).size.height * 0.025),
-      child: Container(
-        color: Colors.transparent,
-        child: Container(
-          decoration: BoxDecoration(
-              color: backgroundColor,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ]),
-          padding: EdgeInsets.fromLTRB(
-            MediaQuery.of(context).size.width * 0.025,
-            MediaQuery.of(context).size.height * 0.015,
-            MediaQuery.of(context).size.width * 0.025,
-            MediaQuery.of(context).size.height * 0.025,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                  mainAxisAlignment: icon != null
-                      ? MainAxisAlignment.spaceBetween
-                      : MainAxisAlignment.center,
-                  children: [
-                    icon ?? Container(),
-                    Text(
-                      title,
-                      style:
-                          TextStyle(fontWeight: FontWeight.w700, fontSize: 22),
-                    )
-                  ]),
-              Divider(
-                thickness: 1,
-              ),
-              cardBody,
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   Widget _profileCardBody(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _detailedRowInBox(user.firstname, "ime"),
-        _detailedRowInBox(user.lastname, "priimek"),
-        _detailedRowInBox("${user.location} (${user.campus}), ${user.room}",
-            "lokacija in številka sobe"),
-        _detailedRowInBox(user.email, "e-pošta"),
-        _detailedRowInBox(user.username, "uporabniško ime"),
-        _detailedRowInBox(user.phone, "telefonska številka"),
-        _detailedRowInBox(user.id.toString(), "id uporabnika"),
+        RowBoxWidget(
+          data: user.firstname,
+          description: "ime",
+        ),
+        RowBoxWidget(
+          data: user.lastname,
+          description: "priimek",
+        ),
+        RowBoxWidget(
+          data: "${user.location} (${user.campus}), ${user.room}",
+          description: "lokacija in številka sobe",
+        ),
+        RowBoxWidget(
+          data: user.email,
+          description: "e-pošta",
+        ),
+        RowBoxWidget(
+          data: user.username,
+          description: "uporabniško ime",
+        ),
+        RowBoxWidget(
+          data: user.phone,
+          description: "telefonska številka",
+        ),
+        RowBoxWidget(
+          data: user.id.toString(),
+          description: "id uporabnika",
+        ),
       ],
     );
   }
@@ -206,7 +170,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _detailedRowInBox(user.id.toString(), "id uporabnika"),
+        RowBoxWidget(data: user.id.toString(), description: "id uporabnika"),
         Padding(
           padding: EdgeInsets.symmetric(
               vertical: MediaQuery.of(context).size.height * 0.01),
@@ -233,13 +197,26 @@ class _HomeScreenState extends State<HomeScreen> {
             ],
           ),
         ),
-        _detailedRowInBox(
-            user.internetAccess ?? false ? 'da' : 'ne', "internetni dostop"),
-        _detailedRowInBox(
-            user.foreigner ?? false ? 'da' : 'ne', "status tujca"),
-        _detailedRowInBox(user.api ?? false ? 'da' : 'ne', "api dostop"),
-        _detailedRowInBox(user.emailDate, "datum potrditve e-pošte"),
-        _detailedRowInBox(user.ip, "trenutni IP"),
+        RowBoxWidget(
+          data: user.internetAccess ?? false ? 'da' : 'ne',
+          description: "internetni dostop",
+        ),
+        RowBoxWidget(
+          data: user.foreigner ?? false ? 'da' : 'ne',
+          description: "status tujca",
+        ),
+        RowBoxWidget(
+          data: user.api ?? false ? 'da' : 'ne',
+          description: "api dostop",
+        ),
+        RowBoxWidget(
+          data: user.emailDate,
+          description: "datum potrditve e-pošte",
+        ),
+        RowBoxWidget(
+          data: user.ip,
+          description: "trenutni IP",
+        ),
       ],
     );
   }
@@ -296,30 +273,6 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: rows,
-    );
-  }
-
-  Widget _detailedRowInBox(String? data, String description) {
-    return Padding(
-      padding: EdgeInsets.symmetric(
-          vertical: MediaQuery.of(context).size.height * 0.01),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(
-            description,
-            style: TextStyle(fontWeight: FontWeight.w300),
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.02, top: 2),
-            child: Text(
-              data ?? '',
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }

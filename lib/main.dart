@@ -13,6 +13,7 @@ import 'package:moj_student/screens/internet/internet_screen.dart';
 import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
+import 'package:moj_student/screens/profile/profile_screen.dart';
 import 'package:moj_student/services/home/home_bloc.dart';
 import 'package:moj_student/services/login/login_bloc.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
@@ -56,6 +57,7 @@ class MyApp extends StatelessWidget {
             '/notification': (context) => NotificationDetailView(),
             '/failures': (context) => FailuresScreen(),
             '/damages': (context) => DamagesScreen(),
+            '/profile': (context) => ProfileScreen(),
             '/login': (context) => LoginScreen(),
           },
           home: InitialLoading(),
