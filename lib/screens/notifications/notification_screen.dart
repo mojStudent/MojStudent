@@ -191,8 +191,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           ),
           style: ElevatedButton.styleFrom(primary: Colors.white),
           onPressed: () {
-            print("tuke");
-
             context
                 .read<NotificationBloc>()
                 .add(LoadNotification(notificationId: notification.id));
