@@ -1,17 +1,17 @@
-import 'dart:io';
+import 'package:html/dom.dart' as dom;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
-import 'package:moj_student/data/notifications/notification_model.dart';
+import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
+import 'package:moj_student/services/files/file_downloader.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
 import 'package:moj_student/services/notification/notification_events.dart';
 import 'package:moj_student/services/notification/notification_states.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/webview_flutter.dart';
 
 class NotificationDetailView extends StatelessWidget {
   const NotificationDetailView({Key? key}) : super(key: key);
@@ -114,8 +114,15 @@ class NotificationDetailView extends StatelessWidget {
           SliverToBoxAdapter(
             child: Flexible(
               child: Html(
-                data: notification.body ?? '',
-              ),
+                  data: notification.body ?? '',
+                  onLinkTap: (String? url, RenderContext context,
+                      Map<String, String> attributes, dom.Element? element) {
+                    if (url != null) {
+                      canLaunch(url).then((can) {
+                        if (can) launch(url);
+                      });
+                    }
+                  }),
             ),
           ),
           SliverPadding(padding: EdgeInsets.only(top: 10)),
@@ -134,15 +141,8 @@ class NotificationDetailView extends StatelessWidget {
           for (var attachment in notification.attachments)
             SliverToBoxAdapter(
               child: TextButton(
-                onPressed: () async {
-                  var authRepo = AuthRepository();
-                  var bearer = "Bearer ${authRepo.token}";
-                  String url =
-                      "https://student.sd-lj.si/api/attachment/${attachment.path}";
-                  await canLaunch(url)
-                      ? await launch(url, headers: {"Auhtorization": bearer})
-                      : throw 'Could not launch $url';
-                },
+                onPressed: () async => await _onAttachmentDownloadButtonPressed(
+                    attachment, context),
                 child: Row(
                   children: [
                     Icon(Icons.file_download),
@@ -161,5 +161,27 @@ class NotificationDetailView extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Future<void> _onAttachmentDownloadButtonPressed(
+      AttachmentModel attachment, BuildContext context) async {
+    _showSnackbarWithText("Prenašanje datoteke, prosim počakaj", context);
+    var authRepo = AuthRepository();
+    var bearer = "Bearer ${authRepo.token}";
+    var url = 'https://student.sd-lj.si/api/attachment/${attachment.path}';
+
+    try {
+      await FileDownloader.openFileFromUrl(
+          url: url, bearer: bearer, getFilenameFromHeader: true);
+    } on FileDownloaderException catch (e) {
+      _showSnackbarWithText(e.message, context);
+    }
+  }
+
+  void _showSnackbarWithText(String message, BuildContext context) {
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 }
