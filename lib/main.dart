@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
+import 'package:moj_student/data/damage-record/damage_record_repo.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
@@ -14,6 +15,7 @@ import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
 import 'package:moj_student/screens/profile/profile_screen.dart';
+import 'package:moj_student/services/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/home/home_bloc.dart';
 import 'package:moj_student/services/login/login_bloc.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
@@ -29,6 +31,7 @@ class MyApp extends StatelessWidget {
       providers: [
         RepositoryProvider(create: (context) => AuthRepository()),
         RepositoryProvider(create: (context) => NotificationRepo()),
+        RepositoryProvider(create: (context) => DamageRecordRepo()),
         RepositoryProvider(
             create: (context) =>
                 InternetRepository(authRepository: AuthRepository())),
@@ -44,6 +47,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) => NotificationBloc(
                   notificationRepo: context.read<NotificationRepo>())),
+          BlocProvider(
+              create: (context) =>
+                  DamageRecordBloc(context.read<DamageRecordRepo>())),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',
