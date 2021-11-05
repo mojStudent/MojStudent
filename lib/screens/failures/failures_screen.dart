@@ -15,13 +15,13 @@ class FailuresScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Škodni zapisniki"),
+          title: Text("Okvare"),
           backgroundColor: AppColors.success,
           centerTitle: true,
           elevation: 0,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () => null,
+          onPressed: () => Navigator.of(context).pushNamed("/failures/new"),
           child: Icon(Icons.add),
         ),
         drawer: AppDrawer(),
@@ -35,7 +35,11 @@ class FailuresScreen extends StatelessWidget {
             } else if (state is FailureRecordLoadingState) {
               return _loadingScreen();
             } else if (state is FailureRecordLoadedState) {
-              return _buildFailureRecords(context, state.model);
+              return RefreshIndicator(
+                  onRefresh: () async => context
+                      .read<FailureRecordBloc>()
+                      .add(FailureRecordLoadPageEvent(page: showPageResult)),
+                  child: _buildFailureRecords(context, state.model));
             } else if (state is FailureRecordErrorState) {
               return NotSupported();
             } else {
@@ -120,6 +124,7 @@ class FailuresScreen extends StatelessWidget {
                   horizontal: MediaQuery.of(context).size.width * 0.01,
                   vertical: MediaQuery.of(context).size.height * 0.01),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -215,57 +220,6 @@ class FailuresScreen extends StatelessWidget {
                 ],
               )),
           onPressed: () {}),
-    );
-  }
-
-  void _showDownloadInProgress(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      isDismissible: false,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.45,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.green,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Prenašanje datoteke',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                // TextButton(
-                //   child: Text(
-                //     'Prekliči',
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                //   onPressed: () => Navigator.pop(context),
-                // )
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }

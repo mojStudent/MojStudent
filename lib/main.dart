@@ -7,6 +7,7 @@ import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
+import 'package:moj_student/screens/failures/failure_add_screen.dart';
 import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/initial_loading/initial_loading.dart';
@@ -68,6 +69,7 @@ class MyApp extends StatelessWidget {
             '/notifications': (context) => NotificationScreen(),
             '/notification': (context) => NotificationDetailView(),
             '/failures': (context) => FailuresScreen(),
+            '/failures/new': (context) => FailureAddScreen(),
             '/damages': (context) => DamagesScreen(),
             '/profile': (context) => ProfileScreen(),
             '/login': (context) => LoginScreen(),

@@ -6,6 +6,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
+import 'package:moj_student/screens/widgets/donwload_in_progress_widget.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
 import 'package:moj_student/services/notification/notification_events.dart';
@@ -171,8 +172,10 @@ class NotificationDetailView extends StatelessWidget {
     var url = 'https://student.sd-lj.si/api/attachment/${attachment.path}';
 
     try {
+      DownloadInProgress.show(context);
       await FileDownloader.openFileFromUrl(
           url: url, bearer: bearer, getFilenameFromHeader: true);
+      Navigator.pop(context);
     } on FileDownloaderException catch (e) {
       _showSnackbarWithText(e.message, context);
     }

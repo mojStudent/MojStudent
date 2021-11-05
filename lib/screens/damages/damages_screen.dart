@@ -4,6 +4,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
 import 'package:moj_student/screens/drawer/app_drawer.dart';
+import 'package:moj_student/screens/widgets/donwload_in_progress_widget.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
@@ -32,7 +33,11 @@ class DamagesScreen extends StatelessWidget {
             } else if (state is DamageRecordLoadingState) {
               return _loadingScreen();
             } else if (state is DamageRecordLoadedState) {
-              return _buildDamageRecords(context, state.model);
+              return RefreshIndicator(
+                  onRefresh: () async => context
+                      .read<DamageRecordBloc>()
+                      .add(DamageRecordLoadPageEvent(page: showPageResult)),
+                  child: _buildDamageRecords(context, state.model));
             } else if (state is DamageRecordErrorState) {
               return NotSupported();
             } else {
@@ -68,13 +73,15 @@ class DamagesScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                IconButton(onPressed: () {
-                  if (showPageResult > 1) {
+                IconButton(
+                    onPressed: () {
+                      if (showPageResult > 1) {
                         showPageResult--;
                         context.read<DamageRecordBloc>().add(
                             DamageRecordLoadPageEvent(page: showPageResult));
                       }
-                }, icon: Icon(Icons.arrow_back)),
+                    },
+                    icon: Icon(Icons.arrow_back)),
                 SizedBox(
                   width: 15,
                 ),
@@ -119,7 +126,7 @@ class DamagesScreen extends StatelessWidget {
                     onTap: () async {
                       final url = "https://student.sd-lj.si${record.url}";
                       final bearer = "Bearer " + AuthRepository().token!;
-                      _showDownloadInProgress(context);
+                      DownloadInProgress.show(context);
                       await FileDownloader.openFileFromUrl(
                           url: url,
                           filename: record.filename,
@@ -161,57 +168,6 @@ class DamagesScreen extends StatelessWidget {
               )),
           style: ElevatedButton.styleFrom(primary: Colors.white),
           onPressed: () {}),
-    );
-  }
-
-  void _showDownloadInProgress(BuildContext context) {
-    showModalBottomSheet<void>(
-      context: context,
-      isDismissible: false,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      builder: (BuildContext context) {
-        return Container(
-          height: MediaQuery.of(context).size.height * 0.45,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.green,
-          ),
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: <Widget>[
-                CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Prenašanje datoteke',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 28,
-                    fontWeight: FontWeight.w300,
-                  ),
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-                // TextButton(
-                //   child: Text(
-                //     'Prekliči',
-                //     style: TextStyle(color: Colors.white),
-                //   ),
-                //   onPressed: () => Navigator.pop(context),
-                // )
-              ],
-            ),
-          ),
-        );
-      },
     );
   }
 }
