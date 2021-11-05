@@ -10,7 +10,7 @@ class DamageRecordRepo {
       "https://student.sd-lj.si/api/damage-record?page=";
 
   Future<SkodniZapisnikPaginationModel> getDamageRecords(
-      {String? token, page = 1}) async {
+      {String? token, int page = 1}) async {
     if (token == null) {
       var auth = AuthRepository();
       token = auth.token!;
@@ -22,7 +22,7 @@ class DamageRecordRepo {
     };
 
     final response =
-        await http.get(Uri.parse(_damageRecordUrl + page), headers: headers);
+        await http.get(Uri.parse(_damageRecordUrl + "$page"), headers: headers);
 
     if (response.statusCode == 200) {
       var model =

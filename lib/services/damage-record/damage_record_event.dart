@@ -3,20 +3,20 @@ part of 'damage_record_bloc.dart';
 @immutable
 abstract class DamageRecordEvent {}
 
-class DamageRecordLoadPageEvent {
-  int page;
+class DamageRecordLoadPageEvent extends DamageRecordEvent {
+  final int page;
 
   DamageRecordLoadPageEvent({this.page = 1});
 }
 
-class DamageRecordLoadedEvent {
-  SkodniZapisnikPaginationModel model;
+class DamageRecordLoadedEvent extends DamageRecordEvent {
+  final SkodniZapisnikPaginationModel model;
 
   DamageRecordLoadedEvent(this.model);
 }
 
-class DamageRecordLoadErrorEvent {
-  Object error;
+class DamageRecordLoadErrorEvent extends DamageRecordEvent {
+  final Object error;
 
   DamageRecordLoadErrorEvent(this.error);
 }

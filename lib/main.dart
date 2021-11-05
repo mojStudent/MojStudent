@@ -49,7 +49,7 @@ class MyApp extends StatelessWidget {
                   notificationRepo: context.read<NotificationRepo>())),
           BlocProvider(
               create: (context) =>
-                  DamageRecordBloc(context.read<DamageRecordRepo>())),
+                  DamageRecordBloc(repo: context.read<DamageRecordRepo>())),
         ],
         child: MaterialApp(
           title: 'Flutter Demo',

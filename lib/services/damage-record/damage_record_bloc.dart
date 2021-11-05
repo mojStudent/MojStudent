@@ -9,8 +9,8 @@ part 'damage_record_state.dart';
 class DamageRecordBloc extends Bloc<DamageRecordEvent, DamageRecordState> {
   final DamageRecordRepo repo;
 
-  DamageRecordBloc(this.repo) : super(DamageRecordInitial()) {
-    on<DamageRecordLoadPageEvent>(event, emit) => _onLoadEvent;
+  DamageRecordBloc({required this.repo}) : super(DamageRecordInitial()) {
+    on<DamageRecordLoadPageEvent>(_onLoadEvent);
   }
 
   _onLoadEvent(DamageRecordLoadPageEvent event, Emitter emit) async {
