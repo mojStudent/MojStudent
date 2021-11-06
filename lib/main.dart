@@ -11,7 +11,6 @@ import 'package:moj_student/screens/failures/failure_add_screen.dart';
 import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/initial_loading/initial_loading.dart';
-import 'package:moj_student/screens/internet/internet_log_detail_screen.dart';
 import 'package:moj_student/screens/internet/internet_screen.dart';
 import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
@@ -28,6 +27,8 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(

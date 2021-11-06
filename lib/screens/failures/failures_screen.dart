@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/failure_record/bloc/failure_record_bloc.dart';
 
+// ignore: must_be_immutable
 class FailuresScreen extends StatelessWidget {
   int showPageResult = 1;
   FailuresScreen({Key? key}) : super(key: key);
@@ -24,7 +23,6 @@ class FailuresScreen extends StatelessWidget {
           onPressed: () => Navigator.of(context).pushNamed("/failures/new"),
           child: Icon(Icons.add),
         ),
-        drawer: AppDrawer(),
         body: BlocBuilder<FailureRecordBloc, FailureRecordState>(
           builder: (ctx, state) {
             if (state is FailureRecordInitial) {
@@ -157,7 +155,7 @@ class FailuresScreen extends StatelessWidget {
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        "${record.location}",
+                        record.location,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,
@@ -195,7 +193,7 @@ class FailuresScreen extends StatelessWidget {
                             fontWeight: FontWeight.w300),
                       ),
                       Text(
-                        "${record.status}",
+                        record.status,
                         style: TextStyle(
                             color: Colors.black,
                             fontSize: 18,

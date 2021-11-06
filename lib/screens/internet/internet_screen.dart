@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
 import 'package:moj_student/screens/internet/views/internet_help_view.dart';
 import 'package:moj_student/screens/internet/views/internet_log_view.dart';
 import 'package:moj_student/screens/internet/views/internet_traffic_view.dart';
 
 class InternetScreen extends StatefulWidget {
-  InternetScreen({Key? key}) : super(key: key);
+  const InternetScreen({Key? key}) : super(key: key);
 
   @override
   _InternetScreenState createState() => _InternetScreenState();
@@ -39,7 +38,6 @@ class _InternetScreenState extends State<InternetScreen> {
                 ),
               ],
             )),
-        drawer: AppDrawer(),
         body: TabBarView(children: [
           InternetTrafficView(),
           InternetLogView(),

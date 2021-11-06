@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/not_supported.dart';
 
 class ProfileScreen extends StatefulWidget {
-  ProfileScreen({Key? key}) : super(key: key);
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -40,7 +38,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         centerTitle: true,
         elevation: 0,
       ),
-      drawer: AppDrawer(),
       body: CustomScrollView(
         slivers: [
           SliverPadding(padding: EdgeInsets.only(top: 20)),
@@ -112,7 +109,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   ElevatedButton _saveButton(
     String text,
     IconData icon, {
-    void onClick()?,
+    Function? onClick,
     disabled = false,
   }) {
     return ElevatedButton(
@@ -130,7 +127,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ],
       ),
       style: ElevatedButton.styleFrom(minimumSize: Size(double.infinity, 35)),
-      onPressed: disabled ? null : (onClick ?? () {}),
+      onPressed: disabled ? null : (() => onClick)
     );
   }
 }

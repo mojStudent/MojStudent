@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
@@ -23,9 +22,8 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
     if (event.formState is FormSubmitting) {
       try {
-        var loggedInUser = await authRepository.login(
+        await authRepository.login(
             LoginModel(username: state.username, password: state.password));
-        print(loggedInUser);
         emit(state.copyWith(formSubmissionStatus: SubmissionSuccess()));
       } catch (e) {
         emit(state.copyWith(

@@ -3,10 +3,9 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 
 class FailureAddScreen extends StatefulWidget {
-  FailureAddScreen({Key? key}) : super(key: key);
+  const FailureAddScreen({Key? key}) : super(key: key);
 
   @override
   _FailureAddScreenState createState() => _FailureAddScreenState();

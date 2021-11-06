@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/services/home/home_bloc.dart';
-import 'package:moj_student/services/home/home_event.dart';
 
 class InitialLoading extends StatefulWidget {
-  InitialLoading({Key? key}) : super(key: key);
+  const InitialLoading({Key? key}) : super(key: key);
 
   @override
   _InitialLoadingState createState() => _InitialLoadingState();
@@ -19,7 +18,7 @@ class _InitialLoadingState extends State<InitialLoading> {
     if (model == null) {
       Navigator.of(context).pushReplacementNamed("/login");
     } else {
-      var userModel = await authRepository.login(model);
+      await authRepository.login(model);
       Navigator.of(context).pushReplacementNamed("/home");
     }
   }

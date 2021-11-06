@@ -1,17 +1,19 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
+import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/services/home/home_bloc.dart';
 import 'package:moj_student/services/home/home_event.dart';
 import 'package:moj_student/services/home/home_state.dart';
-import 'package:moj_student/services/login/login_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
   _HomeScreenState createState() => _HomeScreenState();
@@ -19,7 +21,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   late UserModel user;
-  AuthRepository _authRepository = new AuthRepository();
+  final AuthRepository _authRepository = AuthRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -28,20 +30,8 @@ class _HomeScreenState extends State<HomeScreen> {
     final bloc = BlocProvider.of<HomeBloc>(context);
     if (bloc.state is InitialState) bloc.add(DataLoaded());
 
-    print("bloc: $bloc");
-
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Moj Študent"),
-        centerTitle: true,
-        backgroundColor: AppColors.success,
-        elevation: 0,
-      ),
-      drawer: AppDrawer(),
-      // floatingActionButton: FloatingActionButton(
-      //   onPressed: () => null,
-      //   child: Icon(Icons.menu)
-      // ),
+      backgroundColor: AppColors.green,
       body: BlocProvider(
           create: (context) =>
               HomeBloc(authRepository: context.read<AuthRepository>()),
@@ -49,14 +39,13 @@ class _HomeScreenState extends State<HomeScreen> {
             onRefresh: () async {
               bloc.add(RefreshData());
             },
-            child: _buildView(context),
+            child: SafeArea(child: _buildView(context)),
           )),
     );
   }
 
   Widget _buildView(BuildContext context) {
     final state = context.watch<HomeBloc>().state;
-    print(state);
 
     if (state is LoadingData) {
       return Center(
@@ -89,11 +78,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       );
     } else if (state is LoadedData) {
+      if (state.showTab == LoadedDataTab.MENU) {
+        return CustomScrollView(
+          slivers: [_header(), _menu(context), _aboutApp()],
+        );
+      }
       return CustomScrollView(
         slivers: <Widget>[
-          SliverPadding(
-            padding: EdgeInsets.only(top: 0),
-          ),
+          _header(),
           SliverToBoxAdapter(
             child: BoxWidget(
               cardBody: _profileCardBody(context),
@@ -249,7 +241,7 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           TextButton(
-            onPressed: () => null,
+            onPressed: () {},
             child: Wrap(
               children: <Widget>[
                 Icon(
@@ -273,6 +265,210 @@ class _HomeScreenState extends State<HomeScreen> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: rows,
+    );
+  }
+
+  Widget _header() {
+    final state = (context.read<HomeBloc>().state as LoadedData);
+
+    return SliverToBoxAdapter(
+      child: Container(
+        height: MediaQuery.of(context).size.height * 0.4,
+        decoration: BoxDecoration(
+            color: AppColors.raisinBlack.withOpacity(0.5),
+            borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.height * 0.05,
+                      decoration: BoxDecoration(
+                                                                            color: Colors.white.withOpacity(0.15),
+
+                          borderRadius: BorderRadius.circular(11)),
+                      child: IconButton(
+                        icon: Icon(
+                          state.showTab == LoadedDataTab.MENU
+                              ? Icons.person
+                              : Icons.apps,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          context.read<HomeBloc>().add(ChangeTabEvent(
+                                state,
+                                (state.showTab == LoadedDataTab.MENU
+                                    ? LoadedDataTab.PROFILE
+                                    : LoadedDataTab.MENU),
+                              ));
+                        },
+                      ),
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.height * 0.05,
+                      decoration: BoxDecoration(
+                                                  color: Colors.white.withOpacity(0.15),
+
+                          borderRadius: BorderRadius.circular(11)),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.logout_outlined,
+                          color: Colors.white,
+                        ),
+                        onPressed: () {
+                          var auth = AuthRepository();
+                          auth.logOut().then((value) => Navigator.of(context)
+                              .pushReplacementNamed("/login"));
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.13,
+                    width: MediaQuery.of(context).size.height * 0.13,
+                    decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(30)),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: SvgPicture.network(AvatarRepo.getImgUrlForSeed(
+                          "${user.firstname}-${user.lastname}")),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  Text(
+                    "${user.firstname} ${user.lastname}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600),
+                  ),
+                  Text(
+                    "${user.location} (${user.campus}), ${user.room}",
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w300),
+                  )
+                ],
+              ),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
+              )
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _menu(BuildContext context) {
+    final menuItems = [
+      _menuItem(
+          title: "Internetni dostop",
+          icon: Icons.wifi,
+          onPressed: () => Navigator.of(context).pushNamed("/internet")),
+      _menuItem(
+          title: "Obvestila (${user.notifications} neprebranih)",
+          icon: Icons.notifications_none_outlined,
+          onPressed: () => Navigator.of(context).pushNamed("/notifications")),
+      _menuItem(
+          title: "Okvare",
+          icon: Icons.error_outline,
+          onPressed: () => Navigator.of(context).pushNamed("/failures")),
+      _menuItem(
+          title: "Škodni zapisniki",
+          icon: Icons.houseboat_outlined,
+          onPressed: () => Navigator.of(context).pushNamed("/damages")),
+      _menuItem(
+          title: "Nastavitve profila",
+          icon: Icons.settings_outlined,
+          onPressed: () => Navigator.of(context).pushNamed("/profile")),
+    ];
+
+    return SliverToBoxAdapter(
+      child: BoxWidget(
+          cardBody: Container(
+            child: Column(
+              children: menuItems,
+            ),
+          ),
+          title: "Storitve"),
+    );
+  }
+
+  Widget _menuItem(
+      {required String title,
+      required IconData icon,
+      required Function onPressed}) {
+    return TextButton(
+        onPressed: () => onPressed(),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Flexible(
+              child: Row(
+                children: [
+                  Icon(
+                    icon,
+                    size: 20,
+                  ),
+                  SizedBox(
+                    width: 15,
+                  ),
+                  Flexible(
+                    child: Text(
+                      title,
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Icon(
+              Icons.arrow_forward_ios,
+              size: 16,
+            )
+          ],
+        ));
+  }
+
+  Widget _aboutApp() {
+    return SliverToBoxAdapter(
+      child: BoxWidget(
+        title: "Razvijalec aplikacije",
+        cardBody: Column(
+          children: [
+            Text(
+              "MarelaTeam",
+              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              "Vse pravice pridržane. \nDelovanja zalednih storitev v lasti ŠDL ne moremo zagotavljati. MarelaTeam ne hrani nobenih podatkov o uporabniku ali njegovi uporabi aplikacije.",
+              style: TextStyle(fontSize: 11),
+              textAlign: TextAlign.center,
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

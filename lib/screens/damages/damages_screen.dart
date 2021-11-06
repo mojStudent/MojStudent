@@ -1,9 +1,10 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
 import 'package:moj_student/screens/widgets/donwload_in_progress_widget.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/damage-record/damage_record_bloc.dart';
@@ -22,7 +23,6 @@ class DamagesScreen extends StatelessWidget {
           centerTitle: true,
           elevation: 0,
         ),
-        drawer: AppDrawer(),
         body: BlocBuilder<DamageRecordBloc, DamageRecordState>(
           builder: (ctx, state) {
             if (state is DamageRecordInitial) {

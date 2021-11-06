@@ -4,12 +4,11 @@ import 'package:moj_student/constants/math.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
-import 'package:moj_student/screens/internet/views/charts/internet_left_chart.dart';
 import 'package:moj_student/screens/internet/views/charts/internet_traffic_chart.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 
 class InternetTrafficView extends StatefulWidget {
-  InternetTrafficView({Key? key}) : super(key: key);
+  const InternetTrafficView({Key? key}) : super(key: key);
 
   @override
   _InternetTrafficViewState createState() => _InternetTrafficViewState();
@@ -73,6 +72,7 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
               title: "Količina prenosa",
               cardBody: Column(
                 children: [
+                  // ignore: sized_box_for_whitespace
                   Container(
                       height: MediaQuery.of(context).size.height * 0.5,
                       child: InternetTrafficChart.createChart(data!)),

@@ -166,7 +166,6 @@ class NotificationDetailView extends StatelessWidget {
 
   Future<void> _onAttachmentDownloadButtonPressed(
       AttachmentModel attachment, BuildContext context) async {
-    _showSnackbarWithText("Prenašanje datoteke, prosim počakaj", context);
     var authRepo = AuthRepository();
     var bearer = "Bearer ${authRepo.token}";
     var url = 'https://student.sd-lj.si/api/attachment/${attachment.path}';

@@ -1,10 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
-import 'package:moj_student/screens/home/home_screen.dart';
-import 'package:moj_student/screens/login/login_screen.dart';
-import 'package:moj_student/screens/notifications/notification_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({Key? key}) : super(key: key);
@@ -79,9 +75,9 @@ class AppDrawer extends StatelessWidget {
         ));
   }
 
-  ListTile _drawerItem(String name, IconData icon, {void onClick()?}) {
+  ListTile _drawerItem(String name, IconData icon, {Function? onClick}) {
     return ListTile(
-      onTap: onClick,
+      onTap: () => onClick,
       title: Row(
         children: [
           Icon(icon, color: Colors.black45),

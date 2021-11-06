@@ -43,10 +43,25 @@ class AppColors {
     900: Color.fromRGBO(133, 185, 77, 1),
   };
 
+  static final Map<int, Color> _colorCodesForRaisinBlack = {
+    50: Color.fromRGBO(37, 41, 46, .1),
+    100: Color.fromRGBO(37, 41, 46, .2),
+    200: Color.fromRGBO(37, 41, 46, .3),
+    300: Color.fromRGBO(37, 41, 46, .4),
+    400: Color.fromRGBO(37, 41, 46, .5),
+    500: Color.fromRGBO(37, 41, 46, .6),
+    600: Color.fromRGBO(37, 41, 46, .7),
+    700: Color.fromRGBO(37, 41, 46, .8),
+    800: Color.fromRGBO(37, 41, 46, .9),
+    900: Color.fromRGBO(37, 41, 46, 1),
+  };
+
   static MaterialColor blue = MaterialColor(0xFF255f85, _colorCodesForBlue);
-  
+
   static MaterialColor yellow =
       MaterialColor(0xFFFFBE0B, _colorCodesForWarning);
 
   static MaterialColor green = MaterialColor(0xFF85b94d, _colorCodesForSuccess);
+
+  static MaterialColor raisinBlack = MaterialColor(0xFF25292E, _colorCodesForRaisinBlack);
 }

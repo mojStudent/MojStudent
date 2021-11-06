@@ -11,13 +11,16 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     on<DataLoaded>(_onDataLoadedEvent);
     on<DataError>((event, emit) => emit(LoadingDataError(e: event.e)));
     on<RefreshData>(_onDataLoadingEvent);
+    on<ChangeTabEvent>(
+        (event, emit) => emit(event.state.changeTab(event.newTab)));
   }
 
   void _onDataLoadedEvent(HomeEvent event, Emitter<HomeState> emit) {
-    if (authRepository.loggedInUser != null)
+    if (authRepository.loggedInUser != null) {
       emit(LoadedData(user: authRepository.loggedInUser!));
-    else
+    } else {
       emit(LoadingDataError(e: Exception("Napaka pri pridobivanju podatkov")));
+    }
   }
 
   Future<void> _onDataLoadingEvent(

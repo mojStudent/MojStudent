@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
-import 'package:moj_student/data/notifications/notification_repo.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
 import 'package:moj_student/services/notification/notification_events.dart';
 import 'package:moj_student/services/notification/notification_states.dart';
@@ -103,7 +100,6 @@ class NotificationListView extends StatelessWidget {
           ),
           style: ElevatedButton.styleFrom(primary: Colors.white),
           onPressed: () {
-            print("tuke");
             bloc.add(LoadNotification(notificationId: notification.id));
           }),
     );

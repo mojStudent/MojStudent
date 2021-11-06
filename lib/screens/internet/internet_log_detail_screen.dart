@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/not_supported.dart';
 
 class InternetLogDetailScreen extends StatelessWidget {
   final InternetConnectionLogModel log;

@@ -2,17 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
-import 'package:moj_student/data/notifications/notification_repo.dart';
-import 'package:moj_student/screens/drawer/app_drawer.dart';
-import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
-import 'package:moj_student/screens/notifications/views/notification_list_view.dart';
-import 'package:moj_student/services/home/home_state.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
 import 'package:moj_student/services/notification/notification_events.dart';
 import 'package:moj_student/services/notification/notification_states.dart';
 
 class NotificationScreen extends StatefulWidget {
-  NotificationScreen({Key? key}) : super(key: key);
+  const NotificationScreen({Key? key}) : super(key: key);
 
   @override
   _NotificationScreenState createState() => _NotificationScreenState();
@@ -38,8 +33,6 @@ class _NotificationScreenState extends State<NotificationScreen> {
           backgroundColor: AppColors.primaryBlue,
           child: Icon(Icons.search),
         ),
-        drawer: AppDrawer(),
-
         body: BlocBuilder<NotificationBloc, NotificationState>(
             builder: (ctx, state) {
           if (state is InitialNotificationState) {
