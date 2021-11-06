@@ -34,10 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Nastavitve profila"),
-        backgroundColor: AppColors.success,
+        backgroundColor: AppColors.raisinBlack[500],
         centerTitle: true,
         elevation: 0,
       ),
+      backgroundColor: AppColors.green,
       body: CustomScrollView(
         slivers: [
           SliverPadding(padding: EdgeInsets.only(top: 20)),

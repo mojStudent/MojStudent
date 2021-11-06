@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moj_student/constants/colors.dart';
 
 class BoxWidget extends StatelessWidget {
   final Widget cardBody;
@@ -28,10 +29,10 @@ class BoxWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
+                  color: AppColors.raisinBlack[100]!,
+                  spreadRadius: 1,
                   blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
+                  offset: Offset(8, 6), // changes position of shadow
                 ),
               ]),
           padding: EdgeInsets.fromLTRB(

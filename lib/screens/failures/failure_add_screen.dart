@@ -3,6 +3,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
+import 'package:moj_student/screens/loading/loading_screen.dart';
 
 class FailureAddScreen extends StatefulWidget {
   const FailureAddScreen({Key? key}) : super(key: key);
@@ -32,9 +33,10 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
           title: Text("Prijavi novo okvaro"),
           centerTitle: true,
           elevation: 0,
-          backgroundColor: AppColors.green,
+          backgroundColor: AppColors.raisinBlack[500],
         ),
-        body: options == null ? _loadingScreen() : _buildView());
+        backgroundColor: AppColors.green,
+        body: options == null ? LoadingScreen() : _buildView());
   }
 
   void _getOptions() {
@@ -45,10 +47,6 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
             _chosenValue = options![0];
           }),
         );
-  }
-
-  Widget _loadingScreen() {
-    return Center(child: CircularProgressIndicator());
   }
 
   Widget _buildView() {
@@ -145,7 +143,7 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
               children: [
                 Text(
                   title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
                 Padding(padding: const EdgeInsets.only(top: 10), child: body),
               ],

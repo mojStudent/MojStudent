@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
+import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
 import 'package:moj_student/services/notification/notification_events.dart';
 import 'package:moj_student/services/notification/notification_states.dart';
@@ -19,8 +20,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppColors.green,
         appBar: AppBar(
-          backgroundColor: AppColors.success,
+          backgroundColor: AppColors.raisinBlack.withOpacity(0.5),
           title: Text("Obvestila"),
           centerTitle: true,
           elevation: 0,
@@ -37,11 +39,11 @@ class _NotificationScreenState extends State<NotificationScreen> {
             builder: (ctx, state) {
           if (state is InitialNotificationState) {
             context.read<NotificationBloc>().add(LoadNotifications());
-            return _loading();
+            return LoadingScreen();
           } else if (state is NotificationsLoading ||
               state is NotificationDetailLoading ||
               state is DataLoading) {
-            return _loading();
+            return LoadingScreen();
           } else if (state is NotificationsLoaded) {
             return _buildNotificationsList(context, state.notifications);
           } else if (state is NotificationDetailLoaded) {
@@ -49,41 +51,13 @@ class _NotificationScreenState extends State<NotificationScreen> {
               Navigator.of(context).pushNamed('/notification');
             });
 
-            return Container();
+            return Scaffold ();
           } else if (state is DataLoadingError) {
             return Container();
           } else {
             return Center(child: Text("Napaka programa"));
           }
         }));
-  }
-
-  // Widget _buildScreen(BuildContext context) {
-  //   final state = context.watch<NotificationBloc>().state;
-
-  //   if (state is InitialNotificationState) {
-  //     context.read<NotificationBloc>().add(LoadNotifications());
-  //     return _loading();
-  //   } else if (state is NotificationsLoading ||
-  //       state is NotificationDetailLoading ||
-  //       state is DataLoading) {
-  //     return _loading();
-  //   } else if (state is NotificationsLoaded) {
-  //     return _buildNotificationsList(context, state.notifications);
-  //   } else if (state is NotificationDetailLoaded) {
-  //     Navigator.pushNamed(context, '/notification');
-  //   } else if (state is DataLoadingError) {
-  //     return Container();
-  //   } else {
-  //     return Center(child: Text("Napaka programa"));
-  //   }
-  // }
-
-  Widget _loading() {
-    return Scaffold(
-        body: Center(
-      child: CircularProgressIndicator(),
-    ));
   }
 
   Widget _buildNotificationsList(
@@ -136,8 +110,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
       NotificationModel notification, BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.025,
-          vertical: MediaQuery.of(context).size.height * 0.005),
+          horizontal: MediaQuery.of(context).size.width * 0.05,
+          vertical: MediaQuery.of(context).size.height * 0.01),
       child: ElevatedButton(
           child: Padding(
             padding: EdgeInsets.symmetric(
@@ -159,7 +133,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     Flexible(
                       child: Text(
                         notification.subject,
-                        style: TextStyle(color: Colors.black, fontSize: 14),
+                        style: TextStyle(color: Colors.black, fontSize: 16),
                       ),
                     ),
                   ],

@@ -17,11 +17,12 @@ class _InternetScreenState extends State<InternetScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        backgroundColor: AppColors.green,
         appBar: AppBar(
             title: Text("Internet"),
             centerTitle: true,
             elevation: 0,
-            backgroundColor: AppColors.success,
+            backgroundColor: AppColors.raisinBlack[500],
             bottom: const TabBar(
               tabs: [
                 Tab(

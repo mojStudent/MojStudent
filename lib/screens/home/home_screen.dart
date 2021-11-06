@@ -80,7 +80,10 @@ class _HomeScreenState extends State<HomeScreen> {
     } else if (state is LoadedData) {
       if (state.showTab == LoadedDataTab.MENU) {
         return CustomScrollView(
-          slivers: [_header(), _menu(context), _aboutApp()],
+          slivers: [
+            _header(),
+            _menu(context),
+          ],
         );
       }
       return CustomScrollView(
@@ -290,8 +293,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.height * 0.05,
                       decoration: BoxDecoration(
-                                                                            color: Colors.white.withOpacity(0.15),
-
+                          color: Colors.white.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(11)),
                       child: IconButton(
                         icon: Icon(
@@ -314,8 +316,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: MediaQuery.of(context).size.height * 0.05,
                       width: MediaQuery.of(context).size.height * 0.05,
                       decoration: BoxDecoration(
-                                                  color: Colors.white.withOpacity(0.15),
-
+                          color: Colors.white.withOpacity(0.15),
                           borderRadius: BorderRadius.circular(11)),
                       child: IconButton(
                         icon: Icon(
@@ -446,29 +447,5 @@ class _HomeScreenState extends State<HomeScreen> {
             )
           ],
         ));
-  }
-
-  Widget _aboutApp() {
-    return SliverToBoxAdapter(
-      child: BoxWidget(
-        title: "Razvijalec aplikacije",
-        cardBody: Column(
-          children: [
-            Text(
-              "MarelaTeam",
-              style: TextStyle(fontSize: 28, fontWeight: FontWeight.w400),
-            ),
-            SizedBox(
-              height: 20,
-            ),
-            Text(
-              "Vse pravice pridržane. \nDelovanja zalednih storitev v lasti ŠDL ne moremo zagotavljati. MarelaTeam ne hrani nobenih podatkov o uporabniku ali njegovi uporabi aplikacije.",
-              style: TextStyle(fontSize: 11),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

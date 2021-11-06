@@ -12,14 +12,14 @@ class NotSupported extends StatelessWidget {
           Icon(
             Icons.browser_not_supported,
             size: 68,
-            color: Colors.black26,
+            color: Colors.white,
           ),
           SizedBox(
             height: 10,
           ),
           Text(
             "Storitev trenutno še ni podprta",
-            style: TextStyle(fontSize: 20, color: Colors.black26),
+            style: TextStyle(fontSize: 20, color: Colors.white),
           ),
         ],
       ),

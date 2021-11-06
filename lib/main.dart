@@ -12,6 +12,7 @@ import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/initial_loading/initial_loading.dart';
 import 'package:moj_student/screens/internet/internet_screen.dart';
+import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';

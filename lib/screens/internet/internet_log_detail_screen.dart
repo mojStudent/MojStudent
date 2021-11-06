@@ -12,11 +12,12 @@ class InternetLogDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: AppColors.success,
+          backgroundColor: AppColors.raisinBlack[500],
           elevation: 0,
           title: Text("Podrobnosti povezave"),
           centerTitle: true,
         ),
+        backgroundColor: AppColors.green,
         body: CustomScrollView(
           slivers: [
             SliverPadding(padding: EdgeInsets.only(top: 20)),

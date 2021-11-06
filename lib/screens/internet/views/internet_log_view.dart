@@ -32,13 +32,19 @@ class _InternetLogViewState extends State<InternetLogView> {
                   child: GestureDetector(
                     onTap: () => setState(() => showOnlyActive = false),
                     child: Chip(
-                      backgroundColor:
-                          showOnlyActive ? Colors.black12 : AppColors.green,
+                      backgroundColor: showOnlyActive
+                          ? Colors.white
+                          : Color.alphaBlend(
+                              AppColors.raisinBlack.withOpacity(0.5),
+                              AppColors.green),
                       label: Text(
                         "Vse",
                         style: TextStyle(
-                            color:
-                                showOnlyActive ? Colors.black : Colors.white),
+                            color: showOnlyActive
+                                ? Color.alphaBlend(
+                                    AppColors.raisinBlack.withOpacity(0.5),
+                                    AppColors.green)
+                                : Colors.white),
                       ),
                       avatar: CircleAvatar(
                         child: Icon(
@@ -54,13 +60,19 @@ class _InternetLogViewState extends State<InternetLogView> {
                   child: GestureDetector(
                     onTap: () => setState(() => showOnlyActive = true),
                     child: Chip(
-                      backgroundColor:
-                          !showOnlyActive ? Colors.black12 : AppColors.green,
+                      backgroundColor: !showOnlyActive
+                          ? Colors.white
+                          : Color.alphaBlend(
+                              AppColors.raisinBlack.withOpacity(0.5),
+                              AppColors.green),
                       label: Text(
                         "Aktivne",
                         style: TextStyle(
-                            color:
-                                !showOnlyActive ? Colors.black : Colors.white),
+                            color: !showOnlyActive
+                                ? Color.alphaBlend(
+                                    AppColors.raisinBlack.withOpacity(0.5),
+                                    AppColors.green)
+                                : Colors.white),
                       ),
                       avatar: CircleAvatar(
                         child: Icon(

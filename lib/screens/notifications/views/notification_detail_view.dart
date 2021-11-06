@@ -6,6 +6,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
+import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/donwload_in_progress_widget.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
 import 'package:moj_student/services/notification/notification_bloc.dart';
@@ -31,11 +32,12 @@ class NotificationDetailView extends StatelessWidget {
           return false;
         },
         child: Scaffold(
+          backgroundColor: AppColors.green,
           appBar: AppBar(
             iconTheme: IconThemeData(
               color: Colors.white, //change your color here
             ),
-            backgroundColor: AppColors.success,
+            backgroundColor: AppColors.raisinBlack[500],
             elevation: 0,
             title: Text("Obvestilo"),
             centerTitle: true,
@@ -52,31 +54,58 @@ class NotificationDetailView extends StatelessWidget {
             .notification;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-          horizontal: MediaQuery.of(context).size.width * 0.04),
-      child: CustomScrollView(
-        slivers: [
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverToBoxAdapter(
-            child: Center(
-              child: Text(
-                notification.subject,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: EdgeInsets.symmetric(
+              horizontal: MediaQuery.of(context).size.width * 0.04),
+          child: CustomScrollView(
+            slivers: [
+              SliverPadding(padding: EdgeInsets.only(top: 20)),
+              SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    notification.subject,
+                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
+                  ),
+                ),
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Divider(
-              color: Colors.black,
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              children: [
-                Row(
+              SliverToBoxAdapter(
+                child: Divider(
+                  color: Colors.black,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Row(
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.person,
+                          color: Colors.black54,
+                          size: 15,
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text(
+                          notification.author ?? '',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Row(
                   children: [
                     Icon(
-                      Icons.person,
+                      Icons.calendar_today,
                       color: Colors.black54,
                       size: 15,
                     ),
@@ -84,82 +113,67 @@ class NotificationDetailView extends StatelessWidget {
                       width: 5,
                     ),
                     Text(
-                      notification.author ?? '',
+                      notification.created ?? '',
                       style:
                           TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.calendar_today,
-                  color: Colors.black54,
-                  size: 15,
-                ),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  notification.created ?? '',
-                  style: TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                ),
-              ],
-            ),
-          ),
-          SliverPadding(padding: EdgeInsets.only(top: 10)),
-          SliverToBoxAdapter(
-            child: Flexible(
-              child: Html(
-                  data: notification.body ?? '',
-                  onLinkTap: (String? url, RenderContext context,
-                      Map<String, String> attributes, dom.Element? element) {
-                    if (url != null) {
-                      canLaunch(url).then((can) {
-                        if (can) launch(url);
-                      });
-                    }
-                  }),
-            ),
-          ),
-          SliverPadding(padding: EdgeInsets.only(top: 10)),
-          SliverToBoxAdapter(
-            child: Divider(
-              color: Colors.black,
-            ),
-          ),
-          if (notification.attachments.isNotEmpty)
-            SliverToBoxAdapter(
-              child: Text(
-                "Priponke",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
               ),
-            ),
-          for (var attachment in notification.attachments)
-            SliverToBoxAdapter(
-              child: TextButton(
-                onPressed: () async => await _onAttachmentDownloadButtonPressed(
-                    attachment, context),
-                child: Row(
-                  children: [
-                    Icon(Icons.file_download),
-                    Flexible(child: Text(attachment.label))
-                  ],
+              SliverPadding(padding: EdgeInsets.only(top: 10)),
+              SliverToBoxAdapter(
+                child: Flexible(
+                  child: Html(
+                      data: notification.body ?? '',
+                      onLinkTap: (String? url,
+                          RenderContext context,
+                          Map<String, String> attributes,
+                          dom.Element? element) {
+                        if (url != null) {
+                          canLaunch(url).then((can) {
+                            if (can) launch(url);
+                          });
+                        }
+                      }),
                 ),
               ),
-            ),
-          if (notification.attachments.isNotEmpty)
-            SliverToBoxAdapter(
-              child: Divider(
-                color: Colors.black,
+              SliverPadding(padding: EdgeInsets.only(top: 10)),
+              SliverToBoxAdapter(
+                child: Divider(
+                  color: Colors.black,
+                ),
               ),
-            ),
-          SliverPadding(padding: EdgeInsets.only(top: 40)),
-        ],
+              if (notification.attachments.isNotEmpty)
+                SliverToBoxAdapter(
+                  child: Text(
+                    "Priponke",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+                  ),
+                ),
+              for (var attachment in notification.attachments)
+                SliverToBoxAdapter(
+                  child: TextButton(
+                    onPressed: () async =>
+                        await _onAttachmentDownloadButtonPressed(
+                            attachment, context),
+                    child: Row(
+                      children: [
+                        Icon(Icons.file_download),
+                        Flexible(child: Text(attachment.label))
+                      ],
+                    ),
+                  ),
+                ),
+              if (notification.attachments.isNotEmpty)
+                SliverToBoxAdapter(
+                  child: Divider(
+                    color: Colors.black,
+                  ),
+                ),
+              SliverPadding(padding: EdgeInsets.only(top: 40)),
+            ],
+          ),
+        ),
       ),
     );
   }
