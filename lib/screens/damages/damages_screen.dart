@@ -6,7 +6,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/donwload_in_progress_widget.dart';
+import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
@@ -134,7 +134,7 @@ class DamagesScreen extends StatelessWidget {
                   onTap: () async {
                     final url = "https://student.sd-lj.si${record.url}";
                     final bearer = "Bearer " + AuthRepository().token!;
-                    DownloadInProgress.show(context);
+                    BottomModal.showFileDownloading(context);
                     await FileDownloader.openFileFromUrl(
                         url: url,
                         filename: record.filename,

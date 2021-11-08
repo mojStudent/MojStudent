@@ -19,24 +19,27 @@ class _InitialLoadingState extends State<InitialLoading> {
     if (model == null) {
       Navigator.of(context).pushReplacementNamed("/login");
     } else {
-      await authRepository.login(model);
-      Navigator.of(context).pushReplacementNamed("/home");
+      try {
+        await authRepository.login(model);
+        Navigator.of(context).pushReplacementNamed("/home");
+      } catch (e) {
+        Navigator.of(context).pushReplacementNamed("/login");
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          HomeBloc(authRepository: context.read<AuthRepository>()),
-      child: _letsFuckingBuiltIt(context)
-    );
+        create: (context) =>
+            HomeBloc(authRepository: context.read<AuthRepository>()),
+        child: _letsFuckingBuiltIt(context));
   }
 
   Widget _letsFuckingBuiltIt(BuildContext context) {
     isUserInSharedPreferences(context);
-    return Scaffold(body: LoadingScreen(),);
+    return Scaffold(
+      body: LoadingScreen(),
+    );
   }
-
-
 }
