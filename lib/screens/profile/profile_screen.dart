@@ -29,23 +29,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Nastavitve profila"),
-        backgroundColor: AppColors.raisinBlack[500],
-        centerTitle: true,
-        elevation: 0,
+    return DefaultTabController(
+      length: 3,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("Nastavitve profila"),
+          backgroundColor: AppColors.raisinBlack[500],
+          centerTitle: true,
+          elevation: 0,
+          bottom: const TabBar(tabs: [
+            Tab(
+              icon: Icon(Icons.person),
+              text: "Profil",
+            ),
+            Tab(
+              icon: Icon(Icons.security),
+              text: "Geslo",
+            ),
+            Tab(
+              icon: Icon(Icons.mail),
+              text: "Email",
+            ),
+          ]),
+        ),
+        backgroundColor: AppColors.green,
+        body: TabBarView(
+          children: [
+            _buildTab(ProfileChangeProfileView()),
+            _buildTab(ProfileChangePasswordView()),
+            _buildTab(ProfileChangeEmailView()),
+          ],
+        ),
       ),
-      backgroundColor: AppColors.green,
-      body: CustomScrollView(
-        slivers: [
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-          SliverToBoxAdapter(child: ProfileChangeProfileView()),
-          SliverToBoxAdapter(child: ProfileChangePasswordView()),
-          SliverToBoxAdapter(child: ProfileChangeEmailView()),
-          SliverPadding(padding: EdgeInsets.only(top: 20)),
-        ],
-      ),
+    );
+  }
+
+  Widget _buildTab(Widget tab) {
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(padding: EdgeInsets.only(top: 20)),
+        SliverToBoxAdapter(
+          child: tab,
+        ),
+        SliverPadding(padding: EdgeInsets.only(top: 20)),
+      ],
     );
   }
 }
