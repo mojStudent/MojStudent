@@ -238,32 +238,32 @@ class _HomeScreenState extends State<HomeScreen> {
       ));
     }
 
-    rows.add(
-      Row(
-        mainAxisAlignment: MainAxisAlignment.end,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          TextButton(
-            onPressed: () {},
-            child: Wrap(
-              children: <Widget>[
-                Icon(
-                  Icons.edit,
-                  size: 16,
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Text(
-                  "Uredi",
-                  style: TextStyle(fontSize: 14),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
+    // rows.add(
+    //   Row(
+    //     mainAxisAlignment: MainAxisAlignment.end,
+    //     crossAxisAlignment: CrossAxisAlignment.center,
+    //     children: [
+    //       TextButton(
+    //         onPressed: () {},
+    //         child: Wrap(
+    //           children: <Widget>[
+    //             Icon(
+    //               Icons.edit,
+    //               size: 16,
+    //             ),
+    //             SizedBox(
+    //               width: 10,
+    //             ),
+    //             Text(
+    //               "Uredi",
+    //               style: TextStyle(fontSize: 14),
+    //             ),
+    //           ],
+    //         ),
+    //       ),
+    //     ],
+    //   ),
+    // );
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,

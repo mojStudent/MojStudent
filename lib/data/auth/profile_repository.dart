@@ -7,6 +7,7 @@ import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
+import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
 
 class ProfileRepository extends AuthRepository {
   static const _changeEmailUrl =
@@ -14,6 +15,9 @@ class ProfileRepository extends AuthRepository {
 
   static const _changePasswordUrl =
       "https://student.sd-lj.si/api/user/password/change";
+
+  static const _changeProfileUrl =
+      "https://student.sd-lj.si/api/user/profile";
 
   Future<void> mailChange(ChangeEmailModel model) async {
     final token = super.token;
@@ -65,6 +69,33 @@ class ProfileRepository extends AuthRepository {
     } else if (response.statusCode == 403) {
       if (await reLoginUser()) {
         return await passwordChange(model);
+      } else {
+        throw Exception("Napaka pri ponovni prijavi");
+      }
+    } else {
+      throw Exception(response.body);
+    }
+  }
+
+  Future<void> profileChange(ChangeProfileModel model) async {
+    final token = super.token;
+    if (token == null) {
+      throw Exception("Napaka programa");
+    }
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    final response = await http.put(Uri.parse(_changeProfileUrl),
+        body: jsonEncode(model.toJson()), headers: headers);
+
+    if (response.statusCode == 200) {
+      await reLoginUser();
+    } else if (response.statusCode == 403) {
+      if (await reLoginUser()) {
+        return await profileChange(model);
       } else {
         throw Exception("Napaka pri ponovni prijavi");
       }
