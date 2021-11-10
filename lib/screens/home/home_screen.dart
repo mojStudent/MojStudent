@@ -3,10 +3,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:moj_student/animations/page_scale_transition.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
+import 'package:moj_student/screens/damages/damages_screen.dart';
+import 'package:moj_student/screens/failures/failures_screen.dart';
+import 'package:moj_student/screens/internet/internet_screen.dart';
+import 'package:moj_student/screens/notifications/notification_screen.dart';
+import 'package:moj_student/screens/profile/profile_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_event.dart';
@@ -380,25 +386,35 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _menu(BuildContext context) {
     final menuItems = [
       _menuItem(
-          title: "Internetni dostop",
-          icon: Icons.wifi,
-          onPressed: () => Navigator.of(context).pushNamed("/internet")),
+        title: "Internetni dostop",
+        icon: Icons.wifi,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(InternetScreen())),
+      ),
       _menuItem(
-          title: "Obvestila (${user.notifications} neprebranih)",
-          icon: Icons.notifications_none_outlined,
-          onPressed: () => Navigator.of(context).pushNamed("/notifications")),
+        title: "Obvestila (${user.notifications} neprebranih)",
+        icon: Icons.notifications_none_outlined,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(NotificationScreen())),
+      ),
       _menuItem(
-          title: "Okvare",
-          icon: Icons.error_outline,
-          onPressed: () => Navigator.of(context).pushNamed("/failures")),
+        title: "Okvare",
+        icon: Icons.error_outline,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(FailuresScreen())),
+      ),
       _menuItem(
-          title: "Škodni zapisniki",
-          icon: Icons.houseboat_outlined,
-          onPressed: () => Navigator.of(context).pushNamed("/damages")),
+        title: "Škodni zapisniki",
+        icon: Icons.houseboat_outlined,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(DamagesScreen())),
+      ),
       _menuItem(
-          title: "Nastavitve profila",
-          icon: Icons.settings_outlined,
-          onPressed: () => Navigator.of(context).pushNamed("/profile")),
+        title: "Nastavitve profila",
+        icon: Icons.settings_outlined,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(ProfileScreen())),
+      ),
     ];
 
     return SliverToBoxAdapter(

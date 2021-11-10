@@ -4,6 +4,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_repo.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
+import 'package:moj_student/data/internet/internet_help_repo.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
@@ -21,6 +22,7 @@ import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bl
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
 import 'package:moj_student/services/blocs/login/login_bloc.dart';
 import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
+import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 
 void main() {
   runApp(MyApp());
@@ -40,6 +42,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
             create: (context) =>
                 InternetRepository(authRepository: AuthRepository())),
+        RepositoryProvider(
+            create: (context) =>
+                InternetHelpRepo(authRepository: AuthRepository())),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -58,6 +63,9 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   FailureRecordBloc(repo: context.read<FailureRecordRepo>())),
+          BlocProvider(
+              create: (context) =>
+                  InternetHelpBloc(context.read<InternetHelpRepo>())),
         ],
         child: MaterialApp(
           title: 'Moj študent',
