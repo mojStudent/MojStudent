@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_detail_model.dart';
-import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/services/home/home_state.dart';
-import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 
 class InternetHelpDetailView extends StatefulWidget {
   final List<InternetHelpDetailModel> steps;

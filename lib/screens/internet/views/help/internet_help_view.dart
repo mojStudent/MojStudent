@@ -4,7 +4,6 @@ import 'package:moj_student/screens/internet/views/help/internet_help_master.dar
 import 'package:moj_student/screens/internet/views/help/internet_help_step.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
-import 'package:moj_student/services/home/home_event.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 
 class InternetHelpView extends StatelessWidget {
