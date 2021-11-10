@@ -8,9 +8,10 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/services/home/home_bloc.dart';
-import 'package:moj_student/services/home/home_event.dart';
-import 'package:moj_student/services/home/home_state.dart';
+import 'package:moj_student/services/blocs/home/home_bloc.dart';
+import 'package:moj_student/services/blocs/home/home_event.dart';
+import 'package:moj_student/services/blocs/home/home_state.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);

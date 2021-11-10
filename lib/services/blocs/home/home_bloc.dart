@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
-import 'package:moj_student/services/home/home_event.dart';
-import 'package:moj_student/services/home/home_state.dart';
+import 'package:moj_student/services/blocs/home/home_event.dart';
+import 'package:moj_student/services/blocs/home/home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   final AuthRepository authRepository;

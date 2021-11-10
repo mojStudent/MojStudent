@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
-import 'package:moj_student/services/notification/notification_events.dart';
-import 'package:moj_student/services/notification/notification_states.dart';
+import 'package:moj_student/services/blocs/notification/notification_events.dart';
+import 'package:moj_student/services/blocs/notification/notification_states.dart';
 
 class NotificationBloc extends Bloc<NotificationEvent, NotificationState> {
   NotificationRepo notificationRepo;

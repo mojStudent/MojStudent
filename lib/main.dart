@@ -12,16 +12,15 @@ import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/initial_loading/initial_loading.dart';
 import 'package:moj_student/screens/internet/internet_screen.dart';
-import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
 import 'package:moj_student/screens/profile/profile_screen.dart';
-import 'package:moj_student/services/damage-record/damage_record_bloc.dart';
-import 'package:moj_student/services/failure_record/bloc/failure_record_bloc.dart';
-import 'package:moj_student/services/home/home_bloc.dart';
-import 'package:moj_student/services/login/login_bloc.dart';
-import 'package:moj_student/services/notification/notification_bloc.dart';
+import 'package:moj_student/services/blocs/damage-record/damage_record_bloc.dart';
+import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
+import 'package:moj_student/services/blocs/home/home_bloc.dart';
+import 'package:moj_student/services/blocs/login/login_bloc.dart';
+import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
 
 void main() {
   runApp(MyApp());

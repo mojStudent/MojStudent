@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/services/home/home_bloc.dart';
+import 'package:moj_student/services/blocs/home/home_bloc.dart';
 
 class InitialLoading extends StatefulWidget {
   const InitialLoading({Key? key}) : super(key: key);

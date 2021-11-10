@@ -7,10 +7,10 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
+import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
+import 'package:moj_student/services/blocs/notification/notification_events.dart';
+import 'package:moj_student/services/blocs/notification/notification_states.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
-import 'package:moj_student/services/notification/notification_bloc.dart';
-import 'package:moj_student/services/notification/notification_events.dart';
-import 'package:moj_student/services/notification/notification_states.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:url_launcher/url_launcher.dart';
 

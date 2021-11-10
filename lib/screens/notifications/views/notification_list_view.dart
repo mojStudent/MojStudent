@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
-import 'package:moj_student/services/notification/notification_bloc.dart';
-import 'package:moj_student/services/notification/notification_events.dart';
-import 'package:moj_student/services/notification/notification_states.dart';
+import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
+import 'package:moj_student/services/blocs/notification/notification_events.dart';
+import 'package:moj_student/services/blocs/notification/notification_states.dart';
 
 class NotificationListView extends StatelessWidget {
   final NotificationBloc bloc;

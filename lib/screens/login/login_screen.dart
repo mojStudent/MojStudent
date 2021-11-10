@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
-import 'package:moj_student/services/login/login_bloc.dart';
-import 'package:moj_student/services/login/login_event.dart';
-import 'package:moj_student/services/login/login_state.dart';
-import 'package:moj_student/services/submission/form_submission_status.dart';
+import 'package:moj_student/services/blocs/login/login_bloc.dart';
+import 'package:moj_student/services/blocs/login/login_event.dart';
+import 'package:moj_student/services/blocs/login/login_state.dart';
+import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);

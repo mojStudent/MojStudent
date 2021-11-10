@@ -1,4 +1,4 @@
-import 'package:moj_student/services/home/home_state.dart';
+import 'package:moj_student/services/blocs/home/home_state.dart';
 
 abstract class HomeEvent {}
 

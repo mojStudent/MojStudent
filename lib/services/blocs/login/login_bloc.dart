@@ -1,9 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
-import 'package:moj_student/services/login/login_event.dart';
-import 'package:moj_student/services/login/login_state.dart';
-import 'package:moj_student/services/submission/form_submission_status.dart';
+import 'package:moj_student/services/blocs/login/login_event.dart';
+import 'package:moj_student/services/blocs/login/login_state.dart';
+import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final AuthRepository authRepository;
