@@ -5,6 +5,7 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 import 'package:moj_student/screens/internet/views/charts/internet_traffic_chart.dart';
+import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 
 class InternetTrafficView extends StatefulWidget {
@@ -21,7 +22,7 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
   Widget build(BuildContext context) {
     if (data == null) {
       _getTrafficData();
-      return Center(child: CircularProgressIndicator());
+      return LoadingScreen();
     } else {
       return CustomScrollView(
         slivers: [

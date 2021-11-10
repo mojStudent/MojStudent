@@ -4,6 +4,7 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/screens/internet/internet_log_detail_screen.dart';
+import 'package:moj_student/screens/loading/loading_screen.dart';
 
 class InternetLogView extends StatefulWidget {
   const InternetLogView({Key? key}) : super(key: key);
@@ -175,9 +176,7 @@ class _InternetLogViewState extends State<InternetLogView> {
       );
     } else {
       _getTrafficData();
-      return Center(
-        child: CircularProgressIndicator(),
-      );
+      return LoadingScreen();
     }
   }
 
