@@ -1,11 +1,13 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
 
 class DamageRecordRepo {
+  final client = Client();
+
   static const _damageRecordUrl =
       "https://student.sd-lj.si/api/damage-record?page=";
 
@@ -22,7 +24,7 @@ class DamageRecordRepo {
     };
 
     final response =
-        await http.get(Uri.parse(_damageRecordUrl + "$page"), headers: headers);
+        await client.get(Uri.parse(_damageRecordUrl + "$page"), headers: headers);
 
     if (response.statusCode == 200) {
       var model =

@@ -3,9 +3,11 @@ import 'dart:convert';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class InternetRepository {
+  final client = Client();
+
   AuthRepository authRepository;
 
   InternetRepository({required this.authRepository});
@@ -28,7 +30,7 @@ class InternetRepository {
     };
 
     final response =
-        await http.get(Uri.parse(_internetTrafficUrl), headers: headers);
+        await client.get(Uri.parse(_internetTrafficUrl), headers: headers);
 
     if (response.statusCode == 200) {
       var model = InternetTrafficModel.fromJson(jsonDecode(response.body));
@@ -57,7 +59,7 @@ class InternetRepository {
     };
 
     final response =
-        await http.get(Uri.parse(_internetConnectionsUrl), headers: headers);
+        await client.get(Uri.parse(_internetConnectionsUrl), headers: headers);
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);

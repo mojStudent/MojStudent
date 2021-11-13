@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:moj_student/data/auth/models/auth/loggedin_model.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
@@ -8,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   static const _loginUrl = "https://student.sd-lj.si/api/user/login";
+  final client = Client();
 
   static UserModel? _loggedInUser;
   static String? _token;
@@ -32,7 +33,7 @@ class AuthRepository {
     };
 
     final response =
-        await http.post(Uri.parse(_loginUrl), body: body, headers: headers);
+        await client.post(Uri.parse(_loginUrl), body: body, headers: headers);
 
     if (response.statusCode == 200) {
       var model = LoggedInModel.fromJson(jsonDecode(response.body));

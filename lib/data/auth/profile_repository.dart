@@ -5,11 +5,13 @@ import 'package:moj_student/data/auth/models/auth/login_model.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
 
 class ProfileRepository extends AuthRepository {
+final client = Client();
+
   static const _changeEmailUrl =
       "https://student.sd-lj.si/api/user/email/change";
 
@@ -30,7 +32,7 @@ class ProfileRepository extends AuthRepository {
       'Authorization': 'Bearer $token'
     };
 
-    final response = await http.post(Uri.parse(_changeEmailUrl),
+    final response = await client.post(Uri.parse(_changeEmailUrl),
         body: jsonEncode(model.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
@@ -56,7 +58,7 @@ class ProfileRepository extends AuthRepository {
       'Authorization': 'Bearer $token'
     };
 
-    final response = await http.post(Uri.parse(_changePasswordUrl),
+    final response = await client.post(Uri.parse(_changePasswordUrl),
         body: jsonEncode(model.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
@@ -88,7 +90,7 @@ class ProfileRepository extends AuthRepository {
       'Authorization': 'Bearer $token'
     };
 
-    final response = await http.put(Uri.parse(_changeProfileUrl),
+    final response = await client.put(Uri.parse(_changeProfileUrl),
         body: jsonEncode(model.toJson()), headers: headers);
 
     if (response.statusCode == 200) {

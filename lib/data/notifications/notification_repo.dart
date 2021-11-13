@@ -2,9 +2,10 @@ import 'dart:convert';
 
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class NotificationRepo {
+  final client = Client();
   static const _inboxUrl = "https://student.sd-lj.si/api/notification/inbox";
   static const _envelopeUrl =
       "https://student.sd-lj.si/api/notification/envelope/";
@@ -20,7 +21,7 @@ class NotificationRepo {
       'Authorization': 'Bearer $token'
     };
 
-    final response = await http.get(Uri.parse(_inboxUrl), headers: headers);
+    final response = await client.get(Uri.parse(_inboxUrl), headers: headers);
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
@@ -50,7 +51,7 @@ class NotificationRepo {
       'Authorization': 'Bearer $token'
     };
 
-    final response = await http.get(
+    final response = await client.get(
         Uri.parse(_envelopeUrl + notificationId.toString()),
         headers: headers);
 

@@ -5,9 +5,11 @@ import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_detail_model.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_master_model.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart';
 
 class InternetHelpRepo extends InternetRepository {
+  final client = Client();
+
   InternetHelpRepo({required AuthRepository authRepository})
       : super(authRepository: authRepository);
 
@@ -26,7 +28,7 @@ class InternetHelpRepo extends InternetRepository {
     };
 
     final response =
-        await http.get(Uri.parse(_urlMasterHelp), headers: headers);
+        await client.get(Uri.parse(_urlMasterHelp), headers: headers);
 
     if (response.statusCode == 200) {
       var model = InternetHelpMasterModel.fromJson(jsonDecode(response.body));
@@ -55,7 +57,7 @@ class InternetHelpRepo extends InternetRepository {
     };
 
     var uri = Uri.parse("$_urlDetailHelp$url");
-    final response = await http.get(uri, headers: headers);
+    final response = await client.get(uri, headers: headers);
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
