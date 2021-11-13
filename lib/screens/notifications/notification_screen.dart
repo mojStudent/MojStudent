@@ -26,15 +26,15 @@ class _NotificationScreenState extends State<NotificationScreen> {
           title: Text("Obvestila"),
           centerTitle: true,
           elevation: 0,
-          actions: [
-            IconButton(onPressed: () => null, icon: Icon(Icons.edit)),
-          ],
+          // actions: [
+          //   IconButton(onPressed: () => null, icon: Icon(Icons.edit)),
+          // ],
         ),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () => null,
-          backgroundColor: AppColors.primaryBlue,
-          child: Icon(Icons.search),
-        ),
+        // floatingActionButton: FloatingActionButton(
+        //   onPressed: () => null,
+        //   backgroundColor: AppColors.primaryBlue,
+        //   child: Icon(Icons.search),
+        // ),
         body: BlocBuilder<NotificationBloc, NotificationState>(
             builder: (ctx, state) {
           if (state is InitialNotificationState) {
