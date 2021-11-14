@@ -1,16 +1,11 @@
-# moj_student
+# Moj Študent, klient za Android
 
-A new Flutter project.
+Aplikacija Moj študent je klient za spletno aplikacijo [Moj študent](https://student.sd-lj.si/login), ki jo uporabljajo stanovalci Študentskih domov v Ljubljani za dostop do različnih storitev.
 
-## Getting Started
+Aplikacija je bila sprogramirana v ogrodju [Flutter](https://flutter.com), več o njej je na voljo na [predstavitveni strani](https://mojstudent.marela.team).
 
-This project is a starting point for a Flutter application.
+Aplikacija je bila narejena z obratnim inženiringom (ang. reverse engineering) javnega API-ja.
 
-A few resources to get you started if this is your first Flutter project:
+## Sodelovanje na projektu
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Če bi rad sodeloval pri dodajanju novih funkcionalnosti me lahko kontaktiraš.
