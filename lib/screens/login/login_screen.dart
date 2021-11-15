@@ -7,6 +7,7 @@ import 'package:moj_student/services/blocs/login/login_bloc.dart';
 import 'package:moj_student/services/blocs/login/login_event.dart';
 import 'package:moj_student/services/blocs/login/login_state.dart';
 import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -32,22 +33,53 @@ class LoginScreen extends StatelessWidget {
         padding: EdgeInsets.symmetric(
             horizontal: MediaQuery.of(context).size.width * 0.025),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Center(
-              child: Text(
-                "Moj Študent",
-                style: TextStyle(
-                    fontSize: 48,
-                    fontWeight: FontWeight.w400,
-                    color: Colors.white),
-              ),
+            Column(),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Text(
+                        "Moj Študent",
+                        style: TextStyle(
+                            fontSize: 38,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.white),
+                      ),
+                      Column(
+                        children: [
+                          Image.asset(
+                            'assets/ikona.png',
+                            height: 52,
+                          ),
+                          SizedBox(
+                            height: 10,
+                          )
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.12,
+                ),
+                _loginFormBox(context),
+              ],
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
-            ),
-            _loginFormBox(context)
+            Column(
+              children: [
+                _tosLink(context),
+                SizedBox(
+                  height: 10,
+                )
+              ],
+            )
           ],
         ),
       ),
@@ -108,7 +140,7 @@ class LoginScreen extends StatelessWidget {
             SizedBox(
               height: MediaQuery.of(context).size.height * 0.025,
             ),
-            _loginButton()
+            _loginButton(),
           ],
         ),
       ),
@@ -172,5 +204,23 @@ class LoginScreen extends StatelessWidget {
   void _showSnackbar(BuildContext context, String message) {
     final snackBar = SnackBar(content: Text(message));
     ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
+  Widget _tosLink(BuildContext context) {
+    const url = "https://mojstudent.marela.team/tos";
+
+    return GestureDetector(
+      onTap: () async => await canLaunch(url)
+          ? await launch(url)
+          : _showSnackbar(context, "Ne morem odpreti povezave"),
+      child: Text(
+        "Z uporabo klienta se strinjate s splošnimi pogoji uporabe klienta.",
+        style: TextStyle(
+          color: Colors.white,
+          fontSize: 10,
+        ),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
