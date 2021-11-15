@@ -8,6 +8,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
+import 'package:moj_student/screens/about_app/about_app_screen.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
 import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/internet/internet_screen.dart';
@@ -414,6 +415,12 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: Icons.settings_outlined,
         onPressed: () =>
             Navigator.push(context, PageScaleTransition(ProfileScreen())),
+      ),
+      _menuItem(
+        title: "O aplikaciji",
+        icon: Icons.app_settings_alt_outlined,
+        onPressed: () =>
+            Navigator.push(context, PageScaleTransition(AboutAppScreen())),
       ),
     ];
 

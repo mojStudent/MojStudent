@@ -3,17 +3,17 @@ import 'package:moj_student/constants/colors.dart';
 
 class BoxWidget extends StatelessWidget {
   final Widget cardBody;
-  final String title;
+  final String? title;
   final Color backgroundColor;
   final Icon? icon;
 
-  const BoxWidget(
-      {Key? key,
-      required this.cardBody,
-      required this.title,
-      this.backgroundColor = Colors.white,
-      this.icon,})
-      : super(key: key);
+  const BoxWidget({
+    Key? key,
+    required this.cardBody,
+    this.title,
+    this.backgroundColor = Colors.white,
+    this.icon,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,20 @@ class BoxWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _buildHeader(),
+              cardBody,
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildHeader() {
+    return title == null
+        ? Container()
+        : Column(
+            children: [
               Row(
                   mainAxisAlignment: icon != null
                       ? MainAxisAlignment.spaceBetween
@@ -52,7 +66,7 @@ class BoxWidget extends StatelessWidget {
                     icon ?? Container(),
                     Flexible(
                       child: Text(
-                        title,
+                        title!,
                         style: TextStyle(
                             fontWeight: FontWeight.w700, fontSize: 22),
                       ),
@@ -61,12 +75,8 @@ class BoxWidget extends StatelessWidget {
               Divider(
                 thickness: 1,
               ),
-              cardBody,
             ],
-          ),
-        ),
-      ),
-    );
+          );
   }
 }
 
@@ -87,7 +97,9 @@ class RowBoxWidget extends StatelessWidget {
         children: [
           Text(
             description,
-            style: TextStyle(fontWeight: FontWeight.w300),
+            style: TextStyle(
+              fontWeight: FontWeight.w300,
+            ),
           ),
           Padding(
             padding: EdgeInsets.only(
