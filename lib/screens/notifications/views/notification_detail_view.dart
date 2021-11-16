@@ -121,20 +121,18 @@ class NotificationDetailView extends StatelessWidget {
               ),
               SliverPadding(padding: EdgeInsets.only(top: 10)),
               SliverToBoxAdapter(
-                child: Flexible(
-                  child: Html(
-                      data: notification.body ?? '',
-                      onLinkTap: (String? url,
-                          RenderContext context,
-                          Map<String, String> attributes,
-                          dom.Element? element) {
-                        if (url != null) {
-                          canLaunch(url).then((can) {
-                            if (can) launch(url);
-                          });
-                        }
-                      }),
-                ),
+                child: Html(
+                    data: notification.body ?? '',
+                    onLinkTap: (String? url,
+                        RenderContext context,
+                        Map<String, String> attributes,
+                        dom.Element? element) {
+                      if (url != null) {
+                        canLaunch(url).then((can) {
+                          if (can) launch(url);
+                        });
+                      }
+                    }),
               ),
               SliverPadding(padding: EdgeInsets.only(top: 10)),
               SliverToBoxAdapter(

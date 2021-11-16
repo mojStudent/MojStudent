@@ -51,7 +51,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
               Navigator.of(context).pushNamed('/notification');
             });
 
-            return Scaffold ();
+            return Scaffold (
+              backgroundColor: AppColors.green,
+            );
           } else if (state is DataLoadingError) {
             return Container();
           } else {
