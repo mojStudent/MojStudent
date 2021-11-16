@@ -1,13 +1,18 @@
 import 'dart:convert';
 
+import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
 import 'package:http/http.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
+import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class FailureRecordRepo {
-  final client = Client();
+  final client = InterceptedClient.build(
+    interceptors: [],
+    retryPolicy: TokenExpiredInterceptor(),
+  );
 
   static const _damageRecordUrl = "https://student.sd-lj.si/api/damage?page=";
   static const _optionsUrl = "https://student.sd-lj.si/api/damage/options";
@@ -31,12 +36,6 @@ class FailureRecordRepo {
     if (response.statusCode == 200) {
       var model = FailurePaginationModel.fromJson(jsonDecode(response.body));
       return model;
-    } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await getFailureRecords(token: token);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
     } else {
       throw Exception(response.body);
     }
@@ -59,12 +58,6 @@ class FailureRecordRepo {
     if (response.statusCode == 200) {
       var model = FailureOptions.fromJson(jsonDecode(response.body));
       return model;
-    } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await getFailureOptions(token: token);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
     } else {
       throw Exception(response.body);
     }
@@ -88,23 +81,7 @@ class FailureRecordRepo {
 
     if (response.statusCode == 200) {
       return true;
-    } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await postNewFailure(model, token: token);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
     } else {
-      return false;
-    }
-  }
-
-  Future<bool> reLoginUser() async {
-    var authRepo = AuthRepository();
-    try {
-      await authRepo.login(null);
-      return true;
-    } catch (e) {
       return false;
     }
   }

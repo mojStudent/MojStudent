@@ -1,15 +1,15 @@
 import 'dart:convert';
 
+import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_detail_model.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_master_model.dart';
+import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 import 'package:http/http.dart';
 
 class InternetHelpRepo extends InternetRepository {
-  final client = Client();
-
   InternetHelpRepo({required AuthRepository authRepository})
       : super(authRepository: authRepository);
 
@@ -33,12 +33,6 @@ class InternetHelpRepo extends InternetRepository {
     if (response.statusCode == 200) {
       var model = InternetHelpMasterModel.fromJson(jsonDecode(response.body));
       return model;
-    } else if (response.statusCode == 403) {
-      if (await super.reLoginUser()) {
-        return await loadMasterData(token: token);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
     } else {
       throw Exception(response.body);
     }
@@ -64,12 +58,6 @@ class InternetHelpRepo extends InternetRepository {
       var model = List<InternetHelpDetailModel>.from(
           l.map((model) => InternetHelpDetailModel.fromJson(model)));
       return model;
-    } else if (response.statusCode == 403) {
-      if (await super.reLoginUser()) {
-        return await loadSteps(url, token: token);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
     } else {
       throw Exception(response.body);
     }

@@ -1,16 +1,21 @@
 import 'dart:convert';
 
 import 'package:http/http.dart';
+import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/models/auth/loggedin_model.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/excpetion/errror_model.dart';
 import 'package:moj_student/data/excpetion/sd_api_exception.dart';
+import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
   static const _loginUrl = "https://student.sd-lj.si/api/user/login";
-  final client = Client();
+  final client = InterceptedClient.build(
+    interceptors: [],
+    retryPolicy: TokenExpiredInterceptor(),
+  );
 
   static UserModel? _loggedInUser;
   static String? _token;

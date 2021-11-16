@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
@@ -8,10 +9,9 @@ import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 import 'package:http/http.dart';
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
+import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class ProfileRepository extends AuthRepository {
-final client = Client();
-
   static const _changeEmailUrl =
       "https://student.sd-lj.si/api/user/email/change";
 
@@ -36,13 +36,16 @@ final client = Client();
         body: jsonEncode(model.toJson()), headers: headers);
 
     if (response.statusCode == 200) {
-    } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await mailChange(model);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
-    } else {
+      await reLoginUser();
+    } 
+    // else if (response.statusCode == 403) {
+    //   if (await reLoginUser()) {
+    //     return await mailChange(model);
+    //   } else {
+    //     throw Exception("Napaka pri ponovni prijavi");
+    //   }
+    // }
+     else {
       throw Exception(response.body);
     }
   }
@@ -68,13 +71,15 @@ final client = Client();
           password: model.newPass,
         ),
       );
-    } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await passwordChange(model);
-      } else {
-        throw Exception("Napaka pri ponovni prijavi");
-      }
-    } else {
+    } 
+    // else if (response.statusCode == 403) {
+      // if (await reLoginUser()) {
+      //   return await passwordChange(model);
+      // } else {
+        // throw Exception("Napaka pri ponovni prijavi");
+      // }
+    // } 
+    else {
       throw Exception(response.body);
     }
   }
@@ -96,11 +101,11 @@ final client = Client();
     if (response.statusCode == 200) {
       await reLoginUser();
     } else if (response.statusCode == 403) {
-      if (await reLoginUser()) {
-        return await profileChange(model);
-      } else {
+      // if (await reLoginUser()) {
+      //   return await profileChange(model);
+      // } else {
         throw Exception("Napaka pri ponovni prijavi");
-      }
+      // }
     } else {
       throw Exception(response.body);
     }
