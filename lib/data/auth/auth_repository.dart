@@ -4,6 +4,8 @@ import 'package:http/http.dart';
 import 'package:moj_student/data/auth/models/auth/loggedin_model.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
+import 'package:moj_student/data/excpetion/errror_model.dart';
+import 'package:moj_student/data/excpetion/sd_api_exception.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
@@ -44,7 +46,7 @@ class AuthRepository {
 
       return model.user;
     } else {
-      throw Exception(response.body);
+      throw SdApiException(ApiErrorModel.fromJson(json.decode(response.body)));
     }
   }
 
@@ -61,7 +63,8 @@ class AuthRepository {
 }
 
 class LoginModelSharedPreferences {
-  static Future<void> saveUserToSharedPreferences(LoginModel? loginModel) async {
+  static Future<void> saveUserToSharedPreferences(
+      LoginModel? loginModel) async {
     if (loginModel == null) {
       return;
     }

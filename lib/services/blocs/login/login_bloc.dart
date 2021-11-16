@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
+import 'package:moj_student/data/excpetion/sd_api_exception.dart';
 import 'package:moj_student/services/blocs/login/login_event.dart';
 import 'package:moj_student/services/blocs/login/login_state.dart';
 import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
@@ -27,7 +28,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
         emit(state.copyWith(formSubmissionStatus: SubmissionSuccess()));
       } catch (e) {
         emit(state.copyWith(
-            formSubmissionStatus: SubmissionFailed(e as Exception)));
+            formSubmissionStatus: SubmissionFailed(e as SdApiException)));
       }
     }
   }

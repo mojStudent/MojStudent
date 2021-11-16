@@ -1,3 +1,5 @@
+import 'package:moj_student/data/excpetion/sd_api_exception.dart';
+
 abstract class FormSubmissionStatus {
   const FormSubmissionStatus();
 }
@@ -11,7 +13,7 @@ class FormSubmitting extends FormSubmissionStatus {}
 class SubmissionSuccess extends FormSubmissionStatus {}
 
 class SubmissionFailed extends FormSubmissionStatus {
-  final Exception exception;
+  final SdApiException exception;
 
   SubmissionFailed(this.exception);
 }

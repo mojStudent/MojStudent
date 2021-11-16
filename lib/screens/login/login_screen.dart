@@ -122,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                     )),
           );
         } else if (formStatus is SubmissionFailed) {
-          _showSnackbar(context, formStatus.exception.toString());
+          _showSnackbar(context, formStatus.exception.error.message);
           context
               .read<LoginBloc>()
               .add(LoginFormStatusChanged(formState: InitialFormStatus()));
