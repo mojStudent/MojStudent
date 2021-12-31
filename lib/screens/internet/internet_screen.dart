@@ -35,7 +35,7 @@ class _InternetScreenState extends State<InternetScreen> {
                 ),
                 Tab(
                   icon: Icon(Icons.help_center_outlined),
-                  text: "Navodila",
+                  text: "Pomoč",
                 ),
               ],
             )),
