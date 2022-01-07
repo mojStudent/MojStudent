@@ -13,6 +13,12 @@ class FailureRecordLoadedState extends FailureRecordState {
   FailureRecordLoadedState(this.model);
 }
 
+class FailureEmptyDataState extends FailureRecordState {
+  final EmptyDataException emptyDataException;
+
+  FailureEmptyDataState(this.emptyDataException);
+}
+
 class FailureRecordErrorState extends FailureRecordState {
   final Object error;
 

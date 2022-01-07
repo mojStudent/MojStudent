@@ -7,6 +7,7 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
+import 'package:moj_student/screens/widgets/no_data.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/blocs/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/files/file_downloader.dart';
@@ -34,6 +35,8 @@ class DamagesScreen extends StatelessWidget {
               return Container();
             } else if (state is DamageRecordLoadingState) {
               return LoadingScreen();
+            } else if (state is DamageRecordEmptyState) {
+              return NoData();
             } else if (state is DamageRecordLoadedState) {
               return RefreshIndicator(
                   onRefresh: () async => context

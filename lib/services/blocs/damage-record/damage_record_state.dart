@@ -13,6 +13,12 @@ class DamageRecordLoadedState extends DamageRecordState {
   DamageRecordLoadedState(this.model);
 }
 
+class DamageRecordEmptyState extends DamageRecordState {
+  final EmptyDataException emptyDataException;
+
+  DamageRecordEmptyState(this.emptyDataException);
+}
+
 class DamageRecordErrorState extends DamageRecordState {
   final Object error;
 

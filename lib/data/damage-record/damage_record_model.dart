@@ -1,3 +1,5 @@
+import 'package:moj_student/data/exceptions/empty_data_exception.dart';
+
 class SkodniZapisnikPaginationModel {
   SkodniZapisnikPaginationModel({
     required this.count,
@@ -13,14 +15,20 @@ class SkodniZapisnikPaginationModel {
   late final int page;
   late final int pages;
   late final List<DamageRecordModel> results;
-  
-  SkodniZapisnikPaginationModel.fromJson(Map<String, dynamic> json){
+
+  SkodniZapisnikPaginationModel.fromJson(Map<String, dynamic> json) {
     count = json['count'];
     hits = json['hits'];
     pp = json['pp'];
     page = json['page'];
     pages = json['pages'];
-    results = List.from(json['results']).map((e)=>DamageRecordModel.fromJson(e)).toList();
+    if (json['results'] == null) {
+      throw EmptyDataException();
+    } else {
+      results = List.from(json['results'])
+          .map((e) => DamageRecordModel.fromJson(e))
+          .toList();
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -30,7 +38,7 @@ class SkodniZapisnikPaginationModel {
     _data['pp'] = pp;
     _data['page'] = page;
     _data['pages'] = pages;
-    _data['results'] = results.map((e)=>e.toJson()).toList();
+    _data['results'] = results.map((e) => e.toJson()).toList();
     return _data;
   }
 }
@@ -52,8 +60,8 @@ class DamageRecordModel {
   late final String modified;
   late final String partnerTitle;
   late final String url;
-  
-  DamageRecordModel.fromJson(Map<String, dynamic> json){
+
+  DamageRecordModel.fromJson(Map<String, dynamic> json) {
     mime = json['mime'];
     filename = json['filename'];
     date = json['date'];

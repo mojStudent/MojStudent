@@ -1,3 +1,5 @@
+import 'package:moj_student/data/exceptions/empty_data_exception.dart';
+
 class FailurePaginationModel {
   FailurePaginationModel({
     required this.count,
@@ -20,9 +22,13 @@ class FailurePaginationModel {
     pp = json['pp'];
     page = json['page'];
     pages = json['pages'];
-    results = List.from(json['results'])
-        .map((e) => FailureModel.fromJson(e))
-        .toList();
+    if (json['results'] == null) {
+      throw EmptyDataException();
+    } else {
+      results = List.from(json['results'])
+          .map((e) => FailureModel.fromJson(e))
+          .toList();
+    }
   }
 
   Map<String, dynamic> toJson() {

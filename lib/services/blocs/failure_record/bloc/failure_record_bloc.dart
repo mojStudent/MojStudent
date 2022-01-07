@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
+import 'package:moj_student/data/exceptions/empty_data_exception.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
 
@@ -18,6 +19,8 @@ class FailureRecordBloc extends Bloc<FailureRecordEvent, FailureRecordState> {
     try {
       var data = await repo.getFailureRecords(page: event.page);
       emit(FailureRecordLoadedState(data));
+    } on EmptyDataException catch (e) {
+      emit(FailureEmptyDataState(e));
     } catch (e) {
       emit(FailureRecordErrorState(e));
     }

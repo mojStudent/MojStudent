@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
+import 'package:moj_student/screens/widgets/no_data.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
 
@@ -35,6 +36,8 @@ class FailuresScreen extends StatelessWidget {
               return Container();
             } else if (state is FailureRecordLoadingState) {
               return LoadingScreen();
+            } else if (state is FailureEmptyDataState) {
+              return NoData();
             } else if (state is FailureRecordLoadedState) {
               return RefreshIndicator(
                   onRefresh: () async => context
