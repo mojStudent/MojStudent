@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/screens/profile/views/profile_change_email.dart';
 import 'package:moj_student/screens/profile/views/profile_change_password.dart';
 import 'package:moj_student/screens/profile/views/profile_change_profile.dart';
+import 'package:moj_student/screens/widgets/back_button.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -33,27 +35,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
+          leading: BackNavigationButton(),
           title: Text("Nastavitve profila"),
-          backgroundColor: AppColors.raisinBlack[500],
           centerTitle: true,
           elevation: 0,
-          bottom: const TabBar(tabs: [
+          bottom: TabBar(
+            indicatorColor: AppColors.ghostWhite,
+            tabs: [
             Tab(
-              icon: Icon(Icons.person),
-              text: "Profil",
+              icon: Icon(FlutterRemix.user_3_line),
+              // text: "Profil",
             ),
             Tab(
-              icon: Icon(Icons.security),
-              text: "Geslo",
+              icon: Icon(FlutterRemix.lock_2_line),
+              // text: "Geslo",
             ),
             Tab(
-              icon: Icon(Icons.mail),
-              text: "Email",
+              icon: Icon(FlutterRemix.mail_line),
+              // text: "Email",
             ),
           ]),
         ),
-        backgroundColor: AppColors.green,
         body: TabBarView(
+          physics: BouncingScrollPhysics(),
           children: [
             _buildTab(ProfileChangeProfileView()),
             _buildTab(ProfileChangePasswordView()),

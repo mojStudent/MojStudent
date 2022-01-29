@@ -23,6 +23,7 @@ class _ProfileChangePasswordViewState extends State<ProfileChangePasswordView> {
   Widget build(BuildContext context) {
     return BoxWidget(
       title: "Sprememba gesla",
+      elevated: false,
       cardBody: Form(
         key: _passwordForm,
         child: Column(

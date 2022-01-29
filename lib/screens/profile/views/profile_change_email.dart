@@ -21,6 +21,7 @@ class _ProfileChangeEmailViewState extends State<ProfileChangeEmailView> {
   Widget build(BuildContext context) {
     return BoxWidget(
       title: "Sprememba e-naslova",
+      elevated: false,
       cardBody: Form(
         key: _mailForm,
         child: Column(

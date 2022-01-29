@@ -129,6 +129,17 @@ class UserModel {
     _data['notifications'] = notifications;
     return _data;
   }
+
+  String rolesToString() {
+    var s = "";
+    for (int i = 0; i < roles.length; i++) {
+      if (i != 0) {
+        s += "\n";
+      }
+      s += (roles[i].name ?? '');
+    }
+    return s;
+  }
 }
 
 class Roles {

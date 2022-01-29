@@ -39,6 +39,7 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
 
     return BoxWidget(
       title: "Sprememba nastavitev profila",
+      elevated: false,
       cardBody: Form(
         key: _profileForm,
         child: Column(
@@ -57,8 +58,8 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
                 in _profileModel.subscriptions ?? [])
               CheckboxListTile(
                 activeColor: (subscription.locked ?? false)
-                    ? AppColors.raisinBlack[200]
-                    : AppColors.blue[800],
+                    ? AppColors.jet[200]
+                    : AppColors.jet,
                 title: Text(subscription.name ?? ''),
                 value: subscription.selected,
                 onChanged: (value) => setState(() => subscription.selected =

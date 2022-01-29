@@ -6,6 +6,7 @@ class BoxWidget extends StatelessWidget {
   final String? title;
   final Color backgroundColor;
   final Icon? icon;
+  final bool elevated;
 
   const BoxWidget({
     Key? key,
@@ -13,6 +14,7 @@ class BoxWidget extends StatelessWidget {
     this.title,
     this.backgroundColor = Colors.white,
     this.icon,
+    this.elevated = true
   }) : super(key: key);
 
   @override
@@ -28,12 +30,12 @@ class BoxWidget extends StatelessWidget {
               color: backgroundColor,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
-                BoxShadow(
+                elevated ? BoxShadow(
                   color: AppColors.raisinBlack[100]!,
                   spreadRadius: 1,
                   blurRadius: 7,
                   offset: Offset(8, 6), // changes position of shadow
-                ),
+                ) : BoxShadow(),
               ]),
           padding: EdgeInsets.fromLTRB(
             MediaQuery.of(context).size.width * 0.025,
