@@ -1,0 +1,67 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:moj_student/constants/colors.dart';
+
+class AppHeader extends StatelessWidget {
+  const AppHeader({Key? key, required this.title, this.actions = const []})
+      : super(key: key);
+
+  final String title;
+  final List<GestureDetector> actions;
+
+  @override
+  Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+    final h = MediaQuery.of(context).size.height;
+    return Container(
+      width: double.infinity,
+      padding: EdgeInsets.only(bottom: 20),
+      decoration: BoxDecoration(
+          color: AppColors.jet,
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+      child: SafeArea(
+        child: Padding(
+          padding:
+              EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.02),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    child: Icon(
+                      FlutterRemix.arrow_left_s_line,
+                      color: Colors.white,
+                    ),
+                    onTap: () => Navigator.pop(context),
+                  ),
+                  Row(
+                    children: [
+                      for (var action in actions)
+                        Padding(
+                          padding: EdgeInsets.only(right: 15),
+                          child: action,
+                        )
+                    ],
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                  child: Text(
+                title.toUpperCase(),
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ))
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}

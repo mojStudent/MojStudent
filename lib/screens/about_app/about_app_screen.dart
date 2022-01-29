@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
+import 'package:moj_student/screens/widgets/data_containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
+import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,146 +35,79 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+    final h = MediaQuery.of(context).size.height;
     return Scaffold(
-        backgroundColor: AppColors.green,
-        body: loading ? LoadingScreen() : _buildWithData());
+        // backgroundColor: Color.alphaBlend(AppColors.russianGreen.withOpacity(0.7), Colors.white),
+        backgroundColor: AppColors.ghostWhite,
+        body: loading ? LoadingScreen() : _buildWithData(h, w));
   }
 
-  Widget _buildWithData() {
-    return CustomScrollView(
-      slivers: [
-        _header(),
-        SliverToBoxAdapter(
-          child: BoxWidget(
-            title: "Verzija aplikacije",
-            cardBody: Column(
-              children: [
-                RowBoxWidget(
-                  description: "Verzija aplikacija",
-                  data: version,
-                ),
-                RowBoxWidget(
-                  description: "Verzija gradnje",
-                  data: buildNumber,
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: BoxWidget(
-            title: "O razvijalcu",
-            cardBody: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                RowBoxWidget(
-                  description: "Ime aplikacije",
-                  data: appName,
-                ),
-                RowBoxWidget(
-                  description: "Razvijalec aplikacije",
-                  data: "MarelaTeam",
-                ),
-              ],
-            ),
-          ),
-        ),
-        SliverToBoxAdapter(
-          child: BoxWidget(
-            cardBody: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Text(
-                    "2021 MarelaTeam",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w300),
-                  ),
-                  Text(
-                    "vse pravice pridržane",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () async => await launch(_url),
-                    child: Text(
-                      "Z uporabo aplikacije se strinjate s pogoji uporabe",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: AppColors.blue,
+  Widget _buildWithData(double h, double w) {
+    return Column(
+      children: [
+        AppHeader(title: "o aplikaciji"),
+        Expanded(
+          child: CustomScrollView(
+            physics: BouncingScrollPhysics(),
+            slivers: [
+              CategoryNameContainer(categoryName: "Verzija aplikacije"),
+              DataRowWidget(data: "$version", dataName: "Verzija aplikacije"),
+              DataRowWidget(data: "$buildNumber", dataName: "Verzija gradnje"),
+              CategoryNameContainer(categoryName: "O razvijalcu"),
+              DataRowWidget(data: appName ?? '', dataName: "Ime aplikacije"),
+              DataRowWidget(
+                  data: "MarelaTeam", dataName: "Razvijalec aplikacije"),
+              SliverPadding(
+                padding: EdgeInsets.only(bottom: h * 0.05),
+                sliver: SliverToBoxAdapter(
+                  child: Container(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: w * 0.06, vertical: h * 0.02),
+                    margin: EdgeInsets.symmetric(
+                        horizontal: w * 0.06, vertical: h * 0.0075),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.white),
+                    child: Center(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text(
+                            "2021 MarelaTeam",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w300),
+                          ),
+                          Text(
+                            "vse pravice pridržane",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(fontSize: 12),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          GestureDetector(
+                            onTap: () async => await launch(_url),
+                            child: Text(
+                              "Z uporabo aplikacije se strinjate s pogoji uporabe",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: AppColors.blue,
+                              ),
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
+            ],
           ),
         ),
       ],
-    );
-  }
-
-  Widget _header() {
-    return SliverToBoxAdapter(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.35,
-        decoration: BoxDecoration(
-            color: AppColors.raisinBlack.withOpacity(0.5),
-            borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
-        child: SafeArea(
-          child: Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => Navigator.pop(context),
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: Colors.white,
-                      ),
-                    )
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      width: MediaQuery.of(context).size.height * 0.1,
-                      decoration: BoxDecoration(
-                          color: Colors.white.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(20)),
-                      child: ClipRRect(
-                          borderRadius: BorderRadius.circular(20),
-                          child: Image.asset(
-                            'assets/ikona.png',
-                          )),
-                    ),
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Text(
-                      "O aplikaciji",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 30,
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
     );
   }
 }
