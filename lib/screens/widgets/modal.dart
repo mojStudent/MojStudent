@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 
 class BottomModal {
-
   static void showFileDownloading(BuildContext context) {
     showModalBottomSheet<void>(
       context: context,
@@ -14,8 +13,8 @@ class BottomModal {
         return Container(
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
-            borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.green,
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+            color: AppColors.jet,
           ),
           child: Center(
             child: Column(
@@ -59,7 +58,7 @@ class BottomModal {
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.green,
+            color: AppColors.jet,
           ),
           child: Center(
             child: Column(
@@ -105,7 +104,7 @@ class BottomModal {
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.green,
+            color: AppColors.jet,
           ),
           child: Center(
             child: Column(

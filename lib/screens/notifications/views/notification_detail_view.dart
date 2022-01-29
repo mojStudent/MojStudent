@@ -1,3 +1,4 @@
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:html/dom.dart' as dom;
 
 import 'package:flutter/material.dart';
@@ -6,7 +7,10 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
+import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
+import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
+import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
 import 'package:moj_student/services/blocs/notification/notification_events.dart';
 import 'package:moj_student/services/blocs/notification/notification_states.dart';
@@ -31,148 +35,93 @@ class NotificationDetailView extends StatelessWidget {
           return false;
         },
         child: Scaffold(
-          backgroundColor: AppColors.green,
-          appBar: AppBar(
-            iconTheme: IconThemeData(
-              color: Colors.white, //change your color here
-            ),
-            backgroundColor: AppColors.raisinBlack[500],
-            elevation: 0,
-            title: Text("Obvestilo"),
-            centerTitle: true,
+          backgroundColor: AppColors.ghostWhite,
+          body: Column(
+            children: _buildBody(context),
           ),
-          body: _buildBody(context),
         ),
       ),
     );
   }
 
-  Widget _buildBody(BuildContext context) {
+  List<Widget> _buildBody(BuildContext context) {
+    final w = MediaQuery.of(context).size.width;
+    final h = MediaQuery.of(context).size.height;
+
     final notification =
         (context.read<NotificationBloc>().state as NotificationDetailLoaded)
             .notification;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 20, horizontal: 8),
-      child: Card(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuery.of(context).size.width * 0.04),
-          child: CustomScrollView(
-            slivers: [
-              SliverPadding(padding: EdgeInsets.only(top: 20)),
-              SliverToBoxAdapter(
-                child: Center(
-                  child: Text(
-                    notification.subject,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Divider(
-                  color: Colors.black,
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Row(
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.person,
-                          color: Colors.black54,
-                          size: 15,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text(
-                          notification.author ?? '',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      color: Colors.black54,
-                      size: 15,
-                    ),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      notification.created ?? '',
-                      style:
-                          TextStyle(fontSize: 15, fontWeight: FontWeight.w500),
-                    ),
-                  ],
-                ),
-              ),
-              SliverPadding(padding: EdgeInsets.only(top: 10)),
-              SliverToBoxAdapter(
-                child: Html(
-                    data: notification.body ?? '',
-                    onLinkTap: (String? url,
-                        RenderContext context,
-                        Map<String, String> attributes,
-                        dom.Element? element) {
-                      if (url != null) {
-                        canLaunch(url).then((can) {
-                          if (can) launch(url);
-                        });
-                      }
-                    }),
-              ),
-              SliverPadding(padding: EdgeInsets.only(top: 10)),
-              SliverToBoxAdapter(
-                child: Divider(
-                  color: Colors.black,
-                ),
-              ),
-              if (notification.attachments.isNotEmpty)
-                SliverToBoxAdapter(
-                  child: Text(
-                    "Priponke",
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-                  ),
-                ),
-              for (var attachment in notification.attachments)
-                SliverToBoxAdapter(
-                  child: TextButton(
-                    onPressed: () async =>
-                        await _onAttachmentDownloadButtonPressed(
-                            attachment, context),
-                    child: Row(
-                      children: [
-                        Icon(Icons.file_download),
-                        Flexible(child: Text(attachment.label))
-                      ],
-                    ),
-                  ),
-                ),
-              if (notification.attachments.isNotEmpty)
-                SliverToBoxAdapter(
-                  child: Divider(
-                    color: Colors.black,
-                  ),
-                ),
-              SliverPadding(padding: EdgeInsets.only(top: 40)),
-            ],
-          ),
-        ),
+    return [
+      AppHeader(
+        title:
+            (context.read<NotificationBloc>().state as NotificationDetailLoaded)
+                .notification
+                .subject,
+        onBackButtonClick: () => Future.delayed(Duration.zero, () {
+          Navigator.of(context).pop("/notifications");
+          context.read<NotificationBloc>().add(LoadNotifications());
+        }),
       ),
-    );
+      Expanded(
+          child: CustomScrollView(
+        physics: BouncingScrollPhysics(),
+        slivers: [
+          SliverPadding(padding: EdgeInsets.only(top: 20)),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.03, vertical: h * 0.015),
+              margin: EdgeInsets.symmetric(
+                  horizontal: w * 0.06, vertical: h * 0.0075),
+              decoration: BoxDecoration(
+                  color: Colors.white, borderRadius: BorderRadius.circular(10)),
+              child: Html(
+                  data: notification.body ?? '',
+                  onLinkTap: (String? url, RenderContext context,
+                      Map<String, String> attributes, dom.Element? element) {
+                    if (url != null) {
+                      canLaunch(url).then((can) {
+                        if (can) launch(url);
+                      });
+                    }
+                  }),
+            ),
+          ),
+          DataRowWidget(
+            data: notification.author ?? '',
+            dataName: "Avtor",
+            icon: FlutterRemix.user_3_line,
+          ),
+          DataRowWidget(
+            data: notification.created ?? '',
+            dataName: "Datum objave",
+            icon: FlutterRemix.calendar_2_line,
+          ),
+          if (notification.attachments.isNotEmpty)
+            RowWidgetContainer(
+              dataName: "Priponke",
+              icon: FlutterRemix.attachment_line,
+              child: Column(
+                children: [
+                  for (var attachment in notification.attachments)
+                    TextButton(
+                      onPressed: () async =>
+                          await _onAttachmentDownloadButtonPressed(
+                              attachment, context),
+                      child: Row(
+                        children: [
+                          Icon(Icons.file_download),
+                          Flexible(child: Text(attachment.label))
+                        ],
+                      ),
+                    ),
+                ],
+              ),
+            ),
+          SliverPadding(padding: EdgeInsets.only(top: 40)),
+        ],
+      ))
+    ];
   }
 
   Future<void> _onAttachmentDownloadButtonPressed(

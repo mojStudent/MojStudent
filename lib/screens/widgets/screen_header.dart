@@ -3,11 +3,16 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({Key? key, required this.title, this.actions = const []})
-      : super(key: key);
+  const AppHeader({
+    Key? key,
+    required this.title,
+    this.actions = const [],
+    this.onBackButtonClick,
+  }) : super(key: key);
 
   final String title;
   final List<GestureDetector> actions;
+  final Function? onBackButtonClick;
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +39,9 @@ class AppHeader extends StatelessWidget {
                       FlutterRemix.arrow_left_s_line,
                       color: Colors.white,
                     ),
-                    onTap: () => Navigator.pop(context),
+                    onTap: () => onBackButtonClick != null
+                        ? onBackButtonClick!()
+                        : Navigator.pop(context),
                   ),
                   Row(
                     children: [

@@ -7,14 +7,13 @@ class LoadingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.green,
       body: Center(
         child: Container(
           width: MediaQuery.of(context).size.width * 0.75,
           height: MediaQuery.of(context).size.height * 0.35,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: AppColors.raisinBlack.withOpacity(0.45),
+            color: AppColors.jet,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
