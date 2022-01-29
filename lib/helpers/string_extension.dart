@@ -5,7 +5,7 @@ extension StringExtension on String {
     var s = "";
 
     for (var word in words) {
-      s += "${word[0].toUpperCase()}${word.substring(1)} ";
+      s += "${word[0].toUpperCase()}${word.substring(1).toLowerCase()} ";
     }
 
     return s;
