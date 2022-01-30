@@ -26,7 +26,7 @@ class AppHeader extends StatelessWidget {
       padding: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
           color: backgroundColor ?? Theme.of(context).colorScheme.primary,
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
+          borderRadius: BorderRadius.only(bottomRight: Radius.circular(80))),
       child: SafeArea(
         child: Padding(
           padding:
