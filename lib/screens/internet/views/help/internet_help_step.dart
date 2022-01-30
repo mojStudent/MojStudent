@@ -59,6 +59,7 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             FloatingActionButton.extended(
+              heroTag: "back",
               backgroundColor: ThemeColors.jet[600],
               elevation: 0,
               onPressed: () => controller.animateToPage(
@@ -73,6 +74,7 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
               ),
             ),
             FloatingActionButton.extended(
+              heroTag: "forward",
               backgroundColor: ThemeColors.jet,
               elevation: 0,
               onPressed: () => controller.animateToPage(

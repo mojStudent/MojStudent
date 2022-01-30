@@ -22,6 +22,7 @@ class InternetHelpMasterView extends StatelessWidget {
       var admins = state.administrators;
 
       return CustomScrollView(
+        physics: BouncingScrollPhysics(),
         slivers: [
           RowSliver(
             title: "Domski administratorji",
