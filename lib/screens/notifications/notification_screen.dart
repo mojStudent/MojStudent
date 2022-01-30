@@ -67,14 +67,14 @@ class _NotificationScreenState extends State<NotificationScreen> {
         return Dismissible(
           key: Key(index.toString()),
           confirmDismiss: (direction) async {
-            if (!notifications[index - 1].read) {
+            if (!notifications[index].read) {
               context.read<NotificationBloc>().add(SetNotificationAsRead(
-                  notificationId: notifications[index - 1].id));
+                  notificationId: notifications[index].id));
             }
             return false;
           },
           child: list[index],
-          background: index == 0 || notifications[index - 1].read
+          background: index == 0 || notifications[index].read
               ? Container()
               : Container(
                   color: ThemeColors.warning,
