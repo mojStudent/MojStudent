@@ -6,7 +6,7 @@ import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class FailureAddScreen extends StatefulWidget {
@@ -73,7 +73,7 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
       child: CustomScrollView(
         slivers: [
           if (error != null)
-            RowWidgetContainer(
+            RowSliver(
               child: Row(
                 children: [
                   Text(
@@ -82,11 +82,11 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
                   ),
                 ],
               ),
-              dataName: "Napaka oddaje",
+              title: "Napaka oddaje",
               icon: FlutterRemix.error_warning_line,
             ),
-          RowWidgetContainer(
-            dataName: "Lokacija okvare",
+          RowSliver(
+            title: "Lokacija okvare",
             icon: FlutterRemix.home_2_line,
             child: DropdownButton<SubLocationOption>(
               focusColor: Colors.white,
@@ -118,14 +118,14 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
               },
             ),
           ),
-          RowWidgetContainer(
+          RowSliver(
             child: TextField(
               onChanged: (value) => description = value,
               maxLines: 3,
               decoration:
                   InputDecoration.collapsed(hintText: "Opišite nastalo okvaro"),
             ),
-            dataName: "Opis okvare",
+            title: "Opis okvare",
             icon: FlutterRemix.file_2_fill,
           ),
         ],

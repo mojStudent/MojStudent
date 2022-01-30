@@ -8,7 +8,7 @@ import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 import 'package:moj_student/screens/internet/views/charts/internet_traffic_chart.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 
 class InternetTrafficView extends StatefulWidget {
   const InternetTrafficView({Key? key}) : super(key: key);
@@ -30,8 +30,8 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
         physics: BouncingScrollPhysics(),
         slivers: [
           SliverPadding(padding: EdgeInsets.only(top: 20)),
-          RowWidgetContainer(
-            dataName: "Prenos gor v tem tednu",
+          RowSliver(
+            title: "Prenos gor v tem tednu",
             icon: FlutterRemix.upload_2_line,
             child: Column(
               children: [
@@ -70,8 +70,8 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
               ],
             ),
           ),
-          RowWidgetContainer(
-            dataName: "Količina prenosa",
+          RowSliver(
+            title: "Količina prenosa",
             icon: FlutterRemix.arrow_up_down_line,
             child: Column(
               children: [
@@ -110,8 +110,8 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
               ],
             ),
           ),
-          RowWidgetContainer(
-            dataName: "Prenos v tem tednu",
+          RowSliver(
+            title: "Prenos v tem tednu",
             icon: FlutterRemix.loader_2_line,
             child: Column(children: [
               for (int i = (data?.days.data.labels.length ?? 7) - 7;

@@ -4,6 +4,7 @@ import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -52,12 +53,12 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
             physics: BouncingScrollPhysics(),
             slivers: [
               CategoryNameContainer(categoryName: "Verzija aplikacije"),
-              DataRowWidget(data: "$version", dataName: "Verzija aplikacije"),
-              DataRowWidget(data: "$buildNumber", dataName: "Verzija gradnje"),
+              TextRowSliver(data: "$version", title: "Verzija aplikacije"),
+              TextRowSliver(data: "$buildNumber", title: "Verzija gradnje"),
               CategoryNameContainer(categoryName: "O razvijalcu"),
-              DataRowWidget(data: appName ?? '', dataName: "Ime aplikacije"),
-              DataRowWidget(
-                  data: "MarelaTeam", dataName: "Razvijalec aplikacije"),
+              TextRowSliver(data: appName ?? '', title: "Ime aplikacije"),
+              TextRowSliver(
+                  data: "MarelaTeam", title: "Razvijalec aplikacije"),
               SliverPadding(
                 padding: EdgeInsets.only(bottom: h * 0.05),
                 sliver: SliverToBoxAdapter(

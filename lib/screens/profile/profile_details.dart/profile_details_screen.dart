@@ -9,6 +9,7 @@ import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/blocs/home/home_state.dart';
 import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
@@ -67,56 +68,56 @@ class ProfileDetailsScreen extends StatelessWidget {
         physics: BouncingScrollPhysics(),
         slivers: [
           CategoryNameContainer(categoryName: "Osnovni podatki"),
-          DataRowWidget(
-              dataName: "ime in priimek",
+          TextRowSliver(
+              title: "ime in priimek",
               data: "${user.firstname} ${user.lastname}",
               icon: FlutterRemix.user_smile_line),
-          DataRowWidget(
-              dataName: "lokacija in številka sobe",
+          TextRowSliver(
+              title: "lokacija in številka sobe",
               data: "${user.location} (${user.campus}), ${user.room}",
               icon: FlutterRemix.home_2_line),
-          DataRowWidget(
-              dataName: "uporabniško ime",
+          TextRowSliver(
+              title: "uporabniško ime",
               data: "${user.username}",
               icon: FlutterRemix.user_3_line),
-          DataRowWidget(
-              dataName: "status tujca",
+          TextRowSliver(
+              title: "status tujca",
               data: (user.foreigner ?? false) ? 'da' : 'ne',
               icon: FlutterRemix.earth_line),
-          DataRowWidget(
-              dataName: "številka uporabnika",
+          TextRowSliver(
+              title: "številka uporabnika",
               data: "${user.id}",
               icon: FlutterRemix.passport_line),
           //
           CategoryNameContainer(categoryName: "Kontaktni podatki"),
-          DataRowWidget(
-              dataName: "e-pošta",
+          TextRowSliver(
+              title: "e-pošta",
               data: "${user.email}",
               icon: FlutterRemix.mail_line),
-          DataRowWidget(
-              dataName: "datum potrditve e-pošte",
+          TextRowSliver(
+              title: "datum potrditve e-pošte",
               data: "${user.emailDate}",
               icon: FlutterRemix.calendar_2_line),
-          DataRowWidget(
-              dataName: "telefonska številka",
+          TextRowSliver(
+              title: "telefonska številka",
               data: "${user.phone}",
               icon: FlutterRemix.phone_line),
           //
           CategoryNameContainer(categoryName: "Napredni podatki profila"),
-          DataRowWidget(
-              dataName: "api dostop",
+          TextRowSliver(
+              title: "api dostop",
               data: (user.api ?? false) ? 'da' : "ne",
               icon: FlutterRemix.database_2_line),
-          DataRowWidget(
-              dataName: "internetni dostop",
+          TextRowSliver(
+              title: "internetni dostop",
               data: (user.internetAccess ?? false) ? 'da' : "ne",
               icon: FlutterRemix.cloud_line),
-          DataRowWidget(
-              dataName: "tip uporabniškega računa",
+          TextRowSliver(
+              title: "tip uporabniškega računa",
               data: user.rolesToString(),
               icon: FlutterRemix.shield_user_line),
-          DataRowWidget(
-              dataName: "trenutni ip",
+          TextRowSliver(
+              title: "trenutni ip",
               data: "${user.ip}",
               icon: FlutterRemix.link_m),
           SliverPadding(padding: EdgeInsets.only(bottom: h * 0.04))

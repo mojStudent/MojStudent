@@ -7,7 +7,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/no_data.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
@@ -65,8 +65,8 @@ class DamagesScreen extends StatelessWidget {
           physics: BouncingScrollPhysics(),
           slivers: [
             for (var record in model.results)
-              RowWidgetContainer(
-                dataName: record.created,
+              RowSliver(
+                title: record.created,
                 icon: FlutterRemix.calendar_2_line,
                 child: GestureDetector(
                     onTap: () async {

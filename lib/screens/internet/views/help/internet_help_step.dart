@@ -4,7 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_detail_model.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class InternetHelpDetailView extends StatefulWidget {
@@ -97,8 +97,8 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
       slivers: [
       SliverPadding(
         padding: EdgeInsets.only(top: h * 0.04),
-        sliver: RowWidgetContainer(
-          dataName: "Korak ${index + 1}/${steps.length}",
+        sliver: RowSliver(
+          title: "Korak ${index + 1}/${steps.length}",
           icon: FlutterRemix.information_line,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,

@@ -4,7 +4,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/no_data.dart';
 import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
@@ -73,8 +73,8 @@ class FailuresScreen extends StatelessWidget {
               physics: BouncingScrollPhysics(),
               slivers: [
                 for (var record in model.results)
-                  RowWidgetContainer(
-                    dataName: record.date,
+                  RowSliver(
+                    title: record.date,
                     icon: FlutterRemix.calendar_2_line,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,

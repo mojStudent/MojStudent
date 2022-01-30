@@ -13,21 +13,18 @@ class CategoryNameContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
-    return SliverPadding(
-        padding: EdgeInsets.fromLTRB(
-          w * 0.04,
-          h * 0.03,
-          w * 0.04,
-          h * 0.015,
-        ),
-        sliver: SliverToBoxAdapter(
-          child: Text(
-            categoryName,
-            style: TextStyle(
-                fontSize: 18,
-                color: AppColors.jet,
-                fontWeight: FontWeight.w700),
-          ),
-        ));
+    return Padding(
+      padding: EdgeInsets.fromLTRB(
+        w * 0.04,
+        h * 0.03,
+        w * 0.04,
+        h * 0.015,
+      ),
+      child: Text(
+        categoryName,
+        style: TextStyle(
+            fontSize: 18, color: AppColors.jet, fontWeight: FontWeight.w700),
+      ),
+    );
   }
 }

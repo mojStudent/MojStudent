@@ -8,7 +8,8 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
@@ -87,19 +88,19 @@ class NotificationDetailView extends StatelessWidget {
                   }),
             ),
           ),
-          DataRowWidget(
+          TextRowSliver(
             data: notification.author ?? '',
-            dataName: "Avtor",
+            title: "Avtor",
             icon: FlutterRemix.user_3_line,
           ),
-          DataRowWidget(
+          TextRowSliver(
             data: notification.created ?? '',
-            dataName: "Datum objave",
+            title: "Datum objave",
             icon: FlutterRemix.calendar_2_line,
           ),
           if (notification.attachments.isNotEmpty)
-            RowWidgetContainer(
-              dataName: "Priponke",
+            RowSliver(
+              title: "Priponke",
               icon: FlutterRemix.attachment_line,
               child: Column(
                 children: [

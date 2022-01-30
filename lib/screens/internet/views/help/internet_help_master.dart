@@ -5,7 +5,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_master_model.dart';
 import 'package:moj_student/screens/internet/views/help/internet_help_step.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 import "package:moj_student/helpers/string_extension.dart";
 
@@ -23,8 +23,8 @@ class InternetHelpMasterView extends StatelessWidget {
 
       return CustomScrollView(
         slivers: [
-          RowWidgetContainer(
-            dataName: "Domski administratorji",
+          RowSliver(
+            title: "Domski administratorji",
             icon: FlutterRemix.admin_line,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.end,
@@ -53,8 +53,8 @@ class InternetHelpMasterView extends StatelessWidget {
             ),
           ),
           for (var osGroup in model.help)
-            RowWidgetContainer(
-              dataName: osGroup.name,
+            RowSliver(
+              title: osGroup.name,
               icon: FlutterRemix.computer_line,
               child: Padding(
                 padding: EdgeInsets.symmetric(

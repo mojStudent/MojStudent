@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
+import 'package:moj_student/screens/widgets/data_containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/save_button_widget.dart';
 
@@ -36,6 +39,27 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
       //napaka
       Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
     }
+
+    return Expanded(
+      child: Form(
+        key: _profileForm,
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            CategoryNameContainer(categoryName: "Sprememba nastavitev profila"),
+            RowSliver(
+              child: TextFormField(
+                initialValue: _profileModel.phone,
+                decoration: InputDecoration(label: Text("Telefonska številka")),
+                onChanged: (value) => _profileModel.phone = value,
+              ),
+              title: "Telefonska številka",
+              icon: FlutterRemix.phone_line,
+            )
+          ],
+        ),
+      ),
+    );
 
     return BoxWidget(
       title: "Sprememba nastavitev profila",
