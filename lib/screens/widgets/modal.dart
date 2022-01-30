@@ -141,10 +141,10 @@ class BottomModal {
                 ),
                 Padding(
                     padding: EdgeInsets.symmetric(horizontal: 30),
-                    child: ElevatedButton(
+                    child: TextButton(
                         onPressed: () => Navigator.of(context).pop(),
                         child: Center(
-                          child: Text("Zapri"),
+                          child: Text("Zapri", style: TextStyle(color: Colors.white),),
                         )))
               ],
             ),

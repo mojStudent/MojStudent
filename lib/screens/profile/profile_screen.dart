@@ -71,7 +71,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildTab(Widget tab) {
     return CustomScrollView(
       slivers: [
-        SliverPadding(padding: EdgeInsets.only(top: 20)),
         SliverToBoxAdapter(
           child: tab,
         ),

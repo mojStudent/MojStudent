@@ -6,8 +6,9 @@ import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/data_containers/category_name_container.dart';
-import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/save_button_widget.dart';
 
@@ -26,6 +27,8 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
 
   @override
   Widget build(BuildContext context) {
+    
+
     final authRepo = AuthRepository();
     _userModel = authRepo.loggedInUser;
     if (_userModel != null) {
@@ -40,67 +43,44 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
       Navigator.pushNamedAndRemoveUntil(context, "/", (route) => false);
     }
 
-    return Expanded(
-      child: Form(
-        key: _profileForm,
-        child: CustomScrollView(
-          physics: BouncingScrollPhysics(),
-          slivers: [
-            CategoryNameContainer(categoryName: "Sprememba nastavitev profila"),
-            RowSliver(
-              child: TextFormField(
-                initialValue: _profileModel.phone,
-                decoration: InputDecoration(label: Text("Telefonska številka")),
-                onChanged: (value) => _profileModel.phone = value,
-              ),
-              title: "Telefonska številka",
-              icon: FlutterRemix.phone_line,
-            )
-          ],
-        ),
-      ),
-    );
-
-    return BoxWidget(
-      title: "Sprememba nastavitev profila",
-      elevated: false,
-      cardBody: Form(
-        key: _profileForm,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
+    return Form(
+      key: _profileForm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CategoryNameContainer(categoryName: "Sprememba nastavitev profila"),
+          RowContainer(
+            child: TextFormField(
               initialValue: _profileModel.phone,
-              decoration: InputDecoration(label: Text("Telefonska številka")),
               onChanged: (value) => _profileModel.phone = value,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
+            title: "Telefonska številka",
+            icon: FlutterRemix.phone_line,
+          ),
+          RowContainer(
+            title: "Prijava na obvestila",
+            icon: FlutterRemix.rss_line,
+            child: Column(
+              children: [
+                for (Subscriptions subscription
+                    in _profileModel.subscriptions ?? [])
+                  CheckboxListTile(
+                    activeColor: (subscription.locked ?? false)
+                        ? AppColors.jet[200]
+                        : AppColors.jet,
+                    title: Text(subscription.name ?? ''),
+                    value: subscription.selected,
+                    onChanged: (value) => setState(() => subscription.selected =
+                        (subscription.locked ?? false)
+                            ? subscription.selected
+                            : value),
+                    controlAffinity: ListTileControlAffinity.leading,
+                  ),
+              ],
             ),
-            Text("Prijava na obvestila"),
-            for (Subscriptions subscription
-                in _profileModel.subscriptions ?? [])
-              CheckboxListTile(
-                activeColor: (subscription.locked ?? false)
-                    ? AppColors.jet[200]
-                    : AppColors.jet,
-                title: Text(subscription.name ?? ''),
-                value: subscription.selected,
-                onChanged: (value) => setState(() => subscription.selected =
-                    (subscription.locked ?? false)
-                        ? subscription.selected
-                        : value),
-                controlAffinity: ListTileControlAffinity.leading,
-              ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
-            ),
-            SaveButton(
-              text: "Posodobi profil",
-              onClick: _onSubmit,
-            ),
-          ],
-        ),
+          ),
+          RowButton(title: "Shrani spremembe", onPressed: () => _onSubmit(), icon: FlutterRemix.save_line,)
+        ],
       ),
     );
   }
