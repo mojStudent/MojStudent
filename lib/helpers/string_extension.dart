@@ -4,10 +4,13 @@ extension StringExtension on String {
 
     var s = "";
 
-    for (var word in words) {
-      s += "${word[0].toUpperCase()}${word.substring(1).toLowerCase()} ";
+    for(int i = 0; i < words.length; i++) {
+      if(i != 0) {
+        s += " ";
+      }
+      var word = words[i];
+      s += "${word[0].toUpperCase()}${word.substring(1).toLowerCase()}";
     }
-
     return s;
   }
 }

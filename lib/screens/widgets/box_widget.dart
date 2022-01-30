@@ -14,7 +14,7 @@ class BoxWidget extends StatelessWidget {
     this.title,
     this.backgroundColor = Colors.white,
     this.icon,
-    this.elevated = true
+    this.elevated = false
   }) : super(key: key);
 
   @override

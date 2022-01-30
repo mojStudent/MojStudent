@@ -89,6 +89,7 @@ class _InternetLogViewState extends State<InternetLogView> {
           ),
           Expanded(
             child: ListView.builder(
+              physics: BouncingScrollPhysics(),
               itemCount: dataBuild!.length,
               itemBuilder: (context, index) {
                 var log = dataBuild.elementAt(index);
@@ -96,7 +97,7 @@ class _InternetLogViewState extends State<InternetLogView> {
                   padding: EdgeInsets.symmetric(
                       horizontal: MediaQuery.of(context).size.width * 0.02,
                       vertical: MediaQuery.of(context).size.height * 0.005),
-                  child: ElevatedButton(
+                  child: TextButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.white,
                           textStyle: TextStyle(color: Colors.black)),

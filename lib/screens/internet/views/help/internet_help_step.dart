@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_detail_model.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
+import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class InternetHelpDetailView extends StatefulWidget {
   final List<InternetHelpDetailModel> steps;
@@ -28,24 +31,25 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
 
   @override
   Widget build(BuildContext context) {
+    final h = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: AppColors.green,
-      appBar: AppBar(
-        title: Text("Navodila"),
-        centerTitle: true,
-        elevation: 0,
-        backgroundColor: AppColors.raisinBlack[500],
-      ),
-      body: Center(
-        child: PageView(
-          controller: controller,
-          pageSnapping: true,
-          scrollDirection: Axis.horizontal,
-          children: <Widget>[
-            for (int i = 0; i < steps.length; i++)
-              _buildStep(context, steps[i], i)
-          ],
-        ),
+      body: Column(
+        children: [
+          AppHeader(title: "Navodila"),
+          Expanded(
+            child: Center(
+              child: PageView(
+                controller: controller,
+                pageSnapping: true,
+                scrollDirection: Axis.horizontal,
+                children: <Widget>[
+                  for (int i = 0; i < steps.length; i++)
+                    _buildStep(context, steps[i], i)
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: Padding(
@@ -87,11 +91,16 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
 
   Widget _buildStep(
       BuildContext context, InternetHelpDetailModel step, int index) {
-    return CustomScrollView(slivers: [
-      SliverToBoxAdapter(
-        child: BoxWidget(
-          title: "Korak ${index + 1}/${steps.length}",
-          cardBody: Column(
+        final h = MediaQuery.of(context).size.height;
+    return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: [
+      SliverPadding(
+        padding: EdgeInsets.only(top: h * 0.04),
+        sliver: RowWidgetContainer(
+          dataName: "Korak ${index + 1}/${steps.length}",
+          icon: FlutterRemix.information_line,
+          child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.network(
@@ -100,16 +109,13 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
                 ).toString(),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                  child: Html(data: step.content ?? ''),
-                ),
-              )
+                padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Html(data: step.content ?? ''),
+              ),
             ],
           ),
         ),
-      )
+      ),
     ]);
   }
 }
