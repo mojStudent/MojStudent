@@ -7,7 +7,6 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/attachment_model.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
-import 'package:moj_student/screens/widgets/data_containers/data_row_with_description.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
