@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/save_button_widget.dart';
 import 'package:moj_student/services/validators/email_validator.dart';
@@ -19,14 +23,14 @@ class _ProfileChangeEmailViewState extends State<ProfileChangeEmailView> {
 
   @override
   Widget build(BuildContext context) {
-    return BoxWidget(
-      title: "Sprememba e-naslova",
-      elevated: false,
-      cardBody: Form(
-        key: _mailForm,
-        child: Column(
-          children: [
-            TextFormField(
+    return Form(
+      key: _mailForm,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          CategoryNameContainer(categoryName: "Sprememba e-naslova"),
+          RowContainer(
+            child: TextFormField(
               obscureText: false,
               decoration: InputDecoration(label: Text("Nov e-naslov")),
               validator: (value) => EmailValidator.validate(value ?? "")
@@ -34,23 +38,26 @@ class _ProfileChangeEmailViewState extends State<ProfileChangeEmailView> {
                   : "Podani email ni pravilne oblike",
               onChanged: (value) => _emailFormModel.email = value,
             ),
-            TextFormField(
+            title: "Nov e-naslov",
+            icon: FlutterRemix.mail_line,
+          ),
+          RowContainer(
+            child: TextFormField(
               obscureText: true,
               decoration: InputDecoration(label: Text("Trenutno geslo")),
               validator: (value) =>
                   (value?.length ?? 0) >= 3 ? null : "Geslo mora biti vnešeno",
               onChanged: (value) => _emailFormModel.password = value,
             ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
-            ),
-            SaveButton(
-              text: "Posodobi e-naslov",
-              icon: Icons.save,
-              onClick: _onSave,
-            ),
-          ],
-        ),
+            title: "Trenutno geslo",
+            icon: FlutterRemix.lock_line,
+          ),
+          RowButton(
+            title: "Posdobi geslo",
+            onPressed: () => _onSave(),
+            icon: FlutterRemix.save_line,
+          )
+        ],
       ),
     );
   }
