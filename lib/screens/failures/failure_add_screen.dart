@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
+import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
+import 'package:moj_student/screens/widgets/data_containers/row_widget_container.dart';
+import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class FailureAddScreen extends StatefulWidget {
   const FailureAddScreen({Key? key}) : super(key: key);
@@ -29,14 +33,28 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text("Prijavi novo okvaro"),
-          centerTitle: true,
-          elevation: 0,
-          backgroundColor: AppColors.raisinBlack[500],
+        body: Column(
+          children: [
+            AppHeader(
+              title: "Prijava okvare",
+            ),
+            options == null ? LoadingScreen() : Expanded(child: _buildView())
+          ],
         ),
-        backgroundColor: AppColors.green,
-        body: options == null ? LoadingScreen() : _buildView());
+        floatingActionButton: FloatingActionButton.extended(
+          backgroundColor: AppColors.jet,
+          elevation: 0,
+          onPressed: () => _onSubmit(context),
+          label: Row(
+            children: [
+              Text("Oddaj"),
+              SizedBox(
+                width: 10,
+              ),
+              Icon(FlutterRemix.send_plane_2_line),
+            ],
+          ),
+        ));
   }
 
   void _getOptions() {
@@ -51,12 +69,26 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
 
   Widget _buildView() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8, 10, 8, 10),
+      padding: EdgeInsets.only(top: 20),
       child: CustomScrollView(
         slivers: [
-          _card(
-            "Lokacija okvare",
-            DropdownButton<SubLocationOption>(
+          if (error != null)
+            RowWidgetContainer(
+              child: Row(
+                children: [
+                  Text(
+                    error!,
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ],
+              ),
+              dataName: "Napaka oddaje",
+              icon: FlutterRemix.error_warning_line,
+            ),
+          RowWidgetContainer(
+            dataName: "Lokacija okvare",
+            icon: FlutterRemix.home_2_line,
+            child: DropdownButton<SubLocationOption>(
               focusColor: Colors.white,
               isExpanded: true,
               value: _chosenValue,
@@ -86,70 +118,17 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
               },
             ),
           ),
-          _card(
-            "Opis okvare",
-            TextField(
+          RowWidgetContainer(
+            child: TextField(
               onChanged: (value) => description = value,
               maxLines: 3,
               decoration:
                   InputDecoration.collapsed(hintText: "Opišite nastalo okvaro"),
             ),
+            dataName: "Opis okvare",
+            icon: FlutterRemix.file_2_fill,
           ),
-          if (error != null)
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: Text(
-                  error!,
-                  style: TextStyle(color: Colors.red),
-                ),
-              ),
-            ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: !submitting
-                  ? ElevatedButton(
-                      onPressed: () => _onSubmit(context),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(Icons.save),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text("Oddaj prijavo")
-                        ],
-                      ))
-                  : Center(child: CircularProgressIndicator()),
-            ),
-          )
         ],
-      ),
-    );
-  }
-
-  Widget _card(String title, Widget body) {
-    return SliverToBoxAdapter(
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 10),
-        child: Card(
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
-                ),
-                Padding(padding: const EdgeInsets.only(top: 10), child: body),
-              ],
-            ),
-          ),
-        ),
       ),
     );
   }
