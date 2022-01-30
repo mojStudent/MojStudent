@@ -24,12 +24,16 @@ class RowButton extends StatelessWidget {
             if (icon != null)
               Icon(
                 icon,
+                color: Colors.white,
               ),
             if (icon != null)
               SizedBox(
                 width: 20,
               ),
-            Text(title)
+            Text(title,
+                style: TextStyle(
+                  color: Colors.white,
+                )),
           ]),
         ),
       ),

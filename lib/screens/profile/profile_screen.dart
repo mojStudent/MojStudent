@@ -40,18 +40,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
           centerTitle: true,
           elevation: 0,
           bottom: TabBar(
-            indicatorColor: AppColors.ghostWhite,
+            indicatorColor: ThemeColors.background,
             tabs: [
             Tab(
-              icon: Icon(FlutterRemix.user_3_line),
+              icon: Icon(FlutterRemix.user_3_line, color: Colors.white,),
               // text: "Profil",
             ),
             Tab(
-              icon: Icon(FlutterRemix.lock_2_line),
+              icon: Icon(FlutterRemix.lock_2_line, color: Colors.white,),
               // text: "Geslo",
             ),
             Tab(
-              icon: Icon(FlutterRemix.mail_line),
+              icon: Icon(FlutterRemix.mail_line, color: Colors.white,),
               // text: "Email",
             ),
           ]),
@@ -70,6 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildTab(Widget tab) {
     return CustomScrollView(
+      physics: BouncingScrollPhysics(),
       slivers: [
         SliverToBoxAdapter(
           child: tab,

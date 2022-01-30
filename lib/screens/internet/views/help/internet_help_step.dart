@@ -42,6 +42,7 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
                 controller: controller,
                 pageSnapping: true,
                 scrollDirection: Axis.horizontal,
+                physics: BouncingScrollPhysics(),
                 children: <Widget>[
                   for (int i = 0; i < steps.length; i++)
                     _buildStep(context, steps[i], i)
@@ -58,28 +59,30 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
             FloatingActionButton.extended(
-              backgroundColor: AppColors.raisinBlack[600],
+              backgroundColor: ThemeColors.jet[600],
+              elevation: 0,
               onPressed: () => controller.animateToPage(
                   controller.page!.toInt() - 1,
                   duration: Duration(milliseconds: 200),
                   curve: Curves.easeIn),
               label: Row(
                 children: [
-                  Icon(Icons.navigate_before),
-                  Text("Nazaj"),
+                  Icon(Icons.navigate_before, color: Colors.white,),
+                  Text("Nazaj", style: TextStyle(color: Colors.white,),),
                 ],
               ),
             ),
             FloatingActionButton.extended(
-              backgroundColor: AppColors.raisinBlack,
+              backgroundColor: ThemeColors.jet,
+              elevation: 0,
               onPressed: () => controller.animateToPage(
                   controller.page!.toInt() + 1,
                   duration: Duration(milliseconds: 200),
                   curve: Curves.easeIn),
               label: Row(
                 children: [
-                  Text("Naprej"),
-                  Icon(Icons.navigate_next),
+                  Text("Naprej", style: TextStyle(color: Colors.white,),),
+                  Icon(Icons.navigate_next, color: Colors.white,),
                 ],
               ),
             )

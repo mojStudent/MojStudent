@@ -31,7 +31,7 @@ class BoxWidget extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
                 elevated ? BoxShadow(
-                  color: AppColors.raisinBlack[100]!,
+                  color: ThemeColors.jet[100]!,
                   spreadRadius: 1,
                   blurRadius: 7,
                   offset: Offset(8, 6), // changes position of shadow

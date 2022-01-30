@@ -62,7 +62,7 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
                       horizontal: MediaQuery.of(context).size.width * 0.02),
                   child: LinearProgressIndicator(
                     color: Colors.red,
-                    backgroundColor: AppColors.green[400],
+                    backgroundColor: ThemeColors.primary[400],
                     minHeight: 10,
                     value: (data?.weeks[0].progress ?? 0) / 100.0,
                   ),
@@ -103,7 +103,7 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
                     Container(
                       width: 15,
                       height: 10,
-                      color: AppColors.success,
+                      color: ThemeColors.primary,
                     ),
                   ],
                 ),
@@ -139,7 +139,7 @@ class _InternetTrafficViewState extends State<InternetTrafficView> {
                                 ),
                                 Icon(
                                   Icons.download,
-                                  color: AppColors.green[700],
+                                  color: ThemeColors.primary[700],
                                   size: 20,
                                 ),
                               ],

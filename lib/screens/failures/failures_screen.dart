@@ -18,12 +18,14 @@ class FailuresScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
         floatingActionButton: FloatingActionButton(
           elevation: 0,
           onPressed: () => Navigator.of(context).pushNamed("/failures/new"),
-          child: Icon(FlutterRemix.add_line),
-          backgroundColor: AppColors.jet,
+          child: Icon(
+            FlutterRemix.add_line,
+            color: Colors.white,
+          ),
+          backgroundColor: ThemeColors.jet,
         ),
         body: Column(
           children: [
@@ -178,7 +180,7 @@ class FailuresScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       FlutterRemix.arrow_left_s_line,
-                      color: AppColors.jet,
+                      color: ThemeColors.jet,
                     )),
                 SizedBox(
                   width: 15,
@@ -187,7 +189,7 @@ class FailuresScreen extends StatelessWidget {
                   "${model.page} / ${model.pages}",
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.jet,
+                    color: ThemeColors.jet,
                   ),
                 ),
                 SizedBox(
@@ -203,7 +205,7 @@ class FailuresScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       FlutterRemix.arrow_right_s_line,
-                      color: AppColors.jet,
+                      color: ThemeColors.jet,
                     )),
               ],
             )

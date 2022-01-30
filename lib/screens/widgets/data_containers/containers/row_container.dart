@@ -27,7 +27,7 @@ class RowContainer extends StatelessWidget {
             children: [
               Container(
                 width: w * 0.025,
-                child: Divider(thickness: 1.5, color: AppColors.jet[300]),
+                child: Divider(thickness: 1.5, color: ThemeColors.jet[300]),
               ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: w * 0.01),
@@ -36,7 +36,7 @@ class RowContainer extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: AppColors.jet),
+                      color: ThemeColors.jet),
                 ),
               ),
               icon == null
@@ -51,7 +51,7 @@ class RowContainer extends StatelessWidget {
               Expanded(
                   child: Divider(
                 thickness: 1.5,
-                color: AppColors.jet[300],
+                color: ThemeColors.jet[300],
               )),
             ],
           ),

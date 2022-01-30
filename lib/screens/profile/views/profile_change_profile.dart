@@ -66,8 +66,8 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
                     in _profileModel.subscriptions ?? [])
                   CheckboxListTile(
                     activeColor: (subscription.locked ?? false)
-                        ? AppColors.jet[200]
-                        : AppColors.jet,
+                        ? ThemeColors.jet[200]
+                        : ThemeColors.jet,
                     title: Text(subscription.name ?? ''),
                     value: subscription.selected,
                     onChanged: (value) => setState(() => subscription.selected =

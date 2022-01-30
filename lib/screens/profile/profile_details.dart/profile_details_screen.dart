@@ -8,6 +8,7 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/blocs/home/home_state.dart';
@@ -27,7 +28,7 @@ class ProfileDetailsScreen extends StatelessWidget {
     return BlocBuilder<ProfileBloc, ProfileState>(
       builder: (context, state) {
         return Scaffold(
-          backgroundColor: AppColors.ghostWhite,
+          backgroundColor: ThemeColors.background,
           body: Column(
             children: [
               AppHeader(
@@ -66,7 +67,7 @@ class ProfileDetailsScreen extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          CategoryNameContainer(categoryName: "Osnovni podatki"),
+          CategoryNameSliver(categoryName: "Osnovni podatki"),
           TextRowSliver(
               title: "ime in priimek",
               data: "${user.firstname} ${user.lastname}",
@@ -88,7 +89,7 @@ class ProfileDetailsScreen extends StatelessWidget {
               data: "${user.id}",
               icon: FlutterRemix.passport_line),
           //
-          CategoryNameContainer(categoryName: "Kontaktni podatki"),
+          CategoryNameSliver(categoryName: "Kontaktni podatki"),
           TextRowSliver(
               title: "e-pošta",
               data: "${user.email}",
@@ -102,7 +103,7 @@ class ProfileDetailsScreen extends StatelessWidget {
               data: "${user.phone}",
               icon: FlutterRemix.phone_line),
           //
-          CategoryNameContainer(categoryName: "Napredni podatki profila"),
+          CategoryNameSliver(categoryName: "Napredni podatki profila"),
           TextRowSliver(
               title: "api dostop",
               data: (user.api ?? false) ? 'da' : "ne",

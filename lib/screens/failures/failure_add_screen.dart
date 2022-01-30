@@ -38,20 +38,20 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
             AppHeader(
               title: "Prijava okvare",
             ),
-            options == null ? LoadingScreen() : Expanded(child: _buildView())
+            options == null ? LoadingScreen(withScaffold: false, expanded: true,) : Expanded(child: _buildView())
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
-          backgroundColor: AppColors.jet,
+          backgroundColor: ThemeColors.jet,
           elevation: 0,
           onPressed: () => _onSubmit(context),
           label: Row(
             children: [
-              Text("Oddaj"),
+              Text("Oddaj", style: TextStyle(color: Colors.white),),
               SizedBox(
                 width: 10,
               ),
-              Icon(FlutterRemix.send_plane_2_line),
+              Icon(FlutterRemix.send_plane_2_line, color: Colors.white,),
             ],
           ),
         ));

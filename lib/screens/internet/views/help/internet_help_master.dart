@@ -82,7 +82,7 @@ class InternetHelpMasterView extends StatelessWidget {
                               child: Text(
                                 os.name,
                                 style: TextStyle(
-                                    color: AppColors.jet,
+                                    color: ThemeColors.jet,
                                     fontWeight: FontWeight.w700,
                                     fontSize: 18),
                               ),

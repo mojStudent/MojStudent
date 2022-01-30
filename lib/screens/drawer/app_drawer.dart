@@ -14,7 +14,7 @@ class AppDrawer extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
 
     return Drawer(
-        backgroundColor: AppColors.jet,
+        backgroundColor: ThemeColors.jet,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -31,7 +31,7 @@ class AppDrawer extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: Container(
-                      color: AppColors.ghostWhite,
+                      color: ThemeColors.background,
                       child: SvgPicture.network(
                           AvatarRepo.getImgUrlForSeed("JAKOB-MARUŠIČ")),
                     ),
@@ -200,7 +200,7 @@ class AppDrawer extends StatelessWidget {
               name.toUpperCase(),
               style: TextStyle(
                   fontSize: 10,
-                  color: AppColors.ghostWhite[600],
+                  color: ThemeColors.background[600],
                   fontWeight: FontWeight.w800),
             ),
             Column(children: buttons)

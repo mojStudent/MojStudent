@@ -14,7 +14,7 @@ class BottomModal {
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
-            color: AppColors.jet,
+            color: ThemeColors.jet,
           ),
           child: Center(
             child: Column(
@@ -58,7 +58,7 @@ class BottomModal {
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.jet,
+            color: ThemeColors.jet,
           ),
           child: Center(
             child: Column(
@@ -104,7 +104,7 @@ class BottomModal {
           height: MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(10),
-            color: AppColors.jet,
+            color: ThemeColors.jet,
           ),
           child: Center(
             child: Column(

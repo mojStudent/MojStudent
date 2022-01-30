@@ -14,11 +14,11 @@ class SportsScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text("Šport"),
-          backgroundColor: AppColors.raisinBlack[500],
+          backgroundColor: ThemeColors.jet[500],
           centerTitle: true,
           elevation: 0,
         ),
-        backgroundColor: AppColors.green,
+        backgroundColor: ThemeColors.primary,
         body: BlocBuilder<SportBloc, SportState>(
           builder: (ctx, state) {
             if (state is SportInitial) {

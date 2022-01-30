@@ -93,7 +93,7 @@ class DamagesScreen extends StatelessWidget {
                         Icon(
                           Icons.download,
                           size: 28,
-                          color: AppColors.blue,
+                          color: ThemeColors.blue,
                         ),
                       ],
                     )),
@@ -118,7 +118,7 @@ class DamagesScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       FlutterRemix.arrow_left_s_line,
-                      color: AppColors.jet,
+                      color: ThemeColors.jet,
                     )),
                 SizedBox(
                   width: 15,
@@ -127,7 +127,7 @@ class DamagesScreen extends StatelessWidget {
                   "${model.page} / ${model.pages}",
                   style: TextStyle(
                     fontSize: 16,
-                    color: AppColors.jet,
+                    color: ThemeColors.jet,
                   ),
                 ),
                 SizedBox(
@@ -143,7 +143,7 @@ class DamagesScreen extends StatelessWidget {
                     },
                     icon: Icon(
                       FlutterRemix.arrow_right_s_line,
-                      color: AppColors.jet,
+                      color: ThemeColors.jet,
                     )),
               ],
             )
@@ -181,7 +181,7 @@ class DamagesScreen extends StatelessWidget {
                   child: Icon(
                     Icons.download,
                     size: 28,
-                    color: AppColors.blue,
+                    color: ThemeColors.blue,
                   ),
                 ),
                 SizedBox(

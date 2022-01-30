@@ -61,7 +61,7 @@ class InternetTrafficChart extends StatelessWidget {
         measureFn: (_TrafficDataChart data, _) => data.value,
         data: downTrafficChartData,
         fillColorFn: (_, __) =>
-            charts.ColorUtil.fromDartColor(AppColors.success),
+            charts.ColorUtil.fromDartColor(ThemeColors.primary),
       )
     ];
   }

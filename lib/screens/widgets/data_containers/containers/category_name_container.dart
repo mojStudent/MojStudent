@@ -23,7 +23,7 @@ class CategoryNameContainer extends StatelessWidget {
       child: Text(
         categoryName,
         style: TextStyle(
-            fontSize: 18, color: AppColors.jet, fontWeight: FontWeight.w700),
+            fontSize: 18, color: ThemeColors.jet, fontWeight: FontWeight.w700),
       ),
     );
   }

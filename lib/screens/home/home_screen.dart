@@ -38,14 +38,14 @@ class HomeScreen extends StatelessWidget {
     return BlocBuilder<HomeBloc, HomeState>(
       builder: (context, state) {
         return Scaffold(
-            backgroundColor: AppColors.ghostWhite,
+            backgroundColor: ThemeColors.background,
             appBar: AppBar(
               backgroundColor: Colors.transparent,
               elevation: 0,
               leading: GestureDetector(
                 child: Icon(
                   FlutterRemix.user_3_line,
-                  color: AppColors.jet,
+                  color: ThemeColors.jet,
                 ),
                 onTap: () => Navigator.of(context).pushNamed("/profile"),
               ),
@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 GestureDetector(
                   child: Icon(
                     FlutterRemix.logout_box_r_line,
-                    color: AppColors.jet,
+                    color: ThemeColors.jet,
                   ),
                   onTap: () {
                     var auth = AuthRepository();
@@ -208,7 +208,7 @@ class HomeScreen extends StatelessWidget {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.w600,
-          color: AppColors.jet,
+          color: ThemeColors.jet,
         ),
       )),
     );
@@ -234,7 +234,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                    color: AppColors.russianGreen,
+                    color: ThemeColors.primary,
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(
                   icon,
@@ -249,7 +249,7 @@ class HomeScreen extends StatelessWidget {
                     fontSize: 16,
                     letterSpacing: 0.75,
                     fontWeight: FontWeight.w700,
-                    color: AppColors.jet),
+                    color: ThemeColors.jet),
               )
             ],
           ),
@@ -330,7 +330,7 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     state.traffic.weeks[0].value.human,
                                     style: TextStyle(
-                                        color: AppColors.jet,
+                                        color: ThemeColors.jet,
                                         fontSize: 18,
                                         fontWeight: FontWeight.w600),
                                   ),
@@ -340,7 +340,7 @@ class HomeScreen extends StatelessWidget {
                                   Text(
                                     "GB",
                                     style: TextStyle(
-                                      color: AppColors.jet,
+                                      color: ThemeColors.jet,
                                       fontSize: 10,
                                     ),
                                   ),
@@ -351,7 +351,7 @@ class HomeScreen extends StatelessWidget {
                               ),
                               CircularProgressIndicator(
                                 color: Colors.red,
-                                backgroundColor: AppColors.russianGreen,
+                                backgroundColor: ThemeColors.primary,
                                 value: state.traffic.weeks[0].progress / 100.0,
                               ),
                             ],
@@ -405,7 +405,7 @@ class HomeScreen extends StatelessWidget {
                             return Text(
                               s,
                               style: TextStyle(
-                                color: AppColors.jet,
+                                color: ThemeColors.jet,
                                 fontSize: 18,
                               ),
                             );
@@ -444,7 +444,7 @@ class HomeScreen extends StatelessWidget {
         width: w * 0.48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: dark ? AppColors.jet : Colors.white,
+          color: dark ? ThemeColors.primary : Colors.white,
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -458,12 +458,12 @@ class HomeScreen extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
-                    color: dark ? Colors.white : AppColors.jet,
+                    color: dark ? Colors.white : ThemeColors.jet,
                   ),
                 ),
                 Divider(
                   thickness: 1.5,
-                  color: dark ? Colors.white : AppColors.jet,
+                  color: dark ? Colors.white : ThemeColors.jet,
                 ),
               ],
             ),
@@ -491,7 +491,7 @@ class HomeScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600),
             ),
             Divider(
-              color: AppColors.ghostWhite,
+              color: ThemeColors.background,
             ),
             SizedBox(
               height: h * 0.02,
@@ -503,7 +503,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: AppColors.ghostWhite[600],
+                          color: ThemeColors.background[600],
                           borderRadius: BorderRadius.circular(10)),
                       child: SvgPicture.network(
                           AvatarRepo.getImgUrlForSeed(administrator.name)),
@@ -549,7 +549,7 @@ class HomeScreen extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
-      backgroundColor: AppColors.jet,
+      backgroundColor: ThemeColors.jet,
     );
   }
 }

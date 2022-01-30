@@ -35,22 +35,23 @@ class _InternetLogViewState extends State<InternetLogView> {
                     child: Chip(
                       backgroundColor: showOnlyActive
                           ? Colors.white
-                          : Color.alphaBlend(
-                              AppColors.raisinBlack.withOpacity(0.5),
-                              AppColors.green),
+                          : Color.alphaBlend(ThemeColors.jet.withOpacity(0.5),
+                              ThemeColors.primary),
                       label: Text(
                         "Vse",
                         style: TextStyle(
                             color: showOnlyActive
                                 ? Color.alphaBlend(
-                                    AppColors.raisinBlack.withOpacity(0.5),
-                                    AppColors.green)
+                                    ThemeColors.jet.withOpacity(0.5),
+                                    ThemeColors.primary)
                                 : Colors.white),
                       ),
                       avatar: CircleAvatar(
                         child: Icon(
                           Icons.airplanemode_active,
                           size: 14,
+                          color:
+                              !showOnlyActive ? Colors.white : ThemeColors.jet,
                         ),
                       ),
                     ),
@@ -63,22 +64,24 @@ class _InternetLogViewState extends State<InternetLogView> {
                     child: Chip(
                       backgroundColor: !showOnlyActive
                           ? Colors.white
-                          : Color.alphaBlend(
-                              AppColors.raisinBlack.withOpacity(0.5),
-                              AppColors.green),
+                          : Color.alphaBlend(ThemeColors.jet.withOpacity(0.5),
+                              ThemeColors.primary),
                       label: Text(
                         "Aktivne",
                         style: TextStyle(
-                            color: !showOnlyActive
-                                ? Color.alphaBlend(
-                                    AppColors.raisinBlack.withOpacity(0.5),
-                                    AppColors.green)
-                                : Colors.white),
+                          color: !showOnlyActive
+                              ? Color.alphaBlend(
+                                  ThemeColors.jet.withOpacity(0.5),
+                                  ThemeColors.primary)
+                              : Colors.white,
+                        ),
                       ),
                       avatar: CircleAvatar(
                         child: Icon(
                           Icons.wifi,
                           size: 14,
+                          color:
+                              showOnlyActive ? Colors.white : ThemeColors.jet,
                         ),
                       ),
                     ),
@@ -197,7 +200,7 @@ class _InternetLogViewState extends State<InternetLogView> {
                         padding: EdgeInsets.only(right: 3),
                         child: Icon(
                           Icons.check_circle,
-                          color: AppColors.success,
+                          color: ThemeColors.primary,
                           size: 18,
                         ),
                       )

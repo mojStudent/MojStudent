@@ -8,21 +8,24 @@ class AppHeader extends StatelessWidget {
     required this.title,
     this.actions = const [],
     this.onBackButtonClick,
+    this.backgroundColor
   }) : super(key: key);
 
   final String title;
   final List<GestureDetector> actions;
   final Function? onBackButtonClick;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
+
     return Container(
       width: double.infinity,
       padding: EdgeInsets.only(bottom: 20),
       decoration: BoxDecoration(
-          color: AppColors.jet,
+          color: backgroundColor ?? Theme.of(context).colorScheme.primary,
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(30))),
       child: SafeArea(
         child: Padding(

@@ -3,6 +3,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:package_info_plus/package_info_plus.dart';
@@ -38,8 +39,8 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
     return Scaffold(
-        // backgroundColor: Color.alphaBlend(AppColors.russianGreen.withOpacity(0.7), Colors.white),
-        backgroundColor: AppColors.ghostWhite,
+        // backgroundColor: Color.alphaBlend(ThemeColors.primary.withOpacity(0.7), Colors.white),
+        backgroundColor: ThemeColors.background,
         body: loading ? LoadingScreen() : _buildWithData(h, w));
   }
 
@@ -51,10 +52,10 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
           child: CustomScrollView(
             physics: BouncingScrollPhysics(),
             slivers: [
-              CategoryNameContainer(categoryName: "Verzija aplikacije"),
+              CategoryNameSliver(categoryName: "Verzija aplikacije"),
               TextRowSliver(data: "$version", title: "Verzija aplikacije"),
               TextRowSliver(data: "$buildNumber", title: "Verzija gradnje"),
-              CategoryNameContainer(categoryName: "O razvijalcu"),
+              CategoryNameSliver(categoryName: "O razvijalcu"),
               TextRowSliver(data: appName ?? '', title: "Ime aplikacije"),
               TextRowSliver(
                   data: "MarelaTeam", title: "Razvijalec aplikacije"),
@@ -94,7 +95,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                               textAlign: TextAlign.center,
                               style: TextStyle(
                                 fontSize: 12,
-                                color: AppColors.blue,
+                                color: ThemeColors.blue,
                               ),
                             ),
                           )

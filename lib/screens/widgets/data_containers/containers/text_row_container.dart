@@ -28,7 +28,7 @@ class TextRowContainer extends StatelessWidget {
               child: Text(
                 data,
                 style: TextStyle(
-                    color: AppColors.jet,
+                    color: ThemeColors.jet,
                     fontSize: 16,
                     fontWeight: FontWeight.w700),
               ),

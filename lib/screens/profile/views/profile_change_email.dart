@@ -53,7 +53,7 @@ class _ProfileChangeEmailViewState extends State<ProfileChangeEmailView> {
             icon: FlutterRemix.lock_line,
           ),
           RowButton(
-            title: "Posdobi geslo",
+            title: "Posodobi naslov",
             onPressed: () => _onSave(),
             icon: FlutterRemix.save_line,
           )

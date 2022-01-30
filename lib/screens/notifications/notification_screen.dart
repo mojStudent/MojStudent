@@ -77,7 +77,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
           background: index == 0 || notifications[index - 1].read
               ? Container()
               : Container(
-                  color: AppColors.yellow,
+                  color: ThemeColors.warning,
                   child: Padding(
                     padding: EdgeInsets.only(
                         right: MediaQuery.of(context).size.width * 0.05),
@@ -105,7 +105,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
       padding: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.02),
       margin: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.0075),
       decoration: BoxDecoration(
-          color: notification.read ? Colors.white : AppColors.jet,
+          color: notification.read ? Colors.white : ThemeColors.jet,
           borderRadius: BorderRadius.circular(10)),
       child: GestureDetector(
         onTap: () => context
@@ -120,7 +120,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                   child: Divider(
                     thickness: 1.5,
                     color:
-                        notification.read ? AppColors.jet[300] : Colors.white,
+                        notification.read ? ThemeColors.jet[300] : Colors.white,
                   ),
                 ),
                 Padding(
@@ -130,7 +130,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     style: TextStyle(
                       fontSize: 12,
                       fontWeight: FontWeight.w600,
-                      color: notification.read ? AppColors.jet : Colors.white,
+                      color: notification.read ? ThemeColors.jet : Colors.white,
                     ),
                   ),
                 ),
@@ -140,7 +140,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         child: Icon(
                           FlutterRemix.notification_3_line,
                           color:
-                              notification.read ? AppColors.jet : Colors.white,
+                              notification.read ? ThemeColors.jet : Colors.white,
                           size: 15,
                         ),
                       )
@@ -148,7 +148,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Expanded(
                     child: Divider(
                   thickness: 1.5,
-                  color: notification.read ? AppColors.jet[300] : Colors.white,
+                  color: notification.read ? ThemeColors.jet[300] : Colors.white,
                 )),
               ],
             ),
@@ -162,7 +162,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                       notification.subject,
                       style: TextStyle(
                           color:
-                              notification.read ? AppColors.jet : Colors.white,
+                              notification.read ? ThemeColors.jet : Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w700),
                     ),
@@ -196,7 +196,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
                             padding: const EdgeInsets.only(right: 5),
                             child: Icon(
                               Icons.mark_email_unread_outlined,
-                              color: AppColors.yellow,
+                              color: ThemeColors.warning,
                             ),
                           )
                         : Container(),

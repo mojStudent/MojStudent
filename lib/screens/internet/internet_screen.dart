@@ -10,7 +10,7 @@ class InternetScreen extends StatefulWidget {
 
   @override
   _InternetScreenState createState() => _InternetScreenState();
-} 
+}
 
 class _InternetScreenState extends State<InternetScreen> {
   @override
@@ -22,24 +22,42 @@ class _InternetScreenState extends State<InternetScreen> {
             title: Text("Internet"),
             centerTitle: true,
             elevation: 0,
+            leading: GestureDetector(
+              onTap: () => Navigator.pop(context),
+              child: Icon(
+                FlutterRemix.arrow_left_s_line,
+                color: Colors.white,
+              ),
+            ),
             bottom: const TabBar(
               tabs: [
                 Tab(
-                  icon: Icon(FlutterRemix.bar_chart_fill),
+                  icon: Icon(
+                    FlutterRemix.bar_chart_fill,
+                    color: Colors.white,
+                  ),
                 ),
                 Tab(
-                  icon: Icon(FlutterRemix.file_list_3_fill),
+                  icon: Icon(
+                    FlutterRemix.file_list_3_fill,
+                    color: Colors.white,
+                  ),
                 ),
                 Tab(
-                  icon: Icon(FlutterRemix.question_fill),
+                  icon: Icon(
+                    FlutterRemix.question_fill,
+                    color: Colors.white,
+                  ),
                 ),
               ],
             )),
-        body: TabBarView(children: [
-          InternetTrafficView(),
-          InternetLogView(),
-          InternetHelpView()
-        ],),
+        body: TabBarView(
+          children: [
+            InternetTrafficView(),
+            InternetLogView(),
+            InternetHelpView()
+          ],
+        ),
       ),
     );
   }

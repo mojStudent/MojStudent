@@ -29,7 +29,7 @@ class NotificationListView extends StatelessWidget {
           },
           child: list[index],
           background: Container(
-              color: AppColors.yellow,
+              color: ThemeColors.warning,
               child: Padding(
                 padding: EdgeInsets.only(
                     right: MediaQuery.of(context).size.width * 0.05),
@@ -68,7 +68,7 @@ class NotificationListView extends StatelessWidget {
                             padding: const EdgeInsets.only(right: 5),
                             child: Icon(
                               Icons.mark_email_unread_outlined,
-                              color: AppColors.yellow,
+                              color: ThemeColors.warning,
                             ),
                           )
                         : Container(),

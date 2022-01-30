@@ -4,6 +4,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
@@ -26,7 +27,7 @@ class InternetLogDetailScreen extends StatelessWidget {
             physics: BouncingScrollPhysics(),
             slivers: [
               SliverPadding(padding: EdgeInsets.only(top: 20)),
-              CategoryNameContainer(categoryName: "Osnovni podatki povezave"),
+              CategoryNameSliver(categoryName: "Osnovni podatki povezave"),
               TextRowSliver(
                 title: "Stanje povezave",
                 data: log.status == 0 ? 'aktivna' : 'prekinjena',
@@ -51,7 +52,7 @@ class InternetLogDetailScreen extends StatelessWidget {
                 data: log.status == 0 ? '-/-' : log.terminate,
                 icon: FlutterRemix.door_closed_line,
               ),
-              CategoryNameContainer(categoryName: "Časovni okvir povezave"),
+              CategoryNameSliver(categoryName: "Časovni okvir povezave"),
               TextRowSliver(
                 title: "Čas vzpostavitve",
                 data: log.start,
@@ -67,7 +68,7 @@ class InternetLogDetailScreen extends StatelessWidget {
                 data: log.status == 0 ? '-/-' : "${log.sessionTime} s",
                 icon: FlutterRemix.timer_line,
               ),
-              CategoryNameContainer(categoryName: "Podatki o napravi"),
+              CategoryNameSliver(categoryName: "Podatki o napravi"),
               TextRowSliver(
                 title: "Dodeljen ip naslov",
                 data: log.ip,
@@ -79,7 +80,7 @@ class InternetLogDetailScreen extends StatelessWidget {
                 icon: FlutterRemix.computer_line,
               ),
               //
-              CategoryNameContainer(categoryName: "Podatki o napravi"),
+              CategoryNameSliver(categoryName: "Podatki o napravi"),
               TextRowSliver(
                   title: "ime omrežne naprave",
                   data: log.nas?.shortName ?? '',

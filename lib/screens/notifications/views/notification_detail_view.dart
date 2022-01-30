@@ -35,7 +35,7 @@ class NotificationDetailView extends StatelessWidget {
           return false;
         },
         child: Scaffold(
-          backgroundColor: AppColors.ghostWhite,
+          backgroundColor: ThemeColors.background,
           body: Column(
             children: _buildBody(context),
           ),

@@ -87,9 +87,10 @@ class MyApp extends StatelessWidget {
         child: MaterialApp(
           title: 'Moj študent',
           theme: ThemeData(
-              primarySwatch: AppColors.jet,
-              backgroundColor: AppColors.ghostWhite,
-              scaffoldBackgroundColor: AppColors.ghostWhite,
+              primarySwatch: ThemeColors.primary,
+              primaryColor: ThemeColors.primary,
+              backgroundColor: ThemeColors.background,
+              scaffoldBackgroundColor: ThemeColors.background,
               appBarTheme: AppBarTheme(
                   titleTextStyle: TextStyle(
                 color: Colors.white,
