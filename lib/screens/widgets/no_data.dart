@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:moj_student/constants/colors.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 
 class NoData extends StatelessWidget {
   final String message;
@@ -13,23 +15,22 @@ class NoData extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            size: 68,
-            color: Colors.white,
-          ),
-          SizedBox(
-            height: 10,
-          ),
-          Text(
-            message,
-            style: TextStyle(fontSize: 20, color: Colors.white),
-          ),
-        ],
-      ),
-    );
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              icon,
+              size: 68,
+              color: ThemeColors.jet,
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              message,
+              style: TextStyle(fontSize: 20, color: ThemeColors.jet),
+            ),
+          ],
+        ));
   }
 }
