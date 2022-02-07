@@ -4,10 +4,15 @@ class RowButton extends StatelessWidget {
   final IconData? icon;
   final String title;
   final Function onPressed;
+  final ButtonStyle? style; 
 
-  const RowButton(
-      {Key? key, this.icon, required this.title, required this.onPressed})
-      : super(key: key);
+  const RowButton({
+    Key? key,
+    this.icon,
+    required this.title,
+    required this.onPressed,
+    this.style,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +22,7 @@ class RowButton extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(vertical: h * 0.0075, horizontal: w * 0.06),
       child: ElevatedButton(
+        style: style ?? ElevatedButton.styleFrom(),
         onPressed: () => onPressed(),
         child: Padding(
           padding: EdgeInsets.symmetric(vertical: 8),

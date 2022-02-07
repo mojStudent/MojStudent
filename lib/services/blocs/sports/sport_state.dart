@@ -7,14 +7,25 @@ class SportInitial extends SportState {}
 
 abstract class SportLoadingState extends SportState {}
 
-class SportSubscriptionsLoadingState extends SportLoadingState {}
+class SportDataLoadingState extends SportLoadingState {}
 
-abstract class SportLoadedState extends SportState {}
-
-class SportSubscriptionstLoadedState extends SportLoadedState {
+class SportLoadedState extends SportState {
   final List<SportSubscriptionModel> subscriptions;
+  final FitnesCardModel? fitnesCard;
 
-  SportSubscriptionstLoadedState(this.subscriptions);
+  SportLoadedState({required this.subscriptions, this.fitnesCard});
+}
+
+class SportSubscriptionDetailState extends SportLoadedState {
+  final SportSubscriptionModel subscription;
+
+  SportSubscriptionDetailState({
+    required this.subscription,
+    required SportLoadedState parent,
+  }) : super(
+          subscriptions: parent.subscriptions,
+          fitnesCard: parent.fitnesCard,
+        );
 }
 
 class SportErrorState extends SportState {}

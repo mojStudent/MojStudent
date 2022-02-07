@@ -44,7 +44,7 @@ class FitnesCardModel {
     ordersCount = json['ordersCount'];
     logs = List.from(json['logs']).map((e)=>Logs.fromJson(e)).toList();
     orders = List.castFrom<dynamic, dynamic>(json['orders']);
-    imageSrc = json['imageSrc'];
+    imageSrc = (json['imageSrc'] ?? "").replaceFirst("data:image/jpg;base64,", "");
   }
 
   Map<String, dynamic> toJson() {

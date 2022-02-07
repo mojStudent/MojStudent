@@ -66,10 +66,24 @@ class ThemeColors {
     900: Color.fromRGBO(37, 95, 133, 1),
   };
 
+  static final Map<int, Color> _colorCodesRed = {
+    50: Color.fromRGBO(193, 41, 46, .1),
+    100: Color.fromRGBO(193, 41, 46, .2),
+    200: Color.fromRGBO(193, 41, 46, .3),
+    300: Color.fromRGBO(193, 41, 46, .4),
+    400: Color.fromRGBO(193, 41, 46, .5),
+    500: Color.fromRGBO(193, 41, 46, .6),
+    600: Color.fromRGBO(193, 41, 46, .7),
+    700: Color.fromRGBO(193, 41, 46, .8),
+    800: Color.fromRGBO(193, 41, 46, .9),
+    900: Color.fromRGBO(193, 41, 46, 1),
+  };
+
   static MaterialColor primary = MaterialColor(0xFF85b94d, _colorCodesPrimary);
   static MaterialColor jet = MaterialColor(0xFF292929, _colorCodesJet);
   static MaterialColor blue = MaterialColor(0xFF255f85, _colorCodesBlue);
   static MaterialColor background =
       MaterialColor(0xFFf1f5f8, _colorCodesBackground);
   static MaterialColor warning = MaterialColor(0xFFFFBE0B, _colorCodesWarning);
+  static MaterialColor danger = MaterialColor(0xFFC1292E, _colorCodesRed);
 }

@@ -174,12 +174,12 @@ class HomeScreen extends StatelessWidget {
               title: "Škodni zapisniki",
               icon: FlutterRemix.flood_fill,
               onClick: () => Navigator.pushNamed(context, "/damages")),
-          //
-          // _sectionTitle(w, h, title: "storitve"),
-          // _iconButton(h, w,
-          //     title: "Šport",
-          //     icon: FlutterRemix.ping_pong_fill,
-          //     onClick: () => Navigator.pushNamed(context, "/notifications")),
+          
+          _sectionTitle(w, h, title: "storitve"),
+          _iconButton(h, w,
+              title: "Šport",
+              icon: FlutterRemix.ping_pong_fill,
+              onClick: () => Navigator.pushNamed(context, "/sports")),
           // _iconButton(h, w,
           //     title: "Rožna Kuhn'ja",
           //     icon: FlutterRemix.restaurant_2_fill,

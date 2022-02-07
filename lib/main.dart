@@ -20,6 +20,9 @@ import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
 import 'package:moj_student/screens/profile/profile_details.dart/profile_details_screen.dart';
 import 'package:moj_student/screens/profile/profile_screen.dart';
+import 'package:moj_student/screens/sports/subscriptions/sport_subscriptions_screen.dart';
+import 'package:moj_student/screens/sports/subscriptions/sport_subscription_detail_screen.dart';
+import 'package:moj_student/screens/sports/sports_screen.dart';
 import 'package:moj_student/services/blocs/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
@@ -109,6 +112,9 @@ class MyApp extends StatelessWidget {
             '/profile-settings': (context) => ProfileScreen(),
             '/login': (context) => LoginScreen(),
             '/about': (context) => AboutAppScreen(),
+            '/sports': (context) => SportsScreen(),
+            '/sports/subscriptions': (context) => SportsSubscriptionsScreen(),
+            '/sports/subscription-details': (context) => SportsSubscriptionDetailScreen(),
           },
           home: InitialLoading(),
           debugShowCheckedModeBanner: false,

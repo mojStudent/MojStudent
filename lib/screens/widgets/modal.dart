@@ -144,11 +144,36 @@ class BottomModal {
                     child: TextButton(
                         onPressed: () => Navigator.of(context).pop(),
                         child: Center(
-                          child: Text("Zapri", style: TextStyle(color: Colors.white),),
+                          child: Text(
+                            "Zapri",
+                            style: TextStyle(color: Colors.white),
+                          ),
                         )))
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  static void showCustomModal(BuildContext context,
+      {required Widget body, bool isDismissible = true}) {
+    showModalBottomSheet<void>(
+      context: context,
+      isDismissible: isDismissible,
+      isScrollControlled: true,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      builder: (BuildContext context) {
+        return Container(
+          height: MediaQuery.of(context).size.height * 0.45,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadiusDirectional.circular(10),
+            color: ThemeColors.jet,
+          ),
+          child: body,
         );
       },
     );

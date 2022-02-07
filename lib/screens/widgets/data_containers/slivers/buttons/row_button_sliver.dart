@@ -5,10 +5,15 @@ class RowButtonSliver extends StatelessWidget {
   final IconData? icon;
   final String title;
   final Function onPressed;
+  final ButtonStyle? style;
 
-  const RowButtonSliver(
-      {Key? key, this.icon, required this.title, required this.onPressed})
-      : super(key: key);
+  const RowButtonSliver({
+    Key? key,
+    this.icon,
+    required this.title,
+    required this.onPressed,
+    this.style,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +21,7 @@ class RowButtonSliver extends StatelessWidget {
       child: RowButton(
         title: title,
         icon: icon,
+        style: style,
         onPressed: onPressed,
       ),
     );
