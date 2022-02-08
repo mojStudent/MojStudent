@@ -22,10 +22,7 @@ class SportBloc extends Bloc<SportEvent, SportState> {
 
     FitnesCardModel? fintessCard;
 
-    try {
-      fintessCard = await sportsRepo.getFitnesCard();
-    } catch (e) {}
-
+    fintessCard = await sportsRepo.getFitnesCard();
     try {
       final subscriptions = await sportsRepo.getSubscriptions();
       emit(SportLoadedState(

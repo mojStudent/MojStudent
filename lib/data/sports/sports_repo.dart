@@ -47,7 +47,7 @@ class SportsRepository {
     }
   }
 
-  Future<FitnesCardModel> getFitnesCard({String? token}) async {
+  Future<FitnesCardModel?> getFitnesCard({String? token}) async {
     if (token == null) {
       var auth = AuthRepository();
       token = auth.token!;
@@ -64,8 +64,11 @@ class SportsRepository {
     if (response.statusCode == 200) {
       var model = FitnesCardModel.fromJson(jsonDecode(response.body));
       return model;
+    } else if (response.statusCode == 404) {
+      return null;
     } else {
-      throw Exception(response.body);
+      // throw Exception(response.body);
+      return null;
     }
   }
 
