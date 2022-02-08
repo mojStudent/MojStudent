@@ -30,6 +30,7 @@ class _InternetScreenState extends State<InternetScreen> {
               ),
             ),
             bottom: const TabBar(
+              indicatorColor: Colors.white,
               tabs: [
                 Tab(
                   icon: Icon(
