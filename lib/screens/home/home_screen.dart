@@ -95,7 +95,10 @@ class HomeScreen extends StatelessWidget {
     final user = state.user;
 
     return RefreshIndicator(
-      onRefresh: () async => context.read<HomeBloc>().add(RefreshData()),
+      onRefresh: () async {
+        context.read<HomeBloc>().add(RefreshData());
+        context.read<InternetTrafficBloc>().add(InternetTrafficLoad());
+      },
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
@@ -174,7 +177,7 @@ class HomeScreen extends StatelessWidget {
               title: "Škodni zapisniki",
               icon: FlutterRemix.flood_fill,
               onClick: () => Navigator.pushNamed(context, "/damages")),
-          
+
           _sectionTitle(w, h, title: "storitve"),
           _iconButton(h, w,
               title: "Šport",

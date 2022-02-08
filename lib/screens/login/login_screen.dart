@@ -6,10 +6,13 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
+import 'package:moj_student/services/blocs/home/home_bloc.dart';
+import 'package:moj_student/services/blocs/home/home_event.dart';
 import 'package:moj_student/services/blocs/login/login_bloc.dart';
 import 'package:moj_student/services/blocs/login/login_event.dart';
 import 'package:moj_student/services/blocs/login/login_state.dart';
 import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
+import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -138,6 +141,11 @@ class LoginScreen extends StatelessWidget {
         listener: (context, state) {
           final formStatus = state.formSubmissionStatus;
           if (formStatus is SubmissionSuccess) {
+            //reset blocs on home screen
+            context.read<HomeBloc>().add(InitialEvent());
+            context.read<InternetTrafficBloc>().add(InternetTrafficLoad());
+
+
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
