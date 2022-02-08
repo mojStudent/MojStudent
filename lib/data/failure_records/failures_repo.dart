@@ -4,7 +4,6 @@ import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/exceptions/empty_data_exception.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
-import 'package:http/http.dart';
 import 'package:moj_student/data/failure_records/new_failure_model.dart';
 import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
 import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
@@ -38,7 +37,7 @@ class FailureRecordRepo {
       try {
         var model = FailurePaginationModel.fromJson(jsonDecode(response.body));
         return model;
-      } on EmptyDataException catch (e) {
+      } on EmptyDataException {
         rethrow;
       }
     } else {

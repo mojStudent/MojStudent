@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
-import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 
 class TextRowContainer extends StatelessWidget {
   final String title;

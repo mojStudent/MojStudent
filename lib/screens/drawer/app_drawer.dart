@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
 
 class AppDrawer extends StatelessWidget {

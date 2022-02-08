@@ -5,12 +5,10 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
-import 'package:moj_student/screens/widgets/save_button_widget.dart';
 
 class ProfileChangeProfileView extends StatefulWidget {
   const ProfileChangeProfileView({Key? key}) : super(key: key);

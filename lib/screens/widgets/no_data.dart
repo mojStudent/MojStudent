@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 
 class NoData extends StatelessWidget {
   final String message;

@@ -3,11 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/helpers/base64_converter.dart';
-import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/sports/widgets/sport_subscription_widget.dart';
 import 'package:moj_student/screens/sports/widgets/subscription_modal.dart';
-import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/row_button_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
@@ -19,9 +15,6 @@ class SportsSubscriptionDetailScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final w = MediaQuery.of(context).size.width;
-    final h = MediaQuery.of(context).size.height;
-
     return Scaffold(
         body: BlocBuilder<SportBloc, SportState>(builder: (context, state) {
       if (state is SportSubscriptionDetailState) {

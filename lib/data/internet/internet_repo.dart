@@ -5,7 +5,6 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/models/internet_admin_model.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
-import 'package:http/http.dart';
 import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class InternetRepository {

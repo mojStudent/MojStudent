@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
-import 'package:moj_student/screens/widgets/save_button_widget.dart';
 import 'package:moj_student/services/validators/email_validator.dart';
 
 class ProfileChangeEmailView extends StatefulWidget {

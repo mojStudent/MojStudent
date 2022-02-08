@@ -1,18 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_html/flutter_html.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/sports/models/sport_subcribtion_model.dart';
 import 'package:moj_student/helpers/base64_converter.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/sports/widgets/sport_subscription_widget.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
-import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
-import 'package:moj_student/services/blocs/home/home_state.dart';
 import 'package:moj_student/services/blocs/sports/sport_bloc.dart';
 
 class SportsScreen extends StatelessWidget {

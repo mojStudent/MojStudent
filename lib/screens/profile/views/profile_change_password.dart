@@ -2,12 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
-import 'package:moj_student/screens/widgets/save_button_widget.dart';
 import 'package:moj_student/services/validators/minimal_len_validator.dart';
 import 'package:moj_student/services/validators/same_text_validator.dart';
 
@@ -84,55 +82,6 @@ class _ProfileChangePasswordViewState extends State<ProfileChangePasswordView> {
             icon: FlutterRemix.save_line,
           )
         ],
-      ),
-    );
-
-    return BoxWidget(
-      title: "Sprememba gesla",
-      elevated: false,
-      cardBody: Form(
-        key: _passwordForm,
-        child: Column(
-          children: [
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(label: Text("Trenutno geslo")),
-              validator: (value) =>
-                  MinimalLengthValidator.validate(value ?? '', 3)
-                      ? null
-                      : "Geslo mora biti dolgo vsaj tri znake",
-              onChanged: (value) => _passwordModel.current = value,
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(label: Text("Novo geslo")),
-              validator: (value) =>
-                  MinimalLengthValidator.validate(value ?? '', 3)
-                      ? null
-                      : "Geslo mora biti dolgo vsaj tri znake",
-              onChanged: (value) => _passwordModel.newPass = value,
-            ),
-            TextFormField(
-              obscureText: true,
-              decoration: InputDecoration(label: Text("Ponovi novo geslo")),
-              validator: (value) => SameTextValidator.validate(
-                      _passwordModel.newPass, value ?? "")
-                  ? !SameTextValidator.validate(
-                          _passwordModel.current, value ?? "")
-                      ? null
-                      : "Novo geslo ne more biti enako staremu"
-                  : "Novi gesli se ne ujemata",
-              onChanged: (value) => _passwordModel.repeat = value,
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height * 0.025,
-            ),
-            SaveButton(
-              text: "Posodobi geslo",
-              onClick: _onSubmit,
-            ),
-          ],
-        ),
       ),
     );
   }

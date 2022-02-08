@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 
 class CategoryNameSliver extends StatelessWidget {

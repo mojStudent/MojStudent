@@ -7,7 +7,6 @@ import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 import 'package:moj_student/screens/internet/views/charts/internet_traffic_chart.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 
 class InternetTrafficView extends StatefulWidget {

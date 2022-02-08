@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:moj_student/constants/colors.dart';
 
 class LoadingScreen extends StatelessWidget {
   final bool withScaffold;

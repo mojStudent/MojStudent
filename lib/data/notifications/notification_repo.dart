@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/notifications/notification_model.dart';
-import 'package:http/http.dart';
 import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class NotificationRepo {

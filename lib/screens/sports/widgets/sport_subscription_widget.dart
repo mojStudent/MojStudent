@@ -3,9 +3,7 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/sports/models/sport_subcribtion_model.dart';
 import 'package:moj_student/screens/sports/widgets/subscription_modal.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
-import 'package:moj_student/screens/widgets/modal.dart';
 
 class SportSubscriptionWidget extends StatelessWidget {
   final SportSubscriptionModel subscription;

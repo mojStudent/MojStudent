@@ -1,17 +1,11 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
-import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
-import 'package:moj_student/services/blocs/home/home_state.dart';
 import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
 
 class ProfileDetailsScreen extends StatelessWidget {

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:moj_student/constants/colors.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({

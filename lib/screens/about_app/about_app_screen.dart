@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
-import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';

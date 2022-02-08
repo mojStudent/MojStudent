@@ -1,15 +1,11 @@
 import 'dart:convert';
 
-import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
-import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_email_model.dart';
 
-import 'package:http/http.dart';
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
 import 'package:moj_student/data/auth/models/profile/change_profile_model.dart';
-import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class ProfileRepository extends AuthRepository {
   static const _changeEmailUrl =

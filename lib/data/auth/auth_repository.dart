@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:http/http.dart';
 import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/models/auth/loggedin_model.dart';
 import 'package:moj_student/data/auth/models/auth/login_model.dart';
