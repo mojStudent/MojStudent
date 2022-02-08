@@ -27,81 +27,74 @@ class SportsScreen extends StatelessWidget {
         body: Column(
       children: [
         AppHeader(title: "Šport"),
-        Expanded(child: BlocBuilder<SportBloc, SportState>(
-          builder: (context, state) {
-            if (state is SportInitial) {
-              context.read<SportBloc>().add(SportLoadEvent());
-              return LoadingScreen(
-                withScaffold: false,
-              );
-            } else if (state is SportLoadingState) {
-              return LoadingScreen(
-                withScaffold: false,
-              );
-            } else if (state is SportLoadedState) {
-              return CustomScrollView(
-                physics: BouncingScrollPhysics(),
-                slivers: [
-                  state.fitnesCard != null
-                      ? _fitnessCard(state, w)
-                      : SliverToBoxAdapter(),
-                  CategoryNameSliver(categoryName: "Moje naročnine"),
-                  for (var subscription
-                      in state.subscriptions.where((e) => e.subscribed))
-                    SportSubscriptionWidget(
-                      subscription: subscription,
-                      onTap: () {
-                        context.read<SportBloc>().add(
-                            SportLoadSubscriptionDetailEvent(
-                                state, subscription));
-                        Navigator.of(context)
-                            .pushNamed("/sports/subscription-details");
-                      },
-                    ),
-                  SliverPadding(
-                    padding: EdgeInsets.only(top: h * 0.02),
-                    sliver: SliverToBoxAdapter(
-                      child: GestureDetector(
-                        onTap: () => Navigator.of(context)
-                            .pushNamed("/sports/subscriptions"),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            Text(
-                              "Poglej vse".toUpperCase(),
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: ThemeColors.jet),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            Icon(FlutterRemix.arrow_right_line,
-                                size: 18, color: ThemeColors.jet),
-                            SizedBox(
-                              width: w * 0.03,
-                            ),
-                          ],
+        Expanded(
+          child: BlocBuilder<SportBloc, SportState>(
+            builder: (context, state) {
+              if (state is SportInitial) {
+                context.read<SportBloc>().add(SportLoadEvent());
+                return LoadingScreen(
+                  withScaffold: false,
+                );
+              } else if (state is SportLoadingState) {
+                return LoadingScreen(
+                  withScaffold: false,
+                );
+              } else if (state is SportLoadedState) {
+                return CustomScrollView(
+                  physics: BouncingScrollPhysics(),
+                  slivers: [
+                    state.fitnesCard != null
+                        ? _fitnessCard(state, w)
+                        : SliverToBoxAdapter(),
+                    CategoryNameSliver(categoryName: "Moje naročnine"),
+                    for (var w in _buildActiveSubscriptionList(
+                        context, state.subscriptions))
+                      w,
+                    SliverPadding(
+                      padding: EdgeInsets.only(top: h * 0.02),
+                      sliver: SliverToBoxAdapter(
+                        child: GestureDetector(
+                          onTap: () => Navigator.of(context)
+                              .pushNamed("/sports/subscriptions"),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              Text(
+                                "Poglej vse".toUpperCase(),
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: ThemeColors.jet),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Icon(FlutterRemix.arrow_right_line,
+                                  size: 18, color: ThemeColors.jet),
+                              SizedBox(
+                                width: w * 0.03,
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
-              );
-            } else if (state is SportErrorState) {
-              return RefreshIndicator(
-                  onRefresh: () async =>
-                      context.read<SportBloc>().add(SportLoadEvent()),
-                  child: Text("Napaka"));
-            } else {
-              return RefreshIndicator(
-                  onRefresh: () async =>
-                      context.read<SportBloc>().add(SportLoadEvent()),
-                  child: Text("Napaka, ne vem kaka"));
-            }
-          },
-        )),
+                  ],
+                );
+              } else if (state is SportErrorState) {
+                return RefreshIndicator(
+                    onRefresh: () async =>
+                        context.read<SportBloc>().add(SportLoadEvent()),
+                    child: Text("Napaka"));
+              } else {
+                return RefreshIndicator(
+                    onRefresh: () async =>
+                        context.read<SportBloc>().add(SportLoadEvent()),
+                    child: Text("Napaka, ne vem kaka"));
+              }
+            },
+          ),
+        ),
       ],
     ));
   }
@@ -190,5 +183,39 @@ class SportsScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  List<Widget> _buildActiveSubscriptionList(
+      BuildContext context, List<SportSubscriptionModel> subscriptions) {
+    List<Widget> list = [];
+
+    if (subscriptions.any((e) => e.subscribed)) {
+      for (var subscription in subscriptions.where((e) => e.subscribed)) {
+        list.add(
+          SportSubscriptionWidget(
+            subscription: subscription,
+            onTap: () {
+              context.read<SportBloc>().add(
+                    SportLoadSubscriptionDetailEvent(
+                      context.read<SportBloc>().state as SportLoadedState,
+                      subscription,
+                    ),
+                  );
+              Navigator.of(context).pushNamed("/sports/subscription-details");
+            },
+          ),
+        );
+      }
+    } else {
+      list.add(RowSliver(
+          child: Center(
+        child: Text(
+          "Trenutno nimate aktivnih naročnin",
+          style: TextStyle(fontSize: 16),
+        ),
+      )));
+    }
+
+    return list;
   }
 }
