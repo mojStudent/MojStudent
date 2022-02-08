@@ -123,7 +123,8 @@ class SportSubscriptionWidget extends StatelessWidget {
             ),
             !subscription.subscribed
                 ? TextButton(
-                    onPressed: () => SubscriptionModal.showModal(context, true),
+                    onPressed: () => SubscriptionModal.showModal(
+                        context, false, subscription),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -136,7 +137,8 @@ class SportSubscriptionWidget extends StatelessWidget {
                     ),
                   )
                 : TextButton(
-                    onPressed: () => SubscriptionModal.showModal(context, true),
+                    onPressed: () => SubscriptionModal.showModal(
+                        context, true, subscription),
                     style: TextButton.styleFrom(
                       primary: ThemeColors.danger,
                     ),

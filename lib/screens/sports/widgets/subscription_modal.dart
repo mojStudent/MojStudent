@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
+import 'package:moj_student/data/sports/models/sport_subcribtion_model.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
+import 'package:moj_student/services/blocs/sports/sport_bloc.dart';
 
 class SubscriptionModal {
-  static void showModal(BuildContext context, bool cancel) {
+  static void showModal(BuildContext context, bool cancel, SportSubscriptionModel subscription) {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
 
@@ -61,7 +64,7 @@ class SubscriptionModal {
                           primary:
                               cancel ? ThemeColors.danger : ThemeColors.primary,
                         ),
-                        onPressed: () => null,
+                        onPressed: () => onActionConfirmed(context, subscription, cancel),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: h * 0.01),
                           child: Row(
@@ -107,5 +110,15 @@ class SubscriptionModal {
             ],
           ),
         ));
+  }
+
+  static void onActionConfirmed(BuildContext context, SportSubscriptionModel subscription, bool cancel) {
+    if(cancel) {
+      context.read<SportBloc>().add(SportCancelSubscriptionEvent(subscription.id));
+    } else {
+      context.read<SportBloc>().add(SportSubscribeSubscriptionEvent(subscription.id));
+    }
+
+    Navigator.pop(context);
   }
 }

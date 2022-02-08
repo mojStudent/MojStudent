@@ -48,7 +48,7 @@ class SportsSubscriptionDetailScreen extends StatelessWidget {
                     icon: state.subscription.subscribed
                         ? FlutterRemix.delete_bin_2_line
                         : FlutterRemix.shopping_cart_line,
-                    onPressed: () => SubscriptionModal.showModal(context, true),
+                    onPressed: () => SubscriptionModal.showModal(context, true, state.subscription),
                   )
                 ],
               ),

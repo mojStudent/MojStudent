@@ -11,3 +11,15 @@ class SportLoadSubscriptionDetailEvent extends SportEvent {
 
   SportLoadSubscriptionDetailEvent(this.state, this.detailModel);
 }
+
+class SportCancelSubscriptionEvent extends SportEvent {
+  final int subscriptionId;
+
+  SportCancelSubscriptionEvent(this.subscriptionId);
+}
+
+class SportSubscribeSubscriptionEvent extends SportEvent {
+  final int subscriptionId;
+
+  SportSubscribeSubscriptionEvent(this.subscriptionId);
+}

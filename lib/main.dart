@@ -7,7 +7,7 @@ import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/data/internet/internet_help_repo.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
-import 'package:moj_student/data/sports/sport_services.dart';
+import 'package:moj_student/data/sports/sports_repo.dart';
 import 'package:moj_student/screens/about_app/about_app_screen.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
 import 'package:moj_student/screens/failures/failure_add_screen.dart';
