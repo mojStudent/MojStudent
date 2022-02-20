@@ -29,9 +29,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bloc: ^7.3.0
+  flutter_bloc: ^8.0.1
   http:
-  flutter_html:
+  flutter_html: ^2.2.1
   url_launcher:
   shared_preferences:
   charts_flutter:
