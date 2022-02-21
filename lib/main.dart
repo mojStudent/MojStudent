@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
@@ -26,6 +27,7 @@ import 'package:moj_student/screens/sports/sports_screen.dart';
 import 'package:moj_student/services/blocs/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
+import 'package:moj_student/services/blocs/home/home_view_panel_bloc/home_view_bloc.dart';
 import 'package:moj_student/services/blocs/login/login_bloc.dart';
 import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
 import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
@@ -34,6 +36,8 @@ import 'package:moj_student/services/internet/internet_help/internet_help_bloc.d
 import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
 
 void main() {
+  SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light));
   runApp(MyApp());
 }
 
@@ -86,6 +90,7 @@ class MyApp extends StatelessWidget {
           BlocProvider(
               create: (context) =>
                   InternetTrafficBloc(context.read<InternetRepository>())),
+          BlocProvider(create: (context) => HomeViewBloc()),
         ],
         child: MaterialApp(
           title: 'Moj študent',
@@ -114,7 +119,8 @@ class MyApp extends StatelessWidget {
             '/about': (context) => AboutAppScreen(),
             '/sports': (context) => SportsScreen(),
             '/sports/subscriptions': (context) => SportsSubscriptionsScreen(),
-            '/sports/subscription-details': (context) => SportsSubscriptionDetailScreen(),
+            '/sports/subscription-details': (context) =>
+                SportsSubscriptionDetailScreen(),
           },
           home: InitialLoading(),
           debugShowCheckedModeBanner: false,

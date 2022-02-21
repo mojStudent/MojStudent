@@ -21,6 +21,9 @@ class AuthRepository {
 
   static LoginModel? loginModel;
 
+  static isNetAdmin() => _loggedInUser?.roles.any((role) =>
+      role.role == "ROLE_INTADMIN" || role.role == "ROLE_INTADMINASSIS");
+
   Future<UserModel> login(LoginModel? login) async {
     if (login != null) {
       AuthRepository.loginModel = login;

@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({
-    Key? key,
-    required this.title,
-    this.actions = const [],
-    this.onBackButtonClick,
-    this.backgroundColor
-  }) : super(key: key);
+  const AppHeader(
+      {Key? key,
+      required this.title,
+      this.actions = const [],
+      this.onBackButtonClick,
+      this.showBackButton = true,
+      this.backgroundColor})
+      : super(key: key);
 
   final String title;
   final List<GestureDetector> actions;
   final Function? onBackButtonClick;
+  final bool showBackButton;
   final Color? backgroundColor;
 
   @override
@@ -36,15 +38,17 @@ class AppHeader extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  GestureDetector(
-                    child: Icon(
-                      FlutterRemix.arrow_left_s_line,
-                      color: Colors.white,
-                    ),
-                    onTap: () => onBackButtonClick != null
-                        ? onBackButtonClick!()
-                        : Navigator.pop(context),
-                  ),
+                  showBackButton
+                      ? GestureDetector(
+                          child: Icon(
+                            FlutterRemix.arrow_left_s_line,
+                            color: Colors.white,
+                          ),
+                          onTap: () => onBackButtonClick != null
+                              ? onBackButtonClick!()
+                              : Navigator.pop(context),
+                        )
+                      : Container(),
                   Row(
                     children: [
                       for (var action in actions)
