@@ -127,7 +127,7 @@ class HomeScreen extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Moj Študent",
+                                  "MojŠtudent",
                                   style: TextStyle(color: ThemeColors.jet, fontSize: 18, fontWeight: FontWeight.w800),
                                 ),
                                 SizedBox(height: 4,),
@@ -422,7 +422,7 @@ class HomeScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    state.traffic.weeks[0].value.human,
+                                    state.traffic.weeks[0].value.human.split(" GB")[0],
                                     style: TextStyle(
                                         color: ThemeColors.jet,
                                         fontSize: 18,
