@@ -1,12 +1,12 @@
 // ignore_for_file: avoid_unnecessary_containers
 
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
+import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
@@ -27,34 +27,125 @@ class HomeScreen extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
             backgroundColor: ThemeColors.background,
-            appBar: AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-              leading: GestureDetector(
-                child: Icon(
-                  FlutterRemix.user_3_line,
-                  color: ThemeColors.jet,
+            // appBar: AppBar(
+            //   backgroundColor: Colors.transparent,
+            //   elevation: 0,
+            //   leading: GestureDetector(
+            //     child: Icon(
+            //       FlutterRemix.user_3_line,
+            //       color: ThemeColors.jet,
+            //     ),
+            //     onTap: () => Navigator.of(context).pushNamed("/profile"),
+            //   ),
+            //   actions: [
+            //     GestureDetector(
+            //       child: Icon(
+            //         FlutterRemix.logout_box_r_line,
+            //         color: ThemeColors.jet,
+            //       ),
+            //       onTap: () {
+            //         var auth = AuthRepository();
+            //         auth.logOut().then((value) =>
+            //             Navigator.of(context).pushReplacementNamed("/login"));
+            //       },
+            //     ),
+            //     SizedBox(
+            //       width: 15,
+            //     ),
+            //   ],
+            // ),
+            body: Column(
+              children: [
+                Stack(
+                  alignment: AlignmentDirectional.topCenter,
+                  children: [
+                    Container(
+                      height: h * 0.17,
+                      decoration: BoxDecoration(
+                        color: ThemeColors.primary,
+                        // borderRadius:
+                        //     BorderRadius.only(bottomRight: Radius.circular(20)),
+                      ),
+                      child: SafeArea(
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 15, vertical: 15),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  GestureDetector(
+                                    child: Icon(
+                                      FlutterRemix.user_3_line,
+                                      color: Colors.white,
+                                    ),
+                                    onTap: () => Navigator.of(context)
+                                        .pushNamed("/profile"),
+                                  ),
+                                  GestureDetector(
+                                    child: Icon(
+                                      FlutterRemix.logout_box_r_line,
+                                      color: Colors.white,
+                                    ),
+                                    onTap: () {
+                                      var auth = AuthRepository();
+                                      auth.logOut().then((value) =>
+                                          Navigator.of(context)
+                                              .pushReplacementNamed("/login"));
+                                    },
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: h * 0.1),
+                      child: Padding(
+                        padding: EdgeInsets.only(right: w * 0.1),
+                        child: Container(
+                          height: h * 0.12,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: ThemeColors.jet.withOpacity(0.25),
+                                    offset: Offset(0, 5),
+                                    blurRadius: 10)
+                              ],
+                              borderRadius: BorderRadius.horizontal(
+                                  right: Radius.circular(20))),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: w * 0.04),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Moj Študent",
+                                  style: TextStyle(color: ThemeColors.jet, fontSize: 18, fontWeight: FontWeight.w800),
+                                ),
+                                SizedBox(height: 4,),
+                                Text(
+                                  "Študentski dom Ljubljana",
+                                  style: TextStyle(color: ThemeColors.jet, fontSize: 12, fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
                 ),
-                onTap: () => Navigator.of(context).pushNamed("/profile"),
-              ),
-              actions: [
-                GestureDetector(
-                  child: Icon(
-                    FlutterRemix.logout_box_r_line,
-                    color: ThemeColors.jet,
-                  ),
-                  onTap: () {
-                    var auth = AuthRepository();
-                    auth.logOut().then((value) =>
-                        Navigator.of(context).pushReplacementNamed("/login"));
-                  },
-                ),
-                SizedBox(
-                  width: 15,
-                ),
+                Expanded(child: _buildBody(h, w, context, state)),
               ],
-            ),
-            body: _buildBody(h, w, context, state));
+            ));
       },
     );
   }
@@ -90,62 +181,7 @@ class HomeScreen extends StatelessWidget {
       child: CustomScrollView(
         physics: BouncingScrollPhysics(),
         slivers: [
-          SliverPadding(
-            padding: EdgeInsets.symmetric(horizontal: w * 0.05),
-            sliver: SliverToBoxAdapter(
-              child: Row(
-                children: [
-                  SvgPicture.network(
-                      AvatarRepo.getImgUrlForSeed("${user.username}")),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "${user.firstname} ${user.lastname}",
-                        style: TextStyle(
-                            fontSize: 20, fontWeight: FontWeight.w700),
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            FlutterRemix.community_line,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "${user.campus}",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Icon(
-                            FlutterRemix.home_2_line,
-                            size: 20,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            "${user.location}, ${user.room}",
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.w300),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
+          // _header(h, w, user),
           _slider(h, w, context),
           _sectionTitle(w, h, title: "bivanje"),
 
@@ -189,6 +225,73 @@ class HomeScreen extends StatelessWidget {
       ),
     );
   }
+
+  Widget _header(double h, double w, UserModel user) {
+    return SliverToBoxAdapter(
+      child: Container(
+        height: h * 0.15,
+        decoration: BoxDecoration(color: ThemeColors.primary),
+      ),
+    );
+  }
+  // SliverPadding _userCard(double w, UserModel user) {
+  //   return SliverPadding(
+  //         padding: EdgeInsets.symmetric(horizontal: w * 0.05),
+  //         sliver: SliverToBoxAdapter(
+  //           child: Row(
+  //             children: [
+  //               SvgPicture.network(
+  //                   AvatarRepo.getImgUrlForSeed("${user.username}")),
+  //               SizedBox(
+  //                 width: 15,
+  //               ),
+  //               Column(
+  //                 crossAxisAlignment: CrossAxisAlignment.start,
+  //                 children: [
+  //                   Text(
+  //                     "${user.firstname} ${user.lastname}",
+  //                     style: TextStyle(
+  //                         fontSize: 20, fontWeight: FontWeight.w700),
+  //                   ),
+  //                   Row(
+  //                     children: [
+  //                       Icon(
+  //                         FlutterRemix.community_line,
+  //                         size: 20,
+  //                       ),
+  //                       SizedBox(
+  //                         width: 10,
+  //                       ),
+  //                       Text(
+  //                         "${user.campus}",
+  //                         style: TextStyle(
+  //                             fontSize: 16, fontWeight: FontWeight.w300),
+  //                       )
+  //                     ],
+  //                   ),
+  //                   Row(
+  //                     children: [
+  //                       Icon(
+  //                         FlutterRemix.home_2_line,
+  //                         size: 20,
+  //                       ),
+  //                       SizedBox(
+  //                         width: 10,
+  //                       ),
+  //                       Text(
+  //                         "${user.location}, ${user.room}",
+  //                         style: TextStyle(
+  //                             fontSize: 16, fontWeight: FontWeight.w300),
+  //                       )
+  //                     ],
+  //                   ),
+  //                 ],
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       );
+  // }
 
   SliverPadding _sectionTitle(double w, double h, {required String title}) {
     return SliverPadding(
@@ -253,7 +356,7 @@ class HomeScreen extends StatelessWidget {
     final user = (context.read<HomeBloc>().state as LoadedData).user;
 
     return SliverPadding(
-      padding: EdgeInsets.only(top: h * 0.05),
+      padding: EdgeInsets.only(top: h * 0.025),
       sliver: SliverToBoxAdapter(
         child: Column(
           children: [
