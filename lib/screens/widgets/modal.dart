@@ -158,7 +158,7 @@ class BottomModal {
   }
 
   static void showCustomModal(BuildContext context,
-      {required Widget body, bool isDismissible = true}) {
+      {required Widget body, bool isDismissible = true, Color? color, double? height}) {
     showModalBottomSheet<void>(
       context: context,
       isDismissible: isDismissible,
@@ -168,10 +168,10 @@ class BottomModal {
       ),
       builder: (BuildContext context) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.45,
+          height: height ?? MediaQuery.of(context).size.height * 0.45,
           decoration: BoxDecoration(
             borderRadius: BorderRadiusDirectional.circular(10),
-            color: ThemeColors.jet,
+            color: color ?? ThemeColors.jet,
           ),
           child: body,
         );

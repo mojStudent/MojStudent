@@ -7,6 +7,7 @@ import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/menu_iconbutton_sliver.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_event.dart';
 import 'package:moj_student/services/blocs/home/home_state.dart';
@@ -218,47 +219,12 @@ class HomePanelView extends StatelessWidget {
     );
   }
 
-  SliverToBoxAdapter _iconButton(double h, double w,
+  MenuIconButtonSliver _iconButton(double h, double w,
       {required String title, required IconData icon, Function? onClick}) {
-    return SliverToBoxAdapter(
-      child: GestureDetector(
-        onTap: () => onClick == null ? () {} : onClick(),
-        child: Container(
-          width: double.infinity,
-          margin:
-              EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.005),
-          padding:
-              EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Row(
-            children: [
-              Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                    color: ThemeColors.primary,
-                    borderRadius: BorderRadius.circular(10)),
-                child: Icon(
-                  icon,
-                  color: Colors.white,
-                  size: 20,
-                ),
-              ),
-              SizedBox(width: w * 0.05),
-              Text(
-                title,
-                style: TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 0.75,
-                    fontWeight: FontWeight.w700,
-                    color: ThemeColors.jet),
-              )
-            ],
-          ),
-        ),
-      ),
+    return MenuIconButtonSliver(
+      title: title,
+      icon: icon,
+      onClick: onClick,
     );
   }
 

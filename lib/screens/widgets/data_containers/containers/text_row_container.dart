@@ -18,6 +18,7 @@ class TextRowContainer extends StatelessWidget {
 
     return RowContainer(
       title: title,
+      icon: icon,
       child: Padding(
         padding: EdgeInsets.only(left: w * 0.02, top: h * 0.005),
         child: Row(

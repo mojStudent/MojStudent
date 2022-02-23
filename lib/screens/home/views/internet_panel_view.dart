@@ -5,8 +5,10 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/menu_iconbutton_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/row_button_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
+import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
 import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
 
@@ -79,10 +81,40 @@ class InternetAdminPanelView extends StatelessWidget {
   }
 
   Widget _body(double h, double w, BuildContext context) {
-    return CustomScrollView(slivers: [
-      SliverPadding(padding: EdgeInsets.only(top: h * 0.125), sliver: SliverToBoxAdapter(child: Container()),),
-      CategoryNameSliver(categoryName: "Storitve administracije"),
-      RowButtonSliver(title: "NAS", onPressed: () => null),
-    ],);
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.only(top: h * 0.125),
+          sliver: SliverToBoxAdapter(child: Container()),
+        ),
+        // CategoryNameSliver(categoryName: "Stanje omrežja"),
+        // TextRowSliver(
+        //   data: "24 / 25",
+        //   title: "NAS online",
+        //   icon: FlutterRemix.database_2_line,
+        // ),
+        CategoryNameSliver(categoryName: "Storitve administracije"),
+        MenuIconButtonSliver(
+          title: "Uporabniki",
+          icon: FlutterRemix.admin_fill,
+          onClick: () =>
+              Navigator.of(context).pushNamed("/internet/admin/users"),
+        ),
+        MenuIconButtonSliver(
+          title: "NAS",
+          icon: FlutterRemix.database_2_fill,
+          onClick: () =>
+              Navigator.of(context).pushNamed("/internet/admin/nas"),
+        ),
+        MenuIconButtonSliver(
+            title: "Prijave", icon: FlutterRemix.login_box_fill),
+        MenuIconButtonSliver(
+          title: "Napake",
+          icon: FlutterRemix.error_warning_fill,
+          onClick: () =>
+              Navigator.of(context).pushNamed("/internet/admin/errors"),
+        ),
+      ],
+    );
   }
 }

@@ -106,63 +106,61 @@ class ProfilePanelView extends StatelessWidget {
     return Text("Nalaganje");
   }
 
-  Expanded _profileLoaded(double w, double h, UserModel user) {
-    return Expanded(
-      child: CustomScrollView(
-        physics: BouncingScrollPhysics(),
-        slivers: [
-          SliverPadding(
-            padding: EdgeInsets.only(top: h * 0.2),
-            sliver: SliverToBoxAdapter(child: Container()),
-          ),
-          CategoryNameSliver(categoryName: "Osnovni podatki"),
-          TextRowSliver(
-              title: "uporabniško ime",
-              data: "${user.username}",
-              icon: FlutterRemix.user_3_line),
-          TextRowSliver(
-              title: "status tujca",
-              data: (user.foreigner ?? false) ? 'da' : 'ne',
-              icon: FlutterRemix.earth_line),
-          TextRowSliver(
-              title: "številka uporabnika",
-              data: "${user.id}",
-              icon: FlutterRemix.passport_line),
-          //
-          CategoryNameSliver(categoryName: "Kontaktni podatki"),
-          TextRowSliver(
-              title: "e-pošta",
-              data: "${user.email}",
-              icon: FlutterRemix.mail_line),
-          TextRowSliver(
-              title: "datum potrditve e-pošte",
-              data: "${user.emailDate}",
-              icon: FlutterRemix.calendar_2_line),
-          TextRowSliver(
-              title: "telefonska številka",
-              data: "${user.phone}",
-              icon: FlutterRemix.phone_line),
-          //
-          CategoryNameSliver(categoryName: "Napredni podatki profila"),
-          TextRowSliver(
-              title: "api dostop",
-              data: (user.api ?? false) ? 'da' : "ne",
-              icon: FlutterRemix.database_2_line),
-          TextRowSliver(
-              title: "internetni dostop",
-              data: (user.internetAccess ?? false) ? 'da' : "ne",
-              icon: FlutterRemix.cloud_line),
-          TextRowSliver(
-              title: "tip uporabniškega računa",
-              data: user.rolesToString(),
-              icon: FlutterRemix.shield_user_line),
-          TextRowSliver(
-              title: "trenutni ip",
-              data: "${user.ip}",
-              icon: FlutterRemix.link_m),
-          SliverPadding(padding: EdgeInsets.only(bottom: h * 0.1))
-        ],
-      ),
+  Widget _profileLoaded(double w, double h, UserModel user) {
+    return CustomScrollView(
+      physics: BouncingScrollPhysics(),
+      slivers: [
+        SliverPadding(
+          padding: EdgeInsets.only(top: h * 0.2),
+          sliver: SliverToBoxAdapter(child: Container()),
+        ),
+        CategoryNameSliver(categoryName: "Osnovni podatki"),
+        TextRowSliver(
+            title: "uporabniško ime",
+            data: "${user.username}",
+            icon: FlutterRemix.user_3_line),
+        TextRowSliver(
+            title: "status tujca",
+            data: (user.foreigner ?? false) ? 'da' : 'ne',
+            icon: FlutterRemix.earth_line),
+        TextRowSliver(
+            title: "številka uporabnika",
+            data: "${user.id}",
+            icon: FlutterRemix.passport_line),
+        //
+        CategoryNameSliver(categoryName: "Kontaktni podatki"),
+        TextRowSliver(
+            title: "e-pošta",
+            data: "${user.email}",
+            icon: FlutterRemix.mail_line),
+        TextRowSliver(
+            title: "datum potrditve e-pošte",
+            data: "${user.emailDate}",
+            icon: FlutterRemix.calendar_2_line),
+        TextRowSliver(
+            title: "telefonska številka",
+            data: "${user.phone}",
+            icon: FlutterRemix.phone_line),
+        //
+        CategoryNameSliver(categoryName: "Napredni podatki profila"),
+        TextRowSliver(
+            title: "api dostop",
+            data: (user.api ?? false) ? 'da' : "ne",
+            icon: FlutterRemix.database_2_line),
+        TextRowSliver(
+            title: "internetni dostop",
+            data: (user.internetAccess ?? false) ? 'da' : "ne",
+            icon: FlutterRemix.cloud_line),
+        TextRowSliver(
+            title: "tip uporabniškega računa",
+            data: user.rolesToString(),
+            icon: FlutterRemix.shield_user_line),
+        TextRowSliver(
+            title: "trenutni ip",
+            data: "${user.ip}",
+            icon: FlutterRemix.link_m),
+        SliverPadding(padding: EdgeInsets.only(bottom: h * 0.1))
+      ],
     );
   }
 

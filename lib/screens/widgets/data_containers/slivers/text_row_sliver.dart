@@ -16,6 +16,7 @@ class TextRowSliver extends StatelessWidget {
       child: TextRowContainer(
         data: data,
         title: title,
+        icon: icon,
       ),
     );
   }

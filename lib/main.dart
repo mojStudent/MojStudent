@@ -16,6 +16,10 @@ import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
 import 'package:moj_student/screens/initial_loading/initial_loading.dart';
 import 'package:moj_student/screens/internet/internet_screen.dart';
+import 'package:moj_student/screens/internet_admin/iadmin_errors_screen.dart';
+import 'package:moj_student/screens/internet_admin/iadmin_nas_screen.dart';
+import 'package:moj_student/screens/internet_admin/iadmin_userdet_screen.dart';
+import 'package:moj_student/screens/internet_admin/iadmin_users_screen.dart';
 import 'package:moj_student/screens/login/login_screen.dart';
 import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
@@ -121,6 +125,10 @@ class MyApp extends StatelessWidget {
             '/sports/subscriptions': (context) => SportsSubscriptionsScreen(),
             '/sports/subscription-details': (context) =>
                 SportsSubscriptionDetailScreen(),
+            '/internet/admin/users': (context) => InternetAdminUsersScreen(),
+            '/internet/admin/users/details': (context) => InternetAdminUserDetailScreen(),
+            '/internet/admin/errors': (context) => InternetAdminErrorScreen(),
+            '/internet/admin/nas': (context) => InternetAdminNasScreen(),
           },
           home: InitialLoading(),
           debugShowCheckedModeBanner: false,
