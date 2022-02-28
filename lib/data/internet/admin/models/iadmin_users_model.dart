@@ -86,7 +86,7 @@ class InternetAdminUserModel {
   InternetAdminUserModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
-    email = null;
+    email = json['email'];
     firstname = json['firstname'];
     lastname = json['lastname'];
     resetPassword = json['resetPassword'];
@@ -99,7 +99,7 @@ class InternetAdminUserModel {
     emailDate = null;
     locale = json['locale'];
     internetAccess = json['internetAccess'];
-    phone = null;
+    phone = json['phone'];
     mask = json['mask'];
     bitmask = json['bitmask'];
     roles = List.from(json['roles']).map((e) => Roles.fromJson(e)).toList();

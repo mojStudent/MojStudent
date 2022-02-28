@@ -147,8 +147,11 @@ class InternetAdminUsersScreen extends StatelessWidget {
       BuildContext context, InternetAdminUserModel user) {
     return SliverToBoxAdapter(
       child: GestureDetector(
-        onTap: () =>
-            Navigator.pushNamed(context, "/internet/admin/users/details"),
+        onTap: () => Navigator.pushNamed(
+          context,
+          "/internet/admin/users/details",
+          arguments: user.id,
+        ),
         child: RowContainer(
             child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

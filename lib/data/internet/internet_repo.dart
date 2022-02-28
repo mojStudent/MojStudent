@@ -25,7 +25,8 @@ class InternetRepository {
 
   static const _internetAdminUrl = "https://student.sd-lj.si/api/help/contact";
 
-  Future<InternetTrafficModel> getInternetTraffic({String? token}) async {
+  Future<InternetTrafficModel> getInternetTraffic(
+      {String? token, String? customUrl}) async {
     if (token == null) {
       var auth = AuthRepository();
       token = auth.token!;
@@ -37,7 +38,7 @@ class InternetRepository {
     };
 
     final response =
-        await client.get(Uri.parse(_internetTrafficUrl), headers: headers);
+        await client.get(Uri.parse(customUrl ?? _internetTrafficUrl), headers: headers);
 
     if (response.statusCode == 200) {
       var model = InternetTrafficModel.fromJson(jsonDecode(response.body));
