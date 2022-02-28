@@ -5,6 +5,7 @@ import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/damage-record/damage_record_repo.dart';
 import 'package:moj_student/data/failure_records/failures_repo.dart';
+import 'package:moj_student/data/internet/admin/iadmin_repo.dart';
 import 'package:moj_student/data/internet/internet_help_repo.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/notifications/notification_repo.dart';
@@ -36,6 +37,8 @@ import 'package:moj_student/services/blocs/login/login_bloc.dart';
 import 'package:moj_student/services/blocs/notification/notification_bloc.dart';
 import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
 import 'package:moj_student/services/blocs/sports/sport_bloc.dart';
+import 'package:moj_student/services/internet/admin/nas/iadmin_nas_bloc.dart';
+import 'package:moj_student/services/internet/admin/users/iadmin_users_bloc.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
 
@@ -65,6 +68,9 @@ class MyApp extends StatelessWidget {
         RepositoryProvider(
             create: (context) =>
                 SportsRepository(authRepository: AuthRepository())),
+        RepositoryProvider(
+            create: (context) =>
+                InternetAdminRepository(authRepository: AuthRepository())),
       ],
       child: MultiBlocProvider(
         providers: [
@@ -95,9 +101,15 @@ class MyApp extends StatelessWidget {
               create: (context) =>
                   InternetTrafficBloc(context.read<InternetRepository>())),
           BlocProvider(create: (context) => HomeViewBloc()),
+          BlocProvider(
+              create: (context) => InternetAdminNasBloc(
+                  context.read<InternetAdminRepository>())),
+          BlocProvider(
+              create: (context) => InternetAdminUsersBloc(
+                  context.read<InternetAdminRepository>())),
         ],
         child: MaterialApp(
-          title: 'Moj študent',
+          title: 'MojŠtudent',
           theme: ThemeData(
               primarySwatch: ThemeColors.primary,
               primaryColor: ThemeColors.primary,
@@ -126,7 +138,8 @@ class MyApp extends StatelessWidget {
             '/sports/subscription-details': (context) =>
                 SportsSubscriptionDetailScreen(),
             '/internet/admin/users': (context) => InternetAdminUsersScreen(),
-            '/internet/admin/users/details': (context) => InternetAdminUserDetailScreen(),
+            '/internet/admin/users/details': (context) =>
+                InternetAdminUserDetailScreen(),
             '/internet/admin/errors': (context) => InternetAdminErrorScreen(),
             '/internet/admin/nas': (context) => InternetAdminNasScreen(),
           },
