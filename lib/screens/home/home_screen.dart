@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/screens/home/views/home_panel_view.dart';
 import 'package:moj_student/screens/home/views/internet_panel_view.dart';
 import 'package:moj_student/screens/home/views/profile_panel_view.dart';

@@ -73,7 +73,6 @@ class InternetAdminErrorScreen extends StatelessWidget {
     double w,
   ) {
     if (state is InternetAdminErrorsLoadedState) {
-      state = state as InternetAdminErrorsLoadedState;
       return FloatingActionButton(
         onPressed: () => BottomModal.showCustomModal(context,
             height: h * 0.75,

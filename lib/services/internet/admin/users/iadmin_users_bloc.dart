@@ -5,7 +5,6 @@ import 'package:moj_student/data/internet/admin/exceptions/iadmin_norole_excepti
 import 'package:moj_student/data/internet/admin/iadmin_repo.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_location_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_users_model.dart';
-import 'package:moj_student/services/internet/admin/nas/iadmin_nas_bloc.dart';
 
 part 'iadmin_users_event.dart';
 part 'iadmin_users_state.dart';

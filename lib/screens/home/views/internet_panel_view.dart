@@ -1,16 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/auth/models/auth/user_model.dart';
-import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/menu_iconbutton_sliver.dart';
-import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/row_button_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
-import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
-import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
-import 'package:moj_student/services/blocs/profile/profile_bloc.dart';
 
 class InternetAdminPanelView extends StatelessWidget {
   const InternetAdminPanelView({Key? key}) : super(key: key);

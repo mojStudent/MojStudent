@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
-import 'package:moj_student/screens/internet/views/connections/internet_log_detail_screen.dart';
 import 'package:moj_student/screens/internet/views/connections/internet_log_loaded_view.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 
@@ -40,6 +38,6 @@ class _InternetLogViewState extends State<InternetLogView> {
       setState(() {
         data = d;
       });
-    } catch (e) {}
+    } catch (_) {}
   }
 }

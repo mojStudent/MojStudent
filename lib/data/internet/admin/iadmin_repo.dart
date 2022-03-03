@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
-import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
-import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_errors_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_location_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_nas_model.dart';
@@ -12,7 +10,6 @@ import 'package:moj_student/data/internet/admin/models/iadmin_users_model.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
-import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class InternetAdminRepository extends InternetRepository {
   InternetAdminRepository({required AuthRepository authRepository})

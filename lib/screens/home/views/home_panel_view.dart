@@ -4,7 +4,6 @@ import 'package:flutter_remix/flutter_remix.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
-import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/menu_iconbutton_sliver.dart';
@@ -145,9 +144,6 @@ class HomePanelView extends StatelessWidget {
   }
 
   Widget _buildWithData(double h, double w, BuildContext context) {
-    final state = context.read<HomeBloc>().state as LoadedData;
-    final user = state.user;
-
     return RefreshIndicator(
       onRefresh: () async {
         context.read<HomeBloc>().add(RefreshData());
