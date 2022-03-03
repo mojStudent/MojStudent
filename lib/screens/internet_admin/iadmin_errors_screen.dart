@@ -32,31 +32,74 @@ class InternetAdminErrorScreen extends StatelessWidget {
             return Container();
           } else {
             return Scaffold(
-              body: Column(children: [
-                AppHeader(title: "Napake"),
-                state is InternetAdminErrorsLoadingState
-                    ? LoadingScreen(
-                        withScaffold: false,
-                        expanded: true,
-                      )
-                    : Container(),
-                state is InternetAdminErrorsLoadedState
-                    ? Expanded(
-                        child: CustomScrollView(
-                          physics: BouncingScrollPhysics(),
-                          slivers: [
-                            for (var error in state.errors.results)
-                              _errorCard(error, context, h, w),
-                          ],
-                        ),
-                      )
-                    : Container(),
-                state is InternetAdminErrorsErrorState
-                    ? Expanded(
-                        child: Center(
-                        child: Text(state.e.toString()),
-                      ))
-                    : Container()
+              body: Stack(children: [
+                _body(context, state, h, w),
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AppHeader(title: "Napake"),
+                      if (state is InternetAdminErrorsLoadedState)
+                        Container(
+                          margin: EdgeInsets.fromLTRB(10, 0, 0, h * 0.025),
+                          padding: EdgeInsets.symmetric(
+                              horizontal: w * 0.04, vertical: h * 0.015),
+                          width: w * 0.65,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: ThemeColors.jet.withOpacity(0.3),
+                                  offset: Offset(3, 2),
+                                  blurRadius: 5)
+                            ],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              GestureDetector(
+                                onTap: () => state.page > 1
+                                    ? context
+                                        .read<InternetAdminErrorsBloc>()
+                                        .add(
+                                          InternetAdminErrorsLoadEvent(
+                                              page: state.page - 1),
+                                        )
+                                    : null,
+                                child: Icon(FlutterRemix.arrow_left_s_line),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "${state.page} / ${state.errors.pages}",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              GestureDetector(
+                                onTap: () => state.page < (state.errors.pages)
+                                    ? context
+                                        .read<InternetAdminErrorsBloc>()
+                                        .add(
+                                          InternetAdminErrorsLoadEvent(
+                                              page: state.page + 1),
+                                        )
+                                    : null,
+                                child: Icon(FlutterRemix.arrow_right_s_line),
+                              ),
+                            ],
+                          ),
+                        )
+                    ],
+                  ),
+                ),
               ]),
               floatingActionButton: _fab(context, state, h, w),
             );
@@ -64,6 +107,40 @@ class InternetAdminErrorScreen extends StatelessWidget {
         },
       ),
     );
+  }
+
+  Widget _body(context, state, h, w) {
+    if (state is InternetAdminErrorsLoadingState) {
+      return LoadingScreen(
+        withScaffold: false,
+        expanded: true,
+      );
+    } else if (state is InternetAdminErrorsLoadedState) {
+      return Expanded(
+        child: CustomScrollView(
+          physics: BouncingScrollPhysics(),
+          slivers: [
+            SliverToBoxAdapter(
+              child: SizedBox(height: h * 0.2),
+            ),
+            for (var error in state.errors.results)
+              _errorCard(error, context, h, w),
+            SliverToBoxAdapter(
+              child: SizedBox(height: h * 0.1),
+            ),
+          ],
+        ),
+      );
+    } else if (state is InternetAdminErrorsErrorState) {
+      return Expanded(
+          child: Center(
+        child: Text(state.e.toString()),
+      ));
+    } else {
+      return Expanded(
+        child: Center(child: Text("Napaka, še sam ne vem kaka")),
+      );
+    }
   }
 
   Widget _fab(
