@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
+import 'package:moj_student/screens/internet/views/connections/internet_log_view.dart';
 import 'package:moj_student/screens/internet/views/help/internet_help_view.dart';
-import 'package:moj_student/screens/internet/views/internet_log_view.dart';
 import 'package:moj_student/screens/internet/views/internet_traffic_view.dart';
 
 class InternetScreen extends StatefulWidget {

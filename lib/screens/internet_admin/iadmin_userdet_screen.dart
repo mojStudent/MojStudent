@@ -7,13 +7,14 @@ import 'package:moj_student/data/auth/models/auth/user_model.dart';
 import 'package:moj_student/data/internet/admin/iadmin_repo.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_users_model.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
+import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 import 'package:moj_student/screens/internet/views/charts/internet_traffic_chart.dart';
+import 'package:moj_student/screens/internet/views/connections/internet_log_loaded_view.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
-import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/internet/admin/user_details/iadmin_userdet_bloc.dart';
 
 class InternetAdminUserDetailScreen extends StatelessWidget {
@@ -81,7 +82,7 @@ class InternetAdminUserDetailScreen extends StatelessWidget {
                     children: [
                       _showUserDetInfo(state.user),
                       _trafficTab(context, state.traffic),
-                      _showUserDetInfo(state.user),
+                      _connectionTab(context, state.connections),
                     ],
                   );
                 } else if (state is InternetAdminUserDetErrorState) {
@@ -280,5 +281,9 @@ class InternetAdminUserDetailScreen extends StatelessWidget {
         SliverPadding(padding: EdgeInsets.only(top: 20)),
       ],
     );
+  }
+
+  Widget _connectionTab(BuildContext context, List<InternetConnectionLogModel> data) {
+    return InternetLogLoadedView(connections: data);
   }
 }

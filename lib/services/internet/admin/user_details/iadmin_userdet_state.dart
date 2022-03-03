@@ -10,9 +10,12 @@ class InternetAdminUserDetLoadingState extends InternetAdminUserDetState {}
 class InternetAdminUserDetLoadedState extends InternetAdminUserDetState {
   final InternetAdminUserModel user;
   final InternetTrafficModel traffic;
+  final List<InternetConnectionLogModel> connections;
+
   InternetAdminUserDetLoadedState({
     required this.user,
     required this.traffic,
+    required this.connections
   });
 }
 

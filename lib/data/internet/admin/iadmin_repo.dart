@@ -9,6 +9,7 @@ import 'package:moj_student/data/internet/admin/models/iadmin_nas_model.dart';
 import 'package:moj_student/data/internet/admin/exceptions/iadmin_norole_exception.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_users_model.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
+import 'package:moj_student/data/internet/models/internet_log_model.dart';
 import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
@@ -152,5 +153,13 @@ class InternetAdminRepository extends InternetRepository {
     return await super.getInternetTraffic(
         token: token,
         customUrl: "https://student.sd-lj.si/api/user/$userId/log/traffic");
+  }
+
+  Future<List<InternetConnectionLogModel>> getInternetConnectionsForUser(
+      int userId,
+      {String? token}) async {
+    return await super.getInternetConnections(
+        token: token,
+        customUrl: "https://student.sd-lj.si/api/user/$userId/log/connection");
   }
 }

@@ -37,8 +37,8 @@ class InternetRepository {
       'Authorization': 'Bearer $token'
     };
 
-    final response =
-        await client.get(Uri.parse(customUrl ?? _internetTrafficUrl), headers: headers);
+    final response = await client
+        .get(Uri.parse(customUrl ?? _internetTrafficUrl), headers: headers);
 
     if (response.statusCode == 200) {
       var model = InternetTrafficModel.fromJson(jsonDecode(response.body));
@@ -49,7 +49,7 @@ class InternetRepository {
   }
 
   Future<List<InternetConnectionLogModel>> getInternetConnections(
-      {String? token}) async {
+      {String? token, String? customUrl}) async {
     if (token == null) {
       var auth = AuthRepository();
       token = auth.token!;
@@ -60,8 +60,8 @@ class InternetRepository {
       'Authorization': 'Bearer $token'
     };
 
-    final response =
-        await client.get(Uri.parse(_internetConnectionsUrl), headers: headers);
+    final response = await client
+        .get(Uri.parse(customUrl ?? _internetConnectionsUrl), headers: headers);
 
     if (response.statusCode == 200) {
       Iterable l = json.decode(response.body);
