@@ -4,6 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:http_interceptor/http/http.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/auth/models/auth/user_model.dart';
+import 'package:moj_student/data/internet/admin/models/iadmin_errors_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_location_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_nas_model.dart';
 import 'package:moj_student/data/internet/admin/exceptions/iadmin_norole_exception.dart';
@@ -161,5 +162,45 @@ class InternetAdminRepository extends InternetRepository {
     return await super.getInternetConnections(
         token: token,
         customUrl: "https://student.sd-lj.si/api/user/$userId/log/connection");
+  }
+
+  Future<IAdminErrorsPaginationModel> getErrors({
+    int page = 1,
+    int perPage = 20,
+    String? username,
+    String? description,
+    String? token,
+  }) async {
+    if (token == null) {
+      var auth = AuthRepository();
+      token = auth.token!;
+    }
+
+    Map<String, String> headers = {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer $token'
+    };
+
+    String url = "https://student.sd-lj.si/api/error?page=$page&pp=$perPage";
+    if(username != null) {
+      url += "&username=$username";
+    }
+
+    if(description != null) {
+      url += "&description=$description";
+    }
+
+    final response = await client.get(Uri.parse(url),
+        headers: headers);
+
+    if (response.statusCode == 200) {
+      var model =
+          IAdminErrorsPaginationModel.fromJson(json.decode(response.body));
+      return model;
+    } else if (response.statusCode == 403) {
+      throw InternetAdminNoRoleException("Uporabnik nima pravice za dostop");
+    } else {
+      throw Exception(response.body);
+    }
   }
 }

@@ -112,7 +112,7 @@ class InternetLogLoadedView extends StatelessWidget {
         Expanded(
           child: ListView.builder(
             physics: BouncingScrollPhysics(),
-            itemCount: dataBuild!.length,
+            itemCount: dataBuild.length,
             itemBuilder: (context, index) {
               var log = dataBuild.elementAt(index);
               return Padding(
