@@ -5,12 +5,14 @@ class MenuIconButtonSliver extends StatelessWidget {
   final Function? onClick;
   final String title;
   final IconData icon;
+  final bool darkTheme;
 
   const MenuIconButtonSliver({
     Key? key,
     this.onClick,
     required this.title,
     required this.icon,
+    this.darkTheme = false,
   }) : super(key: key);
 
   @override
@@ -28,7 +30,7 @@ class MenuIconButtonSliver extends StatelessWidget {
           padding:
               EdgeInsets.symmetric(horizontal: w * 0.03, vertical: h * 0.01),
           decoration: BoxDecoration(
-            color: Colors.white,
+            color: darkTheme ? ThemeColors.jet : Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
           child: Row(
@@ -40,7 +42,7 @@ class MenuIconButtonSliver extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(
                   icon,
-                  color: Colors.white,
+                  color:  Colors.white,
                   size: 20,
                 ),
               ),
@@ -48,10 +50,11 @@ class MenuIconButtonSliver extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                    fontSize: 16,
-                    letterSpacing: 0.75,
-                    fontWeight: FontWeight.w700,
-                    color: ThemeColors.jet),
+                  fontSize: 16,
+                  letterSpacing: 0.75,
+                  fontWeight: FontWeight.w700,
+                  color: darkTheme ? Colors.white : ThemeColors.jet,
+                ),
               )
             ],
           ),

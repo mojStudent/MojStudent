@@ -26,6 +26,8 @@ import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
 import 'package:moj_student/screens/profile/profile_details.dart/profile_details_screen.dart';
 import 'package:moj_student/screens/profile/profile_screen.dart';
+import 'package:moj_student/screens/restaurant/restaurant_menu_screen.dart';
+import 'package:moj_student/screens/restaurant/restaurant_screen.dart';
 import 'package:moj_student/screens/sports/subscriptions/sport_subscriptions_screen.dart';
 import 'package:moj_student/screens/sports/subscriptions/sport_subscription_detail_screen.dart';
 import 'package:moj_student/screens/sports/sports_screen.dart';
@@ -142,6 +144,7 @@ class MyApp extends StatelessWidget {
                 InternetAdminUserDetailScreen(),
             '/internet/admin/errors': (context) => InternetAdminErrorScreen(),
             '/internet/admin/nas': (context) => InternetAdminNasScreen(),
+            '/restaurant': (context) => RestaurantScreen(),
           },
           home: InitialLoading(),
           debugShowCheckedModeBanner: false,

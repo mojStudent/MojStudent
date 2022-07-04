@@ -5,9 +5,17 @@ class RowContainer extends StatelessWidget {
   final String? title;
   final IconData? icon;
   final Widget child;
+  final EdgeInsets? padding;
+  final EdgeInsets? margin;
 
-  const RowContainer({Key? key, required this.child, this.title, this.icon})
-      : super(key: key);
+  const RowContainer({
+    Key? key,
+    required this.child,
+    this.title,
+    this.icon,
+    this.margin,
+    this.padding,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,8 +23,10 @@ class RowContainer extends StatelessWidget {
     final h = MediaQuery.of(context).size.height;
 
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.02),
-      margin: EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.0075),
+      padding: padding ??
+          EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.02),
+      margin: margin ??
+          EdgeInsets.symmetric(horizontal: w * 0.06, vertical: h * 0.0075),
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(10)),
       child: Column(

@@ -98,14 +98,14 @@ class InternetAdminPanelView extends StatelessWidget {
           onClick: () =>
               Navigator.of(context).pushNamed("/internet/admin/nas"),
         ),
-        MenuIconButtonSliver(
-            title: "Prijave", icon: FlutterRemix.login_box_fill),
-        MenuIconButtonSliver(
-          title: "Napake",
-          icon: FlutterRemix.error_warning_fill,
-          onClick: () =>
-              Navigator.of(context).pushNamed("/internet/admin/errors"),
-        ),
+        // MenuIconButtonSliver(
+        //     title: "Prijave", icon: FlutterRemix.login_box_fill),
+        // MenuIconButtonSliver(
+        //   title: "Napake",
+        //   icon: FlutterRemix.error_warning_fill,
+        //   onClick: () =>
+        //       Navigator.of(context).pushNamed("/internet/admin/errors"),
+        // ),
       ],
     );
   }

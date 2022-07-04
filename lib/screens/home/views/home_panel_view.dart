@@ -12,6 +12,7 @@ import 'package:moj_student/services/blocs/home/home_event.dart';
 import 'package:moj_student/services/blocs/home/home_state.dart';
 import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
 import "package:moj_student/helpers/string_extension.dart";
+import 'package:url_launcher/url_launcher.dart';
 
 class HomePanelView extends StatelessWidget {
   const HomePanelView({Key? key}) : super(key: key);
@@ -178,6 +179,11 @@ class HomePanelView extends StatelessWidget {
 
           _sectionTitle(w, h, title: "storitve"),
           _iconButton(h, w,
+              title: "Rožna kuh'nja",
+              icon: FlutterRemix.restaurant_fill,
+              onClick: () => Navigator.pushNamed(context, "/restaurant")),
+
+          _iconButton(h, w,
               title: "Šport",
               icon: FlutterRemix.ping_pong_fill,
               onClick: () => Navigator.pushNamed(context, "/sports")),
@@ -216,11 +222,15 @@ class HomePanelView extends StatelessWidget {
   }
 
   MenuIconButtonSliver _iconButton(double h, double w,
-      {required String title, required IconData icon, Function? onClick}) {
+      {required String title,
+      required IconData icon,
+      Function? onClick,
+      bool? darkTheme}) {
     return MenuIconButtonSliver(
       title: title,
       icon: icon,
       onClick: onClick,
+      darkTheme: darkTheme ?? false,
     );
   }
 
@@ -395,51 +405,51 @@ class HomePanelView extends StatelessWidget {
     );
   }
 
-  GestureDetector _sliderCard(
-    double h,
-    double w, {
-    bool dark = false,
-    required String title,
-    Function? onClick,
-    required Widget body,
-  }) {
-    return GestureDetector(
-      onTap: () => onClick == null ? () {} : onClick(),
-      child: Container(
-        margin: EdgeInsets.only(right: 10),
-        padding: EdgeInsets.symmetric(vertical: h * 0.01, horizontal: w * 0.02),
-        width: w * 0.48,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-          color: dark ? ThemeColors.primary : Colors.white,
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  title.toUpperCase(),
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
+    GestureDetector _sliderCard(
+      double h,
+      double w, {
+      bool dark = false,
+      required String title,
+      Function? onClick,
+      required Widget body,
+    }) {
+      return GestureDetector(
+        onTap: () => onClick == null ? () {} : onClick(),
+        child: Container(
+          margin: EdgeInsets.only(right: 10),
+          padding: EdgeInsets.symmetric(vertical: h * 0.01, horizontal: w * 0.02),
+          width: w * 0.48,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: dark ? ThemeColors.primary : Colors.white,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    title.toUpperCase(),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                      color: dark ? Colors.white : ThemeColors.jet,
+                    ),
+                  ),
+                  Divider(
+                    thickness: 1.5,
                     color: dark ? Colors.white : ThemeColors.jet,
                   ),
-                ),
-                Divider(
-                  thickness: 1.5,
-                  color: dark ? Colors.white : ThemeColors.jet,
-                ),
-              ],
-            ),
-            body
-          ],
+                ],
+              ),
+              body
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
+    }
 
   void _administratorsBottomSheet(BuildContext context,
       InternetTrafficLoadedState state, double h, double w) {

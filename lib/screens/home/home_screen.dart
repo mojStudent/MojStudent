@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
+import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/screens/home/views/home_panel_view.dart';
 import 'package:moj_student/screens/home/views/internet_panel_view.dart';
 import 'package:moj_student/screens/home/views/profile_panel_view.dart';
@@ -52,7 +53,7 @@ class HomeScreen extends StatelessWidget {
                 icon: Icon(FlutterRemix.home_3_line), label: "Bivanje"),
             BottomNavigationBarItem(
                 icon: Icon(FlutterRemix.user_line), label: "Profil"),
-            // if (AuthRepository.isNetAdmin())
+            if (AuthRepository.isNetAdmin())
               BottomNavigationBarItem(
                   icon: Icon(FlutterRemix.database_line), label: "Internet"),
           ],
