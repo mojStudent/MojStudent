@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
+import 'package:moj_student/data/sports/models/fitnes_card_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';
@@ -55,8 +56,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
               TextRowSliver(data: "$buildNumber", title: "Verzija gradnje"),
               CategoryNameSliver(categoryName: "O razvijalcu"),
               TextRowSliver(data: appName ?? '', title: "Ime aplikacije"),
-              TextRowSliver(
-                  data: "MarelaTeam", title: "Razvijalec aplikacije"),
+              TextRowSliver(data: "MarelaTeam", title: "Razvijalec aplikacije"),
               SliverPadding(
                 padding: EdgeInsets.only(bottom: h * 0.05),
                 sliver: SliverToBoxAdapter(
@@ -73,7 +73,7 @@ class _AboutAppScreenState extends State<AboutAppScreen> {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "2021 MarelaTeam",
+                            "${DateTime.now().year} MarelaTeam",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 fontSize: 18, fontWeight: FontWeight.w300),

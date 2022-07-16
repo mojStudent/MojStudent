@@ -200,6 +200,32 @@ class HomePanelView extends StatelessWidget {
               title: "O aplikaciji",
               icon: FlutterRemix.app_store_fill,
               onClick: () => Navigator.pushNamed(context, "/about")),
+          SliverPadding(padding: EdgeInsets.only(bottom: h * 0.04)),
+          SliverToBoxAdapter(
+            child: Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(
+                  horizontal: w * 0.06, vertical: h * 0.005),
+              padding: EdgeInsets.symmetric(
+                  horizontal: w * 0.03, vertical: h * 0.01),
+              decoration: BoxDecoration(
+                // color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                children: [
+                  Text(
+                    "${DateTime.now().year} MarelaTeam",
+                    style: TextStyle(fontSize: 20),
+                  ),
+                  Text(
+                    "Vse pravice pridržane",
+                    style: TextStyle(fontSize: 12),
+                  ),
+                ],
+              ),
+            ),
+          ),
           SliverPadding(padding: EdgeInsets.only(bottom: h * 0.1))
         ],
       ),
@@ -405,51 +431,51 @@ class HomePanelView extends StatelessWidget {
     );
   }
 
-    GestureDetector _sliderCard(
-      double h,
-      double w, {
-      bool dark = false,
-      required String title,
-      Function? onClick,
-      required Widget body,
-    }) {
-      return GestureDetector(
-        onTap: () => onClick == null ? () {} : onClick(),
-        child: Container(
-          margin: EdgeInsets.only(right: 10),
-          padding: EdgeInsets.symmetric(vertical: h * 0.01, horizontal: w * 0.02),
-          width: w * 0.48,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-            color: dark ? ThemeColors.primary : Colors.white,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title.toUpperCase(),
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.w500,
-                      color: dark ? Colors.white : ThemeColors.jet,
-                    ),
-                  ),
-                  Divider(
-                    thickness: 1.5,
+  GestureDetector _sliderCard(
+    double h,
+    double w, {
+    bool dark = false,
+    required String title,
+    Function? onClick,
+    required Widget body,
+  }) {
+    return GestureDetector(
+      onTap: () => onClick == null ? () {} : onClick(),
+      child: Container(
+        margin: EdgeInsets.only(right: 10),
+        padding: EdgeInsets.symmetric(vertical: h * 0.01, horizontal: w * 0.02),
+        width: w * 0.48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: dark ? ThemeColors.primary : Colors.white,
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title.toUpperCase(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
                     color: dark ? Colors.white : ThemeColors.jet,
                   ),
-                ],
-              ),
-              body
-            ],
-          ),
+                ),
+                Divider(
+                  thickness: 1.5,
+                  color: dark ? Colors.white : ThemeColors.jet,
+                ),
+              ],
+            ),
+            body
+          ],
         ),
-      );
-    }
+      ),
+    );
+  }
 
   void _administratorsBottomSheet(BuildContext context,
       InternetTrafficLoadedState state, double h, double w) {
