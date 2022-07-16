@@ -143,7 +143,7 @@ class RestaurantScreen extends StatelessWidget {
   }
 
   Widget _slider(final h, List<VerticalSLiderCard> cards) {
-    return VerticalSlider(height: h * 0.1 >= 80 ? h * 0.1 : 80, cards: cards);
+    return VerticalSlider(height: h * 0.1 >= 100 ? h * 0.1 : 100, cards: cards);
   }
 
   List<Widget> _todaysMenu(

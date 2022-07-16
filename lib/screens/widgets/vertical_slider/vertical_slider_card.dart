@@ -17,6 +17,7 @@ class VerticalSLiderCard extends StatelessWidget {
       this.width})
       : super(key: key);
 
+  @override
   Widget build(BuildContext context) {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
@@ -29,6 +30,7 @@ class VerticalSLiderCard extends StatelessWidget {
         margin: EdgeInsets.only(right: 10),
         padding: EdgeInsets.symmetric(vertical: h * 0.01, horizontal: w * 0.02),
         width: this.width ?? width,
+        height: 1000,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: dark ? ThemeColors.primary : Colors.white,
