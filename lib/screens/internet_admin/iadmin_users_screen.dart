@@ -321,7 +321,7 @@ class InternetAdminUsersScreen extends StatelessWidget {
           ),
         ),
         Padding(
-          padding: EdgeInsets.only(top: h * 0.08),
+          padding: EdgeInsets.only(top: h * 0.1),
           child: Padding(
             padding: EdgeInsets.only(right: w * 0.15),
             child: Container(
@@ -363,7 +363,37 @@ class InternetAdminUsersScreen extends StatelessWidget {
                   )),
             ),
           ),
-        )
+        ),
+        SafeArea(
+            child: Padding(
+          padding: EdgeInsets.only(top: h * 0.01),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              IconButton(
+                onPressed: () => Navigator.of(context).pop(),
+                icon: Icon(
+                  FlutterRemix.arrow_left_s_line,
+                  color: Colors.white,
+                ),
+              ),
+              Text(
+                "UPORABNIKI",
+                style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600),
+              ),
+              IconButton(
+                onPressed: () => null,
+                icon: Icon(
+                  FlutterRemix.arrow_left_s_line,
+                  color: Colors.transparent,
+                ),
+              ),
+            ],
+          ),
+        ))
       ],
     );
   }
