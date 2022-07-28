@@ -20,7 +20,7 @@ class InternetHelpView extends StatelessWidget {
       } else if (state is InternetHelpMasterLoadedState) {
         return InternetHelpMasterView();
       } else if (state is InternetHelpDetailLoadedState) {
-        WidgetsBinding.instance?.addPostFrameCallback(
+        WidgetsBinding.instance.addPostFrameCallback(
           (_) {
             Navigator.push(
               context,
