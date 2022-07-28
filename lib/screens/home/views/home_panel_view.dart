@@ -176,6 +176,10 @@ class HomePanelView extends StatelessWidget {
               title: "Škodni zapisniki",
               icon: FlutterRemix.flood_fill,
               onClick: () => Navigator.pushNamed(context, "/damages")),
+          _iconButton(h, w,
+              title: "Dežurna knjiga",
+              icon: FlutterRemix.police_car_fill,
+              onClick: () => Navigator.pushNamed(context, "/logbook")),
 
           _sectionTitle(w, h, title: "storitve"),
           _iconButton(h, w,

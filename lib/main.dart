@@ -12,6 +12,8 @@ import 'package:moj_student/data/notifications/notification_repo.dart';
 import 'package:moj_student/data/sports/sports_repo.dart';
 import 'package:moj_student/screens/about_app/about_app_screen.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
+import 'package:moj_student/screens/dorm_room_services/logbook/logbook_add/logbook_add_screen.dart';
+import 'package:moj_student/screens/dorm_room_services/logbook/logbook_list/logbook_screen.dart';
 import 'package:moj_student/screens/failures/failure_add_screen.dart';
 import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
@@ -125,25 +127,32 @@ class MyApp extends StatelessWidget {
               ))),
           routes: {
             '/home': (context) => HomeScreen(),
-            '/internet': (context) => InternetScreen(),
+            // basic services
             '/notifications': (context) => NotificationScreen(),
             '/notification': (context) => NotificationDetailView(),
+            '/internet': (context) => InternetScreen(),
             '/failures': (context) => FailuresScreen(),
             '/failures/new': (context) => FailureAddScreen(),
             '/damages': (context) => DamagesScreen(),
+            '/logbook': (context) => LogbookListScreen(),
+            '/logbook/new': (context) => LogbookAddScreen(),
+            // profile & about app
             '/profile': (context) => ProfileDetailsScreen(),
             '/profile-settings': (context) => ProfileScreen(),
             '/login': (context) => LoginScreen(),
             '/about': (context) => AboutAppScreen(),
+            // sport
             '/sports': (context) => SportsScreen(),
             '/sports/subscriptions': (context) => SportsSubscriptionsScreen(),
             '/sports/subscription-details': (context) =>
                 SportsSubscriptionDetailScreen(),
+            // admin
             '/internet/admin/users': (context) => InternetAdminUsersScreen(),
             '/internet/admin/users/details': (context) =>
                 InternetAdminUserDetailScreen(),
             '/internet/admin/errors': (context) => InternetAdminErrorScreen(),
             '/internet/admin/nas': (context) => InternetAdminNasScreen(),
+            // restaurant
             '/restaurant': (context) => RestaurantScreen(),
           },
           home: InitialLoading(),
