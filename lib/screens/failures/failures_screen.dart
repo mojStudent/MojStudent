@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/failure_records/failure_record_model.dart';
+import 'package:moj_student/data/failure_records/failures_repo.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/screens/widgets/no_data.dart';
@@ -10,10 +11,8 @@ import 'package:moj_student/screens/widgets/not_supported.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
 
-// ignore: must_be_immutable
 class FailuresScreen extends StatelessWidget {
-  int showPageResult = 1;
-  FailuresScreen({Key? key}) : super(key: key);
+  const FailuresScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -31,34 +30,47 @@ class FailuresScreen extends StatelessWidget {
           children: [
             AppHeader(title: "Okvare"),
             Expanded(
-              child: BlocBuilder<FailureRecordBloc, FailureRecordState>(
-                builder: (ctx, state) {
-                  if (state is FailureRecordInitial) {
-                    context
-                        .read<FailureRecordBloc>()
-                        .add(FailureRecordLoadPageEvent(page: showPageResult));
-                    return Container();
-                  } else if (state is FailureRecordLoadingState) {
-                    return LoadingScreen();
-                  } else if (state is FailureEmptyDataState) {
-                    return NoData();
-                  } else if (state is FailureRecordLoadedState) {
-                    return RefreshIndicator(
-                        onRefresh: () async => context
-                            .read<FailureRecordBloc>()
-                            .add(FailureRecordLoadPageEvent(
-                                page: showPageResult)),
-                        child: _buildFailureRecords(context, state.model));
-                  } else if (state is FailureRecordErrorState) {
-                    return NotSupported();
-                  } else {
-                    return Center(child: Text("NAPAKA"));
-                  }
-                },
-              ),
-            )
+                child: BlocProvider(
+              lazy: false,
+              create: (context) => FailureRecordBloc(repo: FailureRecordRepo()),
+              child: _FailuresScreen(),
+            ))
           ],
         ));
+  }
+}
+
+// ignore: must_be_immutable
+class _FailuresScreen extends StatelessWidget {
+  int showPageResult = 1;
+  _FailuresScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<FailureRecordBloc, FailureRecordState>(
+      builder: (ctx, state) {
+        if (state is FailureRecordInitial) {
+          context
+              .read<FailureRecordBloc>()
+              .add(FailureRecordLoadPageEvent(page: showPageResult));
+          return Container();
+        } else if (state is FailureRecordLoadingState) {
+          return LoadingScreen();
+        } else if (state is FailureEmptyDataState) {
+          return NoData();
+        } else if (state is FailureRecordLoadedState) {
+          return RefreshIndicator(
+              onRefresh: () async => context
+                  .read<FailureRecordBloc>()
+                  .add(FailureRecordLoadPageEvent(page: showPageResult)),
+              child: _buildFailureRecords(context, state.model));
+        } else if (state is FailureRecordErrorState) {
+          return NotSupported();
+        } else {
+          return Center(child: Text("NAPAKA"));
+        }
+      },
+    );
   }
 
   Widget _buildFailureRecords(
@@ -84,63 +96,10 @@ class FailuresScreen extends StatelessWidget {
                         SizedBox(
                           height: 10,
                         ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Lokacija",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                            Text(
-                              record.location,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Podlokacija (soba)",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                            Text(
-                              "${record.subLocation} ${record.room}",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Status",
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w300),
-                            ),
-                            Text(
-                              record.status,
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700),
-                            )
-                          ],
-                        ),
+                        _rowSliverTextRow("Lokacija", record.location),
+                        _rowSliverTextRow("Podlokacija (soba)",
+                            "${record.subLocation} ${record.room}"),
+                        _rowSliverTextRow("Status", record.status),
                         SizedBox(
                           height: 5,
                         ),
@@ -211,6 +170,29 @@ class FailuresScreen extends StatelessWidget {
             )
           ],
         )
+      ],
+    );
+  }
+
+  Row _rowSliverTextRow(String title, String data) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: TextStyle(
+              color: Colors.black, fontSize: 18, fontWeight: FontWeight.w300),
+        ),
+        Flexible(
+            child: Text(
+          data,
+          textAlign: TextAlign.end,
+          style: TextStyle(
+            color: Colors.black,
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ))
       ],
     );
   }

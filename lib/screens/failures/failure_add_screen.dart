@@ -37,7 +37,12 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
             AppHeader(
               title: "Prijava okvare",
             ),
-            options == null ? LoadingScreen(withScaffold: false, expanded: true,) : Expanded(child: _buildView())
+            options == null
+                ? LoadingScreen(
+                    withScaffold: false,
+                    expanded: true,
+                  )
+                : Expanded(child: _buildView())
           ],
         ),
         floatingActionButton: FloatingActionButton.extended(
@@ -46,11 +51,17 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
           onPressed: () => _onSubmit(context),
           label: Row(
             children: [
-              Text("Oddaj", style: TextStyle(color: Colors.white),),
+              Text(
+                "Oddaj",
+                style: TextStyle(color: Colors.white),
+              ),
               SizedBox(
                 width: 10,
               ),
-              Icon(FlutterRemix.send_plane_2_line, color: Colors.white,),
+              Icon(
+                FlutterRemix.send_plane_2_line,
+                color: Colors.white,
+              ),
             ],
           ),
         ));
@@ -149,6 +160,7 @@ class _FailureAddScreenState extends State<FailureAddScreen> {
         (value) {
           if (value) {
             Navigator.of(context).pop();
+            Navigator.of(context).pushReplacementNamed("/failures");
             final snackBar =
                 SnackBar(content: Text("Okvara je bila prijavljena"));
             ScaffoldMessenger.of(context).showSnackBar(snackBar);
