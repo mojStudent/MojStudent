@@ -1,3 +1,6 @@
+import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_sublocation_model.dart';
+import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_vandal_type.dart';
+
 class LogbookAddOptionsModel {
   late final List<LogbookSubLocation> subLocation;
   late final List<VandalType> vandalType;
@@ -26,44 +29,4 @@ class LogbookAddOptionsModel {
         'LogbookSubLocation': subLocation?.map((e) => e.toJson()).toList(),
         'vandalType': vandalType?.map((e) => e.toJson()).toList()
       };
-}
-
-class LogbookSubLocation {
-  late final int value;
-  late final String label;
-  final bool? selected;
-
-  LogbookSubLocation({
-    required this.value,
-    required this.label,
-    this.selected,
-  });
-
-  LogbookSubLocation.fromJson(Map<String, dynamic> json)
-      : value = json['value'] as int,
-        label = json['label'] as String,
-        selected = json['selected'] as bool?;
-
-  Map<String, dynamic> toJson() =>
-      {'value': value, 'label': label, 'selected': selected};
-}
-
-class VandalType {
-  late final int value;
-  late final String label;
-  final bool? selected;
-
-  VandalType({
-    required this.value,
-    required this.label,
-    this.selected,
-  });
-
-  VandalType.fromJson(Map<String, dynamic> json)
-      : value = json['value'] as int,
-        label = json['label'] as String,
-        selected = json['selected'] as bool?;
-
-  Map<String, dynamic> toJson() =>
-      {'value': value, 'label': label, 'selected': selected};
 }

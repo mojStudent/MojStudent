@@ -1,17 +1,27 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/logbook_repo.dart';
-import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_add_options_model.dart';
+import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_model.dart';
+import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_sublocation_model.dart';
+import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_vandal_type.dart';
 import 'package:moj_student/screens/dorm_room_services/logbook/logbook_add/bloc/logbook_add_bloc.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
+import 'package:moj_student/screens/widgets/input/input_validators/m_input_validator.dart';
+import 'package:moj_student/screens/widgets/input/m_input.dart';
+import 'package:moj_student/screens/widgets/input/m_input_group.dart';
+import 'package:moj_student/screens/widgets/input/m_input_params.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class LogbookAddScreen extends StatelessWidget {
-  const LogbookAddScreen({Key? key}) : super(key: key);
+  bool inputFormValid = false;
+
+  LogbookAddScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +47,23 @@ class LogbookAddScreen extends StatelessWidget {
                     );
                   } else if (state is LogbookAddLoadedState) {
                     return _buildForm(context);
-                  } else if (state is LogbookAddErrorState) {
-                    return Center(child: Text("Napaka"));
+                  } else if (state is LogbookAddSumittedState) {
+                    Future.delayed(const Duration(milliseconds: 500), () {
+                      Navigator.pop(context);
+                      _showScaffoldMessage(
+                        context,
+                        "Vpis je bil uspešno shranjen",
+                      );
+                    });
+                    return Container();
+                  } else if (state is LogbookAddErrorState ||
+                      state is LogbookAddOnSubmitErrorState) {
+                    return Center(
+                      child: Text(
+                        (state as LogbookAddErrorState).message,
+                        textAlign: TextAlign.center,
+                      ),
+                    );
                   } else {
                     return Center(child: Text("Napaka, še sam ne vem kakšna"));
                   }
@@ -53,8 +78,18 @@ class LogbookAddScreen extends StatelessWidget {
     return BlocBuilder<LogbookAddBloc, LogbookAddState>(
       builder: (context, state) {
         if (state is LogbookAddLoadedState) {
+          var model = LogbookModel(
+            subLocation: state.selectedSubLocation!,
+            vandalType: state.selectedVandalType!,
+            description: state.description,
+            room: state.room,
+            vandal: state.vandalDescription,
+          );
+
           return FloatingActionButton.extended(
-            onPressed: () => null,
+            onPressed: () => context
+                .read<LogbookAddBloc>()
+                .add(LogbookAddOnSubmissionEvent(model)),
             backgroundColor: ThemeColors.jet,
             label: Row(
               children: [
@@ -81,61 +116,66 @@ class LogbookAddScreen extends StatelessWidget {
 
   Widget _buildForm(BuildContext context) {
     var state = context.read<LogbookAddBloc>().state as LogbookAddLoadedState;
+
+    var inputGroup = MInputGroup(
+      {
+        "soba": MInput(
+          params: MInputParams.required(
+              title: "Soba",
+              icon: FlutterRemix.building_line,
+              placeholder: "Soba",
+              onValueChanged: (value) {
+                state.room = value;
+                context
+                    .read<LogbookAddBloc>()
+                    .add(LogbookAddFormChanged(state));
+              }),
+        ),
+        "povzrocitelj": MInput(
+          params: MInputParams.required(
+            title: "Opis povzročitelja",
+            icon: FlutterRemix.passport_line,
+            placeholder: "Ime in priimek ali opis",
+            onValueChanged: (value) {
+              state.vandalDescription = value;
+              context.read<LogbookAddBloc>().add(LogbookAddFormChanged(state));
+            },
+          ),
+        ),
+        "opis": MInput(
+          params: MInputParams.multiline(
+            title: "Opis dogodka",
+            icon: FlutterRemix.pencil_line,
+            placeholder: "Opis dogodka",
+            validators: [
+              MinLengthValidator.withCustomMessage(
+                minLength: 4,
+                errorMessage:
+                    "Opis dogodkga mora biti izpolnjen in daljši od petih znakov",
+              )
+            ],
+            onValueChanged: (value) {
+              state.description = value;
+              context.read<LogbookAddBloc>().add(LogbookAddFormChanged(state));
+            },
+          ),
+        ),
+      },
+      validListener: (value) => inputFormValid = value,
+    );
+
     return CustomScrollView(
       slivers: [
         CategoryNameSliver(categoryName: "Lokacija"),
         _sublocationInput(state, context),
-        RowSliver(
-          title: "Soba",
-          icon: FlutterRemix.building_line,
-          child: TextFormField(
-              decoration: InputDecoration(hintText: "Soba"),
-              validator: (value) => _notEmptyValidator(value),
-              onChanged: (value) {
-                state.room = value;
-                context
-                    .read<LogbookAddBloc>()
-                    .add(LogbookAddFormChanged(state));
-              }),
-        ),
+        inputGroup.input('soba'),
         CategoryNameSliver(categoryName: "Povzročitelj"),
         _vandalInput(state, context),
-        RowSliver(
-          title: "Opis povzročitelja",
-          icon: FlutterRemix.passport_line,
-          child: TextFormField(
-              decoration: InputDecoration(hintText: "Ime in priimek ali opis"),
-              validator: (value) => _notEmptyValidator(value),
-              onChanged: (value) {
-                state.room = value;
-                context
-                    .read<LogbookAddBloc>()
-                    .add(LogbookAddFormChanged(state));
-              }),
-        ),
+        inputGroup.input('povzrocitelj'),
         CategoryNameSliver(categoryName: "Opis dogodka"),
-        RowSliver(
-          title: "Opis dogodka",
-          icon: FlutterRemix.pencil_line,
-          child: TextFormField(
-              maxLines: null,
-              keyboardType: TextInputType.multiline,
-              decoration: InputDecoration(hintText: "Opis dogodka"),
-              validator: (value) => _notEmptyValidator(
-                    value,
-                    minLength: 4,
-                    message:
-                        "Opis dogodkga mora biti izpolnjen in daljši od petih znakov",
-                  ),
-              onChanged: (value) {
-                state.room = value;
-                context
-                    .read<LogbookAddBloc>()
-                    .add(LogbookAddFormChanged(state));
-              }),
-        ),
+        inputGroup.input('opis'),
         SliverToBoxAdapter(
-          child: SizedBox(height: MediaQuery.of(context).size.height * 0.05),
+          child: SizedBox(height: MediaQuery.of(context).size.height * 0.1),
         )
       ],
     );
@@ -152,7 +192,7 @@ class LogbookAddScreen extends StatelessWidget {
         value: state.selectedSubLocation,
         style: TextStyle(color: Colors.white),
         iconEnabledColor: Colors.black,
-        items: state.subLocationOptions!
+        items: state.subLocationOptions
             .map<DropdownMenuItem<LogbookSubLocation>>(
                 (LogbookSubLocation value) {
           return DropdownMenuItem<LogbookSubLocation>(
@@ -186,7 +226,7 @@ class LogbookAddScreen extends StatelessWidget {
         value: state.selectedVandalType,
         style: TextStyle(color: Colors.white),
         iconEnabledColor: Colors.black,
-        items: state.vandalTypeOptions!
+        items: state.vandalTypeOptions
             .map<DropdownMenuItem<VandalType>>((VandalType value) {
           return DropdownMenuItem<VandalType>(
             value: value,
@@ -209,10 +249,10 @@ class LogbookAddScreen extends StatelessWidget {
     );
   }
 
-  String? _notEmptyValidator(
-    String? value, {
-    int minLength = 0,
-    String message = "Polje je obvezno",
-  }) =>
-      value != null && value.length > minLength ? null : message;
+  void _showScaffoldMessage(BuildContext context, String message) {
+    final snackBar = SnackBar(
+      content: Text(message),
+    );
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
 }

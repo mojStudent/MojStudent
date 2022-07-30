@@ -12,7 +12,7 @@ class LogbookAddFormChanged extends LogbookAddEvent {
 }
 
 class LogbookAddOnSubmissionEvent extends LogbookAddEvent {
-  final LogbookAddLoadedState state;
+  final LogbookModel model;
 
-  LogbookAddOnSubmissionEvent(this.state);
+  LogbookAddOnSubmissionEvent(this.model);
 }

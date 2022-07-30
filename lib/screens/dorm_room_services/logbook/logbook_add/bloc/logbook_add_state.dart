@@ -27,25 +27,6 @@ class LogbookAddLoadedState extends LogbookAddState {
     this.vandalDescription,
   });
 
-  // LogbookAddLoadedState copyWith({
-  //   List<LogbookSubLocation>? subLocationOptions,
-  //   List<VandalType>? vandalTypeOptions,
-  //   LogbookSubLocation? selectedSubLocation,
-  //   String? room,
-  //   VandalType? selectedVandalType,
-  //   String? vandalDescription,
-  //   String? description,
-  // }) =>
-  //     LogbookAddLoadedState(
-  //       subLocationOptions ?? this.subLocationOptions,
-  //       vandalTypeOptions ?? this.vandalTypeOptions,
-  //       selectedSubLocation: selectedSubLocation ?? this.selectedSubLocation,
-  //       room: room ?? this.room,
-  //       selectedVandalType: selectedVandalType ?? this.selectedVandalType,
-  //       vandalDescription: vandalDescription ?? this.vandalDescription,
-  //       description: description ?? this.description,
-  //     );
-
   LogbookAddLoadedState copyWith(LogbookAddLoadedState state) =>
       LogbookAddLoadedState(
         state.subLocationOptions,
@@ -58,4 +39,14 @@ class LogbookAddLoadedState extends LogbookAddState {
       );
 }
 
-class LogbookAddErrorState extends LogbookAddState {}
+class LogbookAddErrorState extends LogbookAddState {
+  final String message;
+
+  LogbookAddErrorState(this.message);
+}
+
+class LogbookAddOnSubmitErrorState extends LogbookAddErrorState {
+  LogbookAddOnSubmitErrorState(String message) : super(message);
+}
+
+class LogbookAddSumittedState extends LogbookAddState {}
