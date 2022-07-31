@@ -5,12 +5,23 @@ import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.d
 import 'package:moj_student/widgets/m-form/bloc/m_input_bloc.dart';
 import 'package:moj_student/widgets/m-form/m_input_params.dart';
 
-abstract class MInput<T extends MInputParams> extends StatelessWidget {
-  final T params;
+class MInput<T, P extends MInputParams> extends StatelessWidget {
+  final P params;
   Function(bool)? validListener;
 
   MInput({Key? key, this.validListener, required this.params})
       : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+        create: (context) => MInputBloc<String>(), child: blocChild());
+  }
+
+  MInputWithBloc<T, P> blocChild() => MInputWithBloc<T, P>(
+        params: params,
+        validListener: validListener,
+      );
 }
 
 class MInputWithBloc<T, P extends MInputParams> extends StatelessWidget {

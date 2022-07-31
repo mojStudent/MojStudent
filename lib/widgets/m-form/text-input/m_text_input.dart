@@ -7,7 +7,7 @@ import 'package:moj_student/widgets/m-form/bloc/m_input_bloc.dart';
 import 'package:moj_student/widgets/m-form/m_input_abstract.dart';
 import 'package:moj_student/widgets/m-form/text-input/m_text_input_params.dart';
 
-class MTextInput extends MInput<MTextInputParams> {
+class MTextInput extends MInput<String, MTextInputParams> {
   bool valid = false;
 
   MTextInput({
@@ -16,14 +16,10 @@ class MTextInput extends MInput<MTextInputParams> {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => MInputBloc<String>(),
-        child: _MInputWithBloc(
-          params: params,
-          validListener: super.validListener,
-        ));
-  }
+  MInputWithBloc<String, MTextInputParams> blocChild() => _MInputWithBloc(
+        params: super.params,
+        validListener: super.validListener,
+      );
 }
 
 class _MInputWithBloc extends MInputWithBloc<String, MTextInputParams> {
