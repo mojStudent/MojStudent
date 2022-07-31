@@ -10,6 +10,6 @@ class LoadNotification extends NotificationEvent {
 
 class SetNotificationAsRead extends NotificationEvent {
   int notificationId;
-  
+
   SetNotificationAsRead({required this.notificationId});
 }

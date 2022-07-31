@@ -6,12 +6,14 @@ class Accordion extends StatefulWidget {
 
   const Accordion({Key? key, required this.title, required this.content})
       : super(key: key);
+
   @override
   _AccordionState createState() => _AccordionState();
 }
 
 class _AccordionState extends State<Accordion> {
   bool _showContent = false;
+
   @override
   Widget build(BuildContext context) {
     return Card(

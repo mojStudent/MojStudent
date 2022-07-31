@@ -3,6 +3,7 @@ class InternetHelpDetailModel {
     required this.image,
     required this.content,
   });
+
   late final String? image;
   late final String? content;
 

@@ -66,6 +66,7 @@ class AuthRepository {
   }
 
   UserModel? get loggedInUser => _loggedInUser;
+
   String? get token => _token;
 }
 

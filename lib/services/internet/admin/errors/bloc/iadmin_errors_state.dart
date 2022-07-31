@@ -27,7 +27,8 @@ class InternetAdminErrorsLoadedState extends InternetAdminErrorsState {
     int? page,
     String? searchUsername,
     String? searchDescription,
-  }) =>   InternetAdminErrorsLoadedState(
+  }) =>
+      InternetAdminErrorsLoadedState(
         errors: errors ?? this.errors,
         page: page ?? this.page,
         perPage: perPage ?? this.perPage,

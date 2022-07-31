@@ -26,7 +26,7 @@ class LogbookAddOptionsModel {
             [];
 
   Map<String, dynamic> toJson() => {
-        'LogbookSubLocation': subLocation?.map((e) => e.toJson()).toList(),
-        'vandalType': vandalType?.map((e) => e.toJson()).toList()
+        'LogbookSubLocation': subLocation.map((e) => e.toJson()).toList(),
+        'vandalType': vandalType.map((e) => e.toJson()).toList()
       };
 }

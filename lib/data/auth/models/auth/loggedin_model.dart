@@ -5,6 +5,7 @@ class LoggedInModel {
     required this.token,
     required this.user,
   });
+
   late final String token;
   late final UserModel user;
 

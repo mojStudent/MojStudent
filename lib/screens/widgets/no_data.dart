@@ -15,21 +15,21 @@ class NoData extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              icon,
-              size: 68,
-              color: ThemeColors.jet,
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Text(
-              message,
-              style: TextStyle(fontSize: 20, color: ThemeColors.jet),
-            ),
-          ],
-        ));
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Icon(
+          icon,
+          size: 68,
+          color: ThemeColors.jet,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          message,
+          style: TextStyle(fontSize: 20, color: ThemeColors.jet),
+        ),
+      ],
+    ));
   }
 }

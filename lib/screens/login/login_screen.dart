@@ -145,7 +145,6 @@ class LoginScreen extends StatelessWidget {
             context.read<HomeBloc>().add(InitialEvent());
             context.read<InternetTrafficBloc>().add(InternetTrafficLoad());
 
-
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(

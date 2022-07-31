@@ -39,19 +39,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
           title: Text("Nastavitve profila"),
           centerTitle: true,
           elevation: 0,
-          bottom: TabBar(
-            indicatorColor: ThemeColors.background,
-            tabs: [
+          bottom: TabBar(indicatorColor: ThemeColors.background, tabs: [
             Tab(
-              icon: Icon(FlutterRemix.user_3_line, color: Colors.white,),
+              icon: Icon(
+                FlutterRemix.user_3_line,
+                color: Colors.white,
+              ),
               // text: "Profil",
             ),
             Tab(
-              icon: Icon(FlutterRemix.lock_2_line, color: Colors.white,),
+              icon: Icon(
+                FlutterRemix.lock_2_line,
+                color: Colors.white,
+              ),
               // text: "Geslo",
             ),
             Tab(
-              icon: Icon(FlutterRemix.mail_line, color: Colors.white,),
+              icon: Icon(
+                FlutterRemix.mail_line,
+                color: Colors.white,
+              ),
               // text: "Email",
             ),
           ]),

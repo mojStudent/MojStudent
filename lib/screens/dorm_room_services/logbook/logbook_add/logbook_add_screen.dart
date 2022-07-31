@@ -12,11 +12,11 @@ import 'package:moj_student/screens/dorm_room_services/logbook/logbook_add/bloc/
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
-import 'package:moj_student/screens/widgets/input/input_validators/m_input_validator.dart';
-import 'package:moj_student/screens/widgets/input/m_input.dart';
-import 'package:moj_student/screens/widgets/input/m_input_group.dart';
-import 'package:moj_student/screens/widgets/input/m_input_params.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
+import 'package:moj_student/widgets/m-form/input_validators/m_input_validator.dart';
+import 'package:moj_student/widgets/m-form/m_input_group.dart';
+import 'package:moj_student/widgets/m-form/text-input/m_text_input.dart';
+import 'package:moj_student/widgets/m-form/text-input/m_text_input_params.dart';
 
 class LogbookAddScreen extends StatelessWidget {
   bool inputFormValid = false;
@@ -119,8 +119,8 @@ class LogbookAddScreen extends StatelessWidget {
 
     var inputGroup = MInputGroup(
       {
-        "soba": MInput(
-          params: MInputParams.required(
+        "soba": MTextInput(
+          params: MTextInputParams.required(
               title: "Soba",
               icon: FlutterRemix.building_line,
               placeholder: "Soba",
@@ -131,8 +131,8 @@ class LogbookAddScreen extends StatelessWidget {
                     .add(LogbookAddFormChanged(state));
               }),
         ),
-        "povzrocitelj": MInput(
-          params: MInputParams.required(
+        "povzrocitelj": MTextInput(
+          params: MTextInputParams.required(
             title: "Opis povzročitelja",
             icon: FlutterRemix.passport_line,
             placeholder: "Ime in priimek ali opis",
@@ -142,8 +142,8 @@ class LogbookAddScreen extends StatelessWidget {
             },
           ),
         ),
-        "opis": MInput(
-          params: MInputParams.multiline(
+        "opis": MTextInput(
+          params: MTextInputParams.multiline(
             title: "Opis dogodka",
             icon: FlutterRemix.pencil_line,
             placeholder: "Opis dogodka",

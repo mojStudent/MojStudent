@@ -18,4 +18,3 @@ class InternetAdminNasErrorState extends InternetAdminNasState {
 
   InternetAdminNasErrorState(this.e);
 }
-

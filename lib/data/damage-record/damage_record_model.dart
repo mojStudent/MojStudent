@@ -9,6 +9,7 @@ class SkodniZapisnikPaginationModel {
     required this.pages,
     required this.results,
   });
+
   late final int count;
   late final int hits;
   late final int pp;
@@ -53,6 +54,7 @@ class DamageRecordModel {
     required this.partnerTitle,
     required this.url,
   });
+
   late final String mime;
   late final String filename;
   late final String date;

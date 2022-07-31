@@ -5,7 +5,8 @@ class ChangeProfileModel {
     this.phone,
     this.subscriptions,
   });
-    String? phone;
+
+  String? phone;
   List<Subscriptions>? subscriptions;
 
   Map<String, dynamic> toJson() {

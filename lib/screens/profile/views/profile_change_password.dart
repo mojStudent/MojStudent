@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/data/auth/models/profile/change_password_model.dart';
 import 'package:moj_student/data/auth/profile_repository.dart';
-import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/buttons/row_button.dart';
+import 'package:moj_student/screens/widgets/data_containers/containers/category_name_container.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/services/validators/minimal_len_validator.dart';
@@ -29,7 +29,6 @@ class _ProfileChangePasswordViewState extends State<ProfileChangePasswordView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           CategoryNameContainer(categoryName: "Sprememba gesla"),
-          
           RowContainer(
             child: Column(
               children: [

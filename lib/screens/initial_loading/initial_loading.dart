@@ -35,11 +35,11 @@ class _InitialLoadingState extends State<InitialLoading> {
     try {
       var info = await InAppUpdate.checkForUpdate();
       if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-      await InAppUpdate.performImmediateUpdate().catchError(
-        // ignore: invalid_return_type_for_catch_error
-        (e) => null,
-      );
-    }
+        await InAppUpdate.performImmediateUpdate().catchError(
+          // ignore: invalid_return_type_for_catch_error
+          (e) => null,
+        );
+      }
     } catch (_) {}
   }
 

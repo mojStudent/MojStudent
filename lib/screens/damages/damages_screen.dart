@@ -17,6 +17,7 @@ import 'package:moj_student/services/files/file_downloader.dart';
 
 class DamagesScreen extends StatelessWidget {
   int showPageResult = 1;
+
   DamagesScreen({Key? key}) : super(key: key);
 
   @override
@@ -152,6 +153,4 @@ class DamagesScreen extends StatelessWidget {
       ],
     );
   }
-
-
 }

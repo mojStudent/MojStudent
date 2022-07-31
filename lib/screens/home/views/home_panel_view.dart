@@ -5,14 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
 import 'package:moj_student/data/avatars/avatar_repo.dart';
+import "package:moj_student/helpers/string_extension.dart";
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/buttons/menu_iconbutton_sliver.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_event.dart';
 import 'package:moj_student/services/blocs/home/home_state.dart';
 import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
-import "package:moj_student/helpers/string_extension.dart";
-import 'package:url_launcher/url_launcher.dart';
 
 class HomePanelView extends StatelessWidget {
   const HomePanelView({Key? key}) : super(key: key);
@@ -172,6 +171,10 @@ class HomePanelView extends StatelessWidget {
               title: "Okvare",
               icon: FlutterRemix.error_warning_fill,
               onClick: () => Navigator.pushNamed(context, "/failures")),
+          _iconButton(h, w,
+              title: "Prenočevalci",
+              icon: FlutterRemix.hotel_bed_fill,
+              onClick: () => Navigator.pushNamed(context, "/overnight")),
           _iconButton(h, w,
               title: "Škodni zapisniki",
               icon: FlutterRemix.flood_fill,

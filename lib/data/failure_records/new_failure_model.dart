@@ -5,10 +5,11 @@ class NewFailureModel {
     required this.subLocation,
     required this.description,
   });
+
   late final SubLocationOption subLocation;
   late final String description;
-  
-  NewFailureModel.fromJson(Map<String, dynamic> json){
+
+  NewFailureModel.fromJson(Map<String, dynamic> json) {
     subLocation = SubLocationOption.fromJson(json['subLocation']);
     description = json['description'];
   }

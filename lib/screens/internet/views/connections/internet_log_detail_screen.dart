@@ -7,6 +7,7 @@ import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class InternetLogDetailScreen extends StatelessWidget {
   final InternetConnectionLogModel log;
+
   const InternetLogDetailScreen({Key? key, required this.log})
       : super(key: key);
 

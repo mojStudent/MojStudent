@@ -3,10 +3,11 @@ class InternetAdministratorModel {
     required this.name,
     required this.room,
   });
+
   late final String name;
   late final String room;
-  
-  InternetAdministratorModel.fromJson(Map<String, dynamic> json){
+
+  InternetAdministratorModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     room = json['room'];
   }

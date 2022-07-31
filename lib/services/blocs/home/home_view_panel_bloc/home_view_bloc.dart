@@ -6,7 +6,7 @@ part 'home_view_state.dart';
 
 class HomeViewBloc extends Bloc<HomeViewEvent, HomeViewState> {
   HomeViewBloc() : super(HomeViewHomePanelState()) {
-    on<HomeViewChangeViewEvent> (_onViewPanelChange);
+    on<HomeViewChangeViewEvent>(_onViewPanelChange);
   }
 
   void _onViewPanelChange(

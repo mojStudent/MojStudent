@@ -7,8 +7,8 @@ import 'package:moj_student/data/internet/models/internet_traffic_model.dart';
 part 'internet_traffic_event.dart';
 part 'internet_traffic_state.dart';
 
-class InternetTrafficBloc extends Bloc<InternetTrafficEvent, InternetTrafficState> {
-
+class InternetTrafficBloc
+    extends Bloc<InternetTrafficEvent, InternetTrafficState> {
   final InternetRepository repo;
 
   InternetTrafficBloc(this.repo) : super(InternetTrafficInitial()) {
@@ -22,7 +22,7 @@ class InternetTrafficBloc extends Bloc<InternetTrafficEvent, InternetTrafficStat
       var model = await repo.getInternetTraffic();
       var administrators = await repo.getInterentAdministrators();
       emit(InternetTrafficLoadedState(model, administrators));
-    } catch(e) {
+    } catch (e) {
       emit(InternetTrafficErrorState(e));
     }
   }

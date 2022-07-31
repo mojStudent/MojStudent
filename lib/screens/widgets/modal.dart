@@ -158,7 +158,10 @@ class BottomModal {
   }
 
   static void showCustomModal(BuildContext context,
-      {required Widget body, bool isDismissible = true, Color? color, double? height}) {
+      {required Widget body,
+      bool isDismissible = true,
+      Color? color,
+      double? height}) {
     showModalBottomSheet<void>(
       context: context,
       isDismissible: isDismissible,

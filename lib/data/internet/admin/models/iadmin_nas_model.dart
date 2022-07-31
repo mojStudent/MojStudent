@@ -6,13 +6,14 @@ class InternetAdminNasModel {
     required this.location,
     required this.active,
   });
+
   late final int id;
   late final String name;
   late final String shortName;
   late final String location;
   late final bool active;
-  
-  InternetAdminNasModel.fromJson(Map<String, dynamic> json){
+
+  InternetAdminNasModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     shortName = json['shortName'];

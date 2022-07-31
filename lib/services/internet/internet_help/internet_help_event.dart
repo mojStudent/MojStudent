@@ -7,5 +7,6 @@ class InternetHelpLoadMasterEvent extends InternetHelpEvent {}
 
 class InternetHelpLoadDetailEvent extends InternetHelpEvent {
   final String url;
+
   InternetHelpLoadDetailEvent(this.url);
 }

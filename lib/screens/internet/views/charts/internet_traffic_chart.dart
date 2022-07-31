@@ -1,4 +1,3 @@
-
 import 'package:charts_flutter/flutter.dart' as charts;
 // EXCLUDE_FROM_GALLERY_DOCS_END
 import 'package:flutter/material.dart';

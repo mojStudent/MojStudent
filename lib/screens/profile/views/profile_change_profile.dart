@@ -25,8 +25,6 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
 
   @override
   Widget build(BuildContext context) {
-    
-
     final authRepo = AuthRepository();
     _userModel = authRepo.loggedInUser;
     if (_userModel != null) {
@@ -77,7 +75,11 @@ class _ProfileChangeProfileViewState extends State<ProfileChangeProfileView> {
               ],
             ),
           ),
-          RowButton(title: "Shrani spremembe", onPressed: () => _onSubmit(), icon: FlutterRemix.save_line,)
+          RowButton(
+            title: "Shrani spremembe",
+            onPressed: () => _onSubmit(),
+            icon: FlutterRemix.save_line,
+          )
         ],
       ),
     );

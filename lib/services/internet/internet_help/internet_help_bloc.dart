@@ -9,7 +9,6 @@ part 'internet_help_event.dart';
 part 'internet_help_state.dart';
 
 class InternetHelpBloc extends Bloc<InternetHelpEvent, InternetHelpState> {
-
   final InternetHelpRepo repo;
 
   InternetHelpBloc(this.repo) : super(InternetHelpInitial()) {
@@ -24,7 +23,7 @@ class InternetHelpBloc extends Bloc<InternetHelpEvent, InternetHelpState> {
       var model = await repo.loadMasterData();
       var administrators = await repo.getInterentAdministrators();
       emit(InternetHelpMasterLoadedState(model, administrators));
-    } catch(e) {
+    } catch (e) {
       emit(InternetHelpErrorState(e));
     }
   }
@@ -35,7 +34,7 @@ class InternetHelpBloc extends Bloc<InternetHelpEvent, InternetHelpState> {
     try {
       var model = await repo.loadSteps(event.url);
       emit(InternetHelpDetailLoadedState(model));
-    } catch(e) {
+    } catch (e) {
       emit(InternetHelpErrorState(e));
     }
   }

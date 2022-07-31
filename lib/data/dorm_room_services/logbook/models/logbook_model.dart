@@ -26,8 +26,8 @@ class LogbookModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['subLocation'] = subLocation!.toJson();
-    data['vandalType'] = vandalType!.toJson();
+    data['subLocation'] = subLocation.toJson();
+    data['vandalType'] = vandalType.toJson();
     data['room'] = room;
     data['vandal'] = vandal;
     data['description'] = description;

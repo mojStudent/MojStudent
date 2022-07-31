@@ -8,14 +8,14 @@ class BoxWidget extends StatelessWidget {
   final Icon? icon;
   final bool elevated;
 
-  const BoxWidget({
-    Key? key,
-    required this.cardBody,
-    this.title,
-    this.backgroundColor = Colors.white,
-    this.icon,
-    this.elevated = false
-  }) : super(key: key);
+  const BoxWidget(
+      {Key? key,
+      required this.cardBody,
+      this.title,
+      this.backgroundColor = Colors.white,
+      this.icon,
+      this.elevated = false})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +30,14 @@ class BoxWidget extends StatelessWidget {
               color: backgroundColor,
               borderRadius: BorderRadius.all(Radius.circular(10)),
               boxShadow: [
-                elevated ? BoxShadow(
-                  color: ThemeColors.jet[100]!,
-                  spreadRadius: 1,
-                  blurRadius: 7,
-                  offset: Offset(8, 6), // changes position of shadow
-                ) : BoxShadow(),
+                elevated
+                    ? BoxShadow(
+                        color: ThemeColors.jet[100]!,
+                        spreadRadius: 1,
+                        blurRadius: 7,
+                        offset: Offset(8, 6), // changes position of shadow
+                      )
+                    : BoxShadow(),
               ]),
           padding: EdgeInsets.fromLTRB(
             MediaQuery.of(context).size.width * 0.025,

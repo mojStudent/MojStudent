@@ -6,8 +6,7 @@ abstract class NotificationState {
 
 class InitialNotificationState extends NotificationState {}
 
-class NotificationsLoading extends NotificationState {
-}
+class NotificationsLoading extends NotificationState {}
 
 class NotificationsLoaded extends NotificationState {
   List<NotificationModel> notifications;
@@ -16,7 +15,6 @@ class NotificationsLoaded extends NotificationState {
 }
 
 class NotificationDetailLoading extends NotificationState {}
-
 
 class NotificationDetailLoaded extends NotificationState {
   NotificationModel notification;

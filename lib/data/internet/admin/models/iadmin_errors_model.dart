@@ -6,6 +6,7 @@ class IAdminErrorsPaginationModel {
     required this.count,
     required this.results,
   });
+
   late final String hits;
   late final int page;
   late final int pages;
@@ -44,6 +45,7 @@ class IAdminErrorModel {
     required this.error,
     required this.description,
   });
+
   late final String id;
   late final String username;
   late final String date;

@@ -139,8 +139,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                         padding: EdgeInsets.only(right: w * 0.01),
                         child: Icon(
                           FlutterRemix.notification_3_line,
-                          color:
-                              notification.read ? ThemeColors.jet : Colors.white,
+                          color: notification.read
+                              ? ThemeColors.jet
+                              : Colors.white,
                           size: 15,
                         ),
                       )
@@ -148,7 +149,8 @@ class _NotificationScreenState extends State<NotificationScreen> {
                 Expanded(
                     child: Divider(
                   thickness: 1.5,
-                  color: notification.read ? ThemeColors.jet[300] : Colors.white,
+                  color:
+                      notification.read ? ThemeColors.jet[300] : Colors.white,
                 )),
               ],
             ),
@@ -161,8 +163,9 @@ class _NotificationScreenState extends State<NotificationScreen> {
                     child: Text(
                       notification.subject,
                       style: TextStyle(
-                          color:
-                              notification.read ? ThemeColors.jet : Colors.white,
+                          color: notification.read
+                              ? ThemeColors.jet
+                              : Colors.white,
                           fontSize: 16,
                           fontWeight: FontWeight.w700),
                     ),

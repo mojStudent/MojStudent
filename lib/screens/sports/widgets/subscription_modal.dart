@@ -7,7 +7,8 @@ import 'package:moj_student/screens/widgets/modal.dart';
 import 'package:moj_student/services/blocs/sports/sport_bloc.dart';
 
 class SubscriptionModal {
-  static void showModal(BuildContext context, bool cancel, SportSubscriptionModel subscription) {
+  static void showModal(
+      BuildContext context, bool cancel, SportSubscriptionModel subscription) {
     final w = MediaQuery.of(context).size.width;
     final h = MediaQuery.of(context).size.height;
 
@@ -64,7 +65,8 @@ class SubscriptionModal {
                           primary:
                               cancel ? ThemeColors.danger : ThemeColors.primary,
                         ),
-                        onPressed: () => onActionConfirmed(context, subscription, cancel),
+                        onPressed: () =>
+                            onActionConfirmed(context, subscription, cancel),
                         child: Padding(
                           padding: EdgeInsets.symmetric(vertical: h * 0.01),
                           child: Row(
@@ -112,11 +114,16 @@ class SubscriptionModal {
         ));
   }
 
-  static void onActionConfirmed(BuildContext context, SportSubscriptionModel subscription, bool cancel) {
-    if(cancel) {
-      context.read<SportBloc>().add(SportCancelSubscriptionEvent(subscription.id));
+  static void onActionConfirmed(
+      BuildContext context, SportSubscriptionModel subscription, bool cancel) {
+    if (cancel) {
+      context
+          .read<SportBloc>()
+          .add(SportCancelSubscriptionEvent(subscription.id));
     } else {
-      context.read<SportBloc>().add(SportSubscribeSubscriptionEvent(subscription.id));
+      context
+          .read<SportBloc>()
+          .add(SportSubscribeSubscriptionEvent(subscription.id));
     }
 
     Navigator.pop(context);

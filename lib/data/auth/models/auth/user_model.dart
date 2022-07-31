@@ -32,6 +32,7 @@ class UserModel {
     this.subscriptions = const [],
     this.notifications,
   });
+
   int? id;
   String? username;
   String? email;
@@ -150,6 +151,7 @@ class Roles {
     this.role,
     this.count,
   });
+
   int? id;
   String? name;
   bool? internet;
@@ -182,6 +184,7 @@ class Subscriptions {
     this.locked,
     this.selected,
   });
+
   int? id;
   String? name;
   bool? locked;

@@ -4,6 +4,7 @@ import 'package:moj_student/screens/widgets/vertical_slider/vertical_slider_card
 class VerticalSlider extends StatelessWidget {
   final double? height;
   final List<VerticalSLiderCard> cards;
+
   const VerticalSlider({Key? key, required this.cards, this.height})
       : super(key: key);
 

@@ -6,6 +6,7 @@ class InternetAdminUsersPaginationModel {
     required this.count,
     required this.results,
   });
+
   late final int hits;
   late final int page;
   late final int pages;
@@ -59,6 +60,7 @@ class InternetAdminUserModel {
     required this.CRMCategory,
     required this.api,
   });
+
   late final int id;
   late final String username;
   late final String? email;
@@ -146,6 +148,7 @@ class Roles {
     required this.role,
     required this.count,
   });
+
   late final int id;
   late final String name;
   late final bool internet;

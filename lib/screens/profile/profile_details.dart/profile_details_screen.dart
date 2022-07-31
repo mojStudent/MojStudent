@@ -120,4 +120,3 @@ class ProfileDetailsScreen extends StatelessWidget {
     );
   }
 }
-

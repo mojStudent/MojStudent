@@ -14,6 +14,8 @@ import 'package:moj_student/screens/about_app/about_app_screen.dart';
 import 'package:moj_student/screens/damages/damages_screen.dart';
 import 'package:moj_student/screens/dorm_room_services/logbook/logbook_add/logbook_add_screen.dart';
 import 'package:moj_student/screens/dorm_room_services/logbook/logbook_list/logbook_screen.dart';
+import 'package:moj_student/screens/dorm_room_services/overnight_stay/overnight_stay_list/overnight_stay_add/overnight_stay_add_screen.dart';
+import 'package:moj_student/screens/dorm_room_services/overnight_stay/overnight_stay_list/overnight_stay_screen.dart';
 import 'package:moj_student/screens/failures/failure_add_screen.dart';
 import 'package:moj_student/screens/failures/failures_screen.dart';
 import 'package:moj_student/screens/home/home_screen.dart';
@@ -28,11 +30,10 @@ import 'package:moj_student/screens/notifications/notification_screen.dart';
 import 'package:moj_student/screens/notifications/views/notification_detail_view.dart';
 import 'package:moj_student/screens/profile/profile_details.dart/profile_details_screen.dart';
 import 'package:moj_student/screens/profile/profile_screen.dart';
-import 'package:moj_student/screens/restaurant/restaurant_menu_screen.dart';
 import 'package:moj_student/screens/restaurant/restaurant_screen.dart';
-import 'package:moj_student/screens/sports/subscriptions/sport_subscriptions_screen.dart';
-import 'package:moj_student/screens/sports/subscriptions/sport_subscription_detail_screen.dart';
 import 'package:moj_student/screens/sports/sports_screen.dart';
+import 'package:moj_student/screens/sports/subscriptions/sport_subscription_detail_screen.dart';
+import 'package:moj_student/screens/sports/subscriptions/sport_subscriptions_screen.dart';
 import 'package:moj_student/services/blocs/damage-record/damage_record_bloc.dart';
 import 'package:moj_student/services/blocs/failure_record/bloc/failure_record_bloc.dart';
 import 'package:moj_student/services/blocs/home/home_bloc.dart';
@@ -136,6 +137,8 @@ class MyApp extends StatelessWidget {
             '/damages': (context) => DamagesScreen(),
             '/logbook': (context) => LogbookListScreen(),
             '/logbook/new': (context) => LogbookAddScreen(),
+            '/overnight': (context) => OvernightStayScreen(),
+            '/overnight/new': (context) => OvernightStayAddScreen(),
             // profile & about app
             '/profile': (context) => ProfileDetailsScreen(),
             '/profile-settings': (context) => ProfileScreen(),

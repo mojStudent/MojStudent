@@ -1,4 +1,3 @@
-
 import 'package:moj_student/services/blocs/submission/form_submission_status.dart';
 
 class LoginState {

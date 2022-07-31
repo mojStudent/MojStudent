@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_remix/flutter_remix.dart';
 import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/data/internet/models/help/internet_help_master_model.dart';
+import "package:moj_student/helpers/string_extension.dart";
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
-import "package:moj_student/helpers/string_extension.dart";
 
 class InternetHelpMasterView extends StatelessWidget {
   InternetHelpMasterView({Key? key}) : super(key: key);
@@ -71,7 +71,6 @@ class InternetHelpMasterView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         for (var os in osGroup.os)
-
                           Padding(
                             padding: const EdgeInsets.symmetric(vertical: 4),
                             child: GestureDetector(

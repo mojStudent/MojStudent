@@ -95,8 +95,7 @@ class InternetAdminPanelView extends StatelessWidget {
         MenuIconButtonSliver(
           title: "NAS",
           icon: FlutterRemix.database_2_fill,
-          onClick: () =>
-              Navigator.of(context).pushNamed("/internet/admin/nas"),
+          onClick: () => Navigator.of(context).pushNamed("/internet/admin/nas"),
         ),
         // MenuIconButtonSliver(
         //     title: "Prijave", icon: FlutterRemix.login_box_fill),

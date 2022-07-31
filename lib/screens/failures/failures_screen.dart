@@ -43,6 +43,7 @@ class FailuresScreen extends StatelessWidget {
 // ignore: must_be_immutable
 class _FailuresScreen extends StatelessWidget {
   int showPageResult = 1;
+
   _FailuresScreen({Key? key}) : super(key: key);
 
   @override

@@ -4,8 +4,8 @@ extension StringExtension on String {
 
     var s = "";
 
-    for(int i = 0; i < words.length; i++) {
-      if(i != 0) {
+    for (int i = 0; i < words.length; i++) {
+      if (i != 0) {
         s += " ";
       }
       var word = words[i];

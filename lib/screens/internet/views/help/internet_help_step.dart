@@ -8,6 +8,7 @@ import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class InternetHelpDetailView extends StatefulWidget {
   final List<InternetHelpDetailModel> steps;
+
   const InternetHelpDetailView({Key? key, required this.steps})
       : super(key: key);
 
@@ -67,8 +68,16 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
                   curve: Curves.easeIn),
               label: Row(
                 children: [
-                  Icon(Icons.navigate_before, color: Colors.white,),
-                  Text("Nazaj", style: TextStyle(color: Colors.white,),),
+                  Icon(
+                    Icons.navigate_before,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    "Nazaj",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -82,8 +91,16 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
                   curve: Curves.easeIn),
               label: Row(
                 children: [
-                  Text("Naprej", style: TextStyle(color: Colors.white,),),
-                  Icon(Icons.navigate_next, color: Colors.white,),
+                  Text(
+                    "Naprej",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                  Icon(
+                    Icons.navigate_next,
+                    color: Colors.white,
+                  ),
                 ],
               ),
             )
@@ -95,10 +112,8 @@ class _InternetHelpDetailViewState extends State<InternetHelpDetailView> {
 
   Widget _buildStep(
       BuildContext context, InternetHelpDetailModel step, int index) {
-        final h = MediaQuery.of(context).size.height;
-    return CustomScrollView(
-      physics: BouncingScrollPhysics(),
-      slivers: [
+    final h = MediaQuery.of(context).size.height;
+    return CustomScrollView(physics: BouncingScrollPhysics(), slivers: [
       SliverPadding(
         padding: EdgeInsets.only(top: h * 0.04),
         sliver: RowSliver(

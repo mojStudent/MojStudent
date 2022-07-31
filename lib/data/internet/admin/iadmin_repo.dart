@@ -2,10 +2,10 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:moj_student/data/auth/auth_repository.dart';
+import 'package:moj_student/data/internet/admin/exceptions/iadmin_norole_exception.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_errors_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_location_model.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_nas_model.dart';
-import 'package:moj_student/data/internet/admin/exceptions/iadmin_norole_exception.dart';
 import 'package:moj_student/data/internet/admin/models/iadmin_users_model.dart';
 import 'package:moj_student/data/internet/internet_repo.dart';
 import 'package:moj_student/data/internet/models/internet_log_model.dart';
@@ -179,16 +179,15 @@ class InternetAdminRepository extends InternetRepository {
     };
 
     String url = "https://student.sd-lj.si/api/error?page=$page&pp=$perPage";
-    if(username != null) {
+    if (username != null) {
       url += "&username=$username";
     }
 
-    if(description != null) {
+    if (description != null) {
       url += "&description=$description";
     }
 
-    final response = await client.get(Uri.parse(url),
-        headers: headers);
+    final response = await client.get(Uri.parse(url), headers: headers);
 
     if (response.statusCode == 200) {
       var model =

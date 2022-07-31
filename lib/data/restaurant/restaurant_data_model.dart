@@ -5,6 +5,7 @@ class RestaurantDataModel {
     required this.weeklyMenu,
     required this.timetableModel,
   });
+
   late final List<WeeklyMenu> weeklyMenu;
   late final TimetableModel timetableModel;
 
@@ -39,6 +40,7 @@ class WeeklyMenu {
     required this.date,
     required this.menus,
   });
+
   late final String stringDate;
   late final DateTime date;
   late final List<Menus> menus;
@@ -63,6 +65,7 @@ class Menus {
     required this.menuName,
     required this.menuItems,
   });
+
   late final String menuName;
   late final List<String> menuItems;
 
@@ -84,6 +87,7 @@ class TimetableModel {
     required this.bar,
     required this.restaurant,
   });
+
   late final List<Bar> bar;
   late final List<Restaurant> restaurant;
 
@@ -107,6 +111,7 @@ class Bar {
     required this.days,
     required this.hours,
   });
+
   late final String days;
   late final String hours;
 
@@ -128,6 +133,7 @@ class Restaurant {
     required this.days,
     required this.hours,
   });
+
   late final String days;
   late final String hours;
 

@@ -7,6 +7,7 @@ import 'package:moj_student/services/blocs/notification/notification_states.dart
 
 class NotificationListView extends StatelessWidget {
   final NotificationBloc bloc;
+
   const NotificationListView({Key? key, required this.bloc}) : super(key: key);
 
   @override
@@ -18,8 +19,7 @@ class NotificationListView extends StatelessWidget {
       list.add(_buildNotificationRow(d, context));
     }
 
-    return 
-    ListView.builder(
+    return ListView.builder(
       itemCount: list.length,
       itemBuilder: (BuildContext ctxt, int index) {
         return Dismissible(

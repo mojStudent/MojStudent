@@ -9,6 +9,7 @@ class InternetAdminUsersLoadingState extends InternetAdminUsersState {}
 
 class InternetAdminUsersLocationsLoadedState extends InternetAdminUsersState {
   final List<InternetAdminLocationModel> locations;
+
   InternetAdminUsersLocationsLoadedState(this.locations);
 }
 
@@ -51,5 +52,6 @@ class InternetAdminUsersLoadedState
 
 class InternetAdminUsersErrorState extends InternetAdminUsersState {
   final Exception e;
+
   InternetAdminUsersErrorState(this.e);
 }

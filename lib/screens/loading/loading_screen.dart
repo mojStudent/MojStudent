@@ -6,7 +6,10 @@ class LoadingScreen extends StatelessWidget {
   final Color? background;
 
   const LoadingScreen(
-      {Key? key, this.withScaffold = true, this.expanded = false, this.background})
+      {Key? key,
+      this.withScaffold = true,
+      this.expanded = false,
+      this.background})
       : super(key: key);
 
   @override

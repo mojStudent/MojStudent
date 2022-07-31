@@ -15,6 +15,7 @@ class FitnesCardModel {
     required this.orders,
     required this.imageSrc,
   });
+
   late final int id;
   late final Owner owner;
   late final int status;
@@ -29,8 +30,8 @@ class FitnesCardModel {
   late final List<Logs> logs;
   late final List<dynamic> orders;
   late final String imageSrc;
-  
-  FitnesCardModel.fromJson(Map<String, dynamic> json){
+
+  FitnesCardModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     owner = Owner.fromJson(json['owner']);
     status = json['status'];
@@ -42,9 +43,10 @@ class FitnesCardModel {
     price = json['price'];
     priceLabel = json['priceLabel'];
     ordersCount = json['ordersCount'];
-    logs = List.from(json['logs']).map((e)=>Logs.fromJson(e)).toList();
+    logs = List.from(json['logs']).map((e) => Logs.fromJson(e)).toList();
     orders = List.castFrom<dynamic, dynamic>(json['orders']);
-    imageSrc = (json['imageSrc'] ?? "").replaceFirst("data:image/jpg;base64,", "");
+    imageSrc =
+        (json['imageSrc'] ?? "").replaceFirst("data:image/jpg;base64,", "");
   }
 
   Map<String, dynamic> toJson() {
@@ -60,7 +62,7 @@ class FitnesCardModel {
     _data['price'] = price;
     _data['priceLabel'] = priceLabel;
     _data['ordersCount'] = ordersCount;
-    _data['logs'] = logs.map((e)=>e.toJson()).toList();
+    _data['logs'] = logs.map((e) => e.toJson()).toList();
     _data['orders'] = orders;
     _data['imageSrc'] = imageSrc;
     return _data;
@@ -79,6 +81,7 @@ class Owner {
     required this.campus,
     required this.room,
   });
+
   late final int id;
   late final String username;
   late final String email;
@@ -88,8 +91,8 @@ class Owner {
   late final int locationId;
   late final String campus;
   late final String room;
-  
-  Owner.fromJson(Map<String, dynamic> json){
+
+  Owner.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     username = json['username'];
     email = json['email'];
@@ -121,10 +124,11 @@ class Subscription {
     required this.id,
     required this.title,
   });
+
   late final int id;
   late final String title;
-  
-  Subscription.fromJson(Map<String, dynamic> json){
+
+  Subscription.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     title = json['title'];
   }
@@ -143,11 +147,12 @@ class Logs {
     required this.message,
     required this.author,
   });
+
   late final Date date;
   late final String message;
   late final Author author;
-  
-  Logs.fromJson(Map<String, dynamic> json){
+
+  Logs.fromJson(Map<String, dynamic> json) {
     date = Date.fromJson(json['date']);
     message = json['message'];
     author = Author.fromJson(json['author']);
@@ -168,11 +173,12 @@ class Date {
     required this.timezoneType,
     required this.timezone,
   });
+
   late final String date;
   late final int timezoneType;
   late final String timezone;
-  
-  Date.fromJson(Map<String, dynamic> json){
+
+  Date.fromJson(Map<String, dynamic> json) {
     date = json['date'];
     timezoneType = json['timezone_type'];
     timezone = json['timezone'];
@@ -192,10 +198,11 @@ class Author {
     required this.id,
     required this.label,
   });
+
   late final int id;
   late final String label;
-  
-  Author.fromJson(Map<String, dynamic> json){
+
+  Author.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     label = json['label'];
   }

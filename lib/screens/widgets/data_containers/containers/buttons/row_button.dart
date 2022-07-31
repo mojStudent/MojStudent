@@ -4,7 +4,7 @@ class RowButton extends StatelessWidget {
   final IconData? icon;
   final String title;
   final Function onPressed;
-  final ButtonStyle? style; 
+  final ButtonStyle? style;
 
   const RowButton({
     Key? key,

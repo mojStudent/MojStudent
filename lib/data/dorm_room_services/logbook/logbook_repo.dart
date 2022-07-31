@@ -6,9 +6,6 @@ import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_add_o
 import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_list_model.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_model.dart';
 import 'package:moj_student/data/exceptions/empty_data_exception.dart';
-import 'package:moj_student/data/failure_records/failure_record_model.dart';
-import 'package:moj_student/data/failure_records/new_failure_model.dart';
-import 'package:moj_student/data/failure_records/new_failure_options_model.dart';
 import 'package:moj_student/services/interceptors/token_expired_inetrecptor.dart';
 
 class LogbookRepo {

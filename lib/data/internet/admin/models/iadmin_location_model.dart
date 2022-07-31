@@ -7,14 +7,15 @@ class InternetAdminLocationModel {
     required this.label,
     required this.home,
   });
+
   late final int id;
   late final String name;
   late final int users;
   late final String campus;
   late final String label;
   late final bool home;
-  
-  InternetAdminLocationModel.fromJson(Map<String, dynamic> json){
+
+  InternetAdminLocationModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     users = json['users'];

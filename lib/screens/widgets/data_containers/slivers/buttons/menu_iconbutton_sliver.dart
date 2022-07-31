@@ -42,7 +42,7 @@ class MenuIconButtonSliver extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10)),
                 child: Icon(
                   icon,
-                  color:  Colors.white,
+                  color: Colors.white,
                   size: 20,
                 ),
               ),

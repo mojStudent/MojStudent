@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moj_student/data/restaurant/restaurant_data_model.dart';
-import 'package:moj_student/screens/widgets/accordion/accordion.dart';
-import 'package:moj_student/screens/widgets/box_widget.dart';
 import 'package:moj_student/helpers/compare_dates_only.dart';
+import 'package:moj_student/screens/widgets/accordion/accordion.dart';
 import 'package:moj_student/screens/widgets/data_containers/containers/row_container.dart';
 import 'package:moj_student/screens/widgets/screen_header.dart';
 
 class RestaurantMenuScreen extends StatelessWidget {
   final List<WeeklyMenu> weeklyMenu;
+
   const RestaurantMenuScreen({Key? key, required this.weeklyMenu})
       : super(key: key);
 

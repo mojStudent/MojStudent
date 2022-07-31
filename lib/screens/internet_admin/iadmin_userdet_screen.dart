@@ -281,7 +281,8 @@ class InternetAdminUserDetailScreen extends StatelessWidget {
     );
   }
 
-  Widget _connectionTab(BuildContext context, List<InternetConnectionLogModel> data) {
+  Widget _connectionTab(
+      BuildContext context, List<InternetConnectionLogModel> data) {
     return InternetLogLoadedView(connections: data);
   }
 }

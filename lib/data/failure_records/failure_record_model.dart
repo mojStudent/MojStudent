@@ -9,6 +9,7 @@ class FailurePaginationModel {
     required this.pages,
     required this.results,
   });
+
   late final int count;
   late final int hits;
   late final int pp;
@@ -53,6 +54,7 @@ class FailureModel {
     required this.description,
     required this.status,
   });
+
   late final String id;
   late final String location;
   late final String subLocation;

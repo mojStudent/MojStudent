@@ -35,7 +35,6 @@ class InternetAdminUserDetBloc
           traffic: traffic,
           connections: connections,
         ));
-        
       } catch (e) {
         emit(InternetAdminUserDetErrorState(e as Exception));
       }

@@ -21,13 +21,10 @@ class LoadedData extends HomeState {
   }
 }
 
-class LoadingDataError extends HomeState{
+class LoadingDataError extends HomeState {
   Exception e;
 
   LoadingDataError({required this.e});
 }
 
-enum LoadedDataTab {
-  MENU,
-  PROFILE
-}
+enum LoadedDataTab { MENU, PROFILE }

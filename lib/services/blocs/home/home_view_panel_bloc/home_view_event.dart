@@ -5,5 +5,6 @@ abstract class HomeViewEvent {}
 
 class HomeViewChangeViewEvent extends HomeViewEvent {
   final int panelIndex;
+
   HomeViewChangeViewEvent(this.panelIndex);
 }

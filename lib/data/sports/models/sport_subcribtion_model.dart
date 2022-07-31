@@ -17,6 +17,7 @@ class SportSubscriptionModel {
     required this.manager,
     required this.attachments,
   });
+
   late final int id;
   late final int capacity;
   late final int sold;
@@ -33,8 +34,8 @@ class SportSubscriptionModel {
   late final bool subscribed;
   late final bool manager;
   late final List<dynamic> attachments;
-  
-  SportSubscriptionModel.fromJson(Map<String, dynamic> json){
+
+  SportSubscriptionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     capacity = json['capacity'];
     sold = json['sold'];

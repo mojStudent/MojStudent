@@ -2,7 +2,6 @@ import 'package:moj_student/services/blocs/submission/form_submission_status.dar
 
 abstract class LoginEvent {}
 
-
 class LoginUsernameChanged extends LoginEvent {
   final String username;
 

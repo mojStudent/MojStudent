@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:moj_student/constants/colors.dart';
-import 'package:moj_student/data/sports/models/fitnes_card_model.dart';
 import 'package:moj_student/screens/loading/loading_screen.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/category_name_sliver.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/text_row_sliver.dart';

@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/logbook_repo.dart';
-import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_add_options_model.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_model.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_sublocation_model.dart';
 import 'package:moj_student/data/dorm_room_services/logbook/models/logbook_vandal_type.dart';
