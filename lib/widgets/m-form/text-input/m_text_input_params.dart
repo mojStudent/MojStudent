@@ -78,7 +78,7 @@ class MTextInputParams extends MInputParams<String> {
     required String title,
     String initialValue = "",
     IconData? icon,
-    List<MInputValidator> validators = const [],
+    List<MInputValidator>? validators,
     required Function(String) onValueChanged,
     this.placeholder,
     this.obscuredText = false,
@@ -88,12 +88,12 @@ class MTextInputParams extends MInputParams<String> {
     this.maxLines,
     this.minLines,
   }) : super(
-            title: title,
-            initialValue: initialValue,
-            onValueChanged: onValueChanged,
-            icon: icon,
-            validators: validators) {
-    this.validators = validators ?? [];
-    this.validators.add(NotNullValidator());
+          title: title,
+          initialValue: initialValue,
+          onValueChanged: onValueChanged,
+          icon: icon,
+        ) {
+    super.validators = validators ?? [];
+    super.validators.add(NotEmptyValidator());
   }
 }
