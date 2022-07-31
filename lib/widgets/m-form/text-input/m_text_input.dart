@@ -60,7 +60,9 @@ class _MInputWithBloc extends MInputWithBloc<String, MTextInputParams> {
         hintText: params.placeholder,
       ),
       onChanged: (value) {
-        context.read<MInputBloc>().add(MInputOnValueChangedEvent(state, value));
+        context
+            .read<MInputBloc<String>>()
+            .add(MInputOnValueChangedEvent<String>(state, value));
         params.onValueChanged(value);
       },
       obscureText: params.obscuredText,
