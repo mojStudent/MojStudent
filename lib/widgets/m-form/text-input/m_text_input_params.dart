@@ -15,51 +15,41 @@ class MTextInputParams extends MInputParams<String> {
   final int? maxLength;
 
   MTextInputParams({
-    required String title,
-    String initialValue = "",
+    required super.title,
+    super.initialValue = "",
     this.placeholder,
-    IconData? icon,
-    List<MInputValidator> validators = const [],
-    required Function(String) onValueChanged,
+    super.icon,
+    super.validators = const [],
+    required super.onValueChanged,
     this.obscuredText = false,
     this.keyboardType = TextInputType.text,
     this.textInputFormatters = const [],
     this.maxLength,
     this.maxLines = 1,
     this.minLines,
-  }) : super(
-            title: title,
-            initialValue: initialValue,
-            onValueChanged: onValueChanged,
-            icon: icon,
-            validators: validators);
+  });
 
   MTextInputParams.password({
-    required String title,
-    String initialValue = "",
+    required super.title,
+    super.initialValue = "",
     this.placeholder,
-    IconData? icon,
-    List<MInputValidator> validators = const [],
-    required Function(String) onValueChanged,
+    super.icon,
+    super.validators = const [],
+    required super.onValueChanged,
     this.keyboardType = TextInputType.text,
     this.textInputFormatters = const [],
     this.maxLength,
     this.maxLines = 1,
     this.minLines,
     this.obscuredText = true,
-  }) : super(
-            title: title,
-            initialValue: initialValue,
-            onValueChanged: onValueChanged,
-            icon: icon,
-            validators: validators);
+  });
 
   MTextInputParams.multiline({
-    required String title,
-    String initialValue = "",
-    IconData? icon,
-    List<MInputValidator> validators = const [],
-    required Function(String) onValueChanged,
+    required super.title,
+    super.initialValue = "",
+    super.icon,
+    super.validators = const [],
+    required super.onValueChanged,
     this.placeholder,
     this.obscuredText = false,
     this.keyboardType = TextInputType.multiline,
@@ -67,19 +57,14 @@ class MTextInputParams extends MInputParams<String> {
     this.maxLength,
     this.maxLines,
     this.minLines,
-  }) : super(
-            title: title,
-            initialValue: initialValue,
-            onValueChanged: onValueChanged,
-            icon: icon,
-            validators: validators);
+  });
 
   MTextInputParams.required({
-    required String title,
-    String initialValue = "",
-    IconData? icon,
-    List<MInputValidator>? validators,
-    required Function(String) onValueChanged,
+    required super.title,
+    super.initialValue = "",
+    super.icon,
+    List<MInputValidator<String>>? validators,
+    required super.onValueChanged,
     this.placeholder,
     this.obscuredText = false,
     this.keyboardType = TextInputType.text,
@@ -87,12 +72,7 @@ class MTextInputParams extends MInputParams<String> {
     this.maxLength,
     this.maxLines,
     this.minLines,
-  }) : super(
-          title: title,
-          initialValue: initialValue,
-          onValueChanged: onValueChanged,
-          icon: icon,
-        ) {
+  }) {
     super.validators = validators ?? [];
     super.validators.add(NotEmptyValidator());
   }

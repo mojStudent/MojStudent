@@ -55,8 +55,8 @@ class _MInputWithBloc extends MInputWithBloc<DateTime, MDatepickerParams> {
     final pickedDate = await showDatePicker(
       context: context,
       initialDate: params.initialValue,
-      firstDate: params.initialValue,
-      lastDate: DateTime(2022, 12, 31),
+      firstDate: params.firstDate,
+      lastDate: params.lastDate,
     );
 
     if (pickedDate != null) {
