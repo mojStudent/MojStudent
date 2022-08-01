@@ -5,12 +5,19 @@ class LoadingScreen extends StatelessWidget {
   final bool expanded;
   final Color? background;
 
-  const LoadingScreen(
-      {Key? key,
-      this.withScaffold = true,
-      this.expanded = false,
-      this.background})
-      : super(key: key);
+  const LoadingScreen({
+    Key? key,
+    this.withScaffold = true,
+    this.expanded = false,
+    this.background,
+  }) : super(key: key);
+
+  const LoadingScreen.noScaffold({
+    Key? key,
+    this.expanded = false,
+    this.background,
+  })  : withScaffold = false,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
