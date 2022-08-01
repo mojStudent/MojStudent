@@ -34,7 +34,7 @@ class _MInputWithBloc extends MInputWithBloc<String, MTextInputParams> {
     return [_inputStack(context, state)];
   }
 
-  Widget _inputStack(BuildContext context, MInputValueState state) {
+  Widget _inputStack(BuildContext context, MInputValueState<String> state) {
     return Stack(
       alignment: Alignment.centerRight,
       children: [
@@ -50,7 +50,8 @@ class _MInputWithBloc extends MInputWithBloc<String, MTextInputParams> {
     );
   }
 
-  TextFormField _inputWidget(BuildContext context, MInputValueState state) {
+  TextFormField _inputWidget(
+      BuildContext context, MInputValueState<String> state) {
     return TextFormField(
       decoration: InputDecoration(
         hintText: params.placeholder,

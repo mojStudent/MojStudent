@@ -1,70 +1,75 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_remix/flutter_remix.dart';
+import 'package:moj_student/constants/colors.dart';
 import 'package:moj_student/screens/widgets/data_containers/slivers/row_sliver.dart';
 import 'package:moj_student/widgets/m-form/bloc/m_input_bloc.dart';
 import 'package:moj_student/widgets/m-form/datepicker/m_datepicker_params.dart';
 import 'package:moj_student/widgets/m-form/m_input_abstract.dart';
+import 'package:intl/intl.dart';
 
-class MDatepicker extends MInput<MDatepickerParams> {
-  MDatepicker({required super.params});
+class MDatepicker extends MInput<DateTime, MDatepickerParams> {
+  MDatepicker({required super.params, super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => MInputBloc<DateTime>(),
-      child: BlocBuilder<MInputBloc, MInputState>(
-        builder: (context, state) {
-          var _bloc = _MInputWithBloc(
-            params: params,
-            validListener: validListener,
-          );
-
-          return _bloc;
-        },
-      ),
-    );
-  }
+  MInputWithBloc<DateTime, MDatepickerParams> blocChild() => _MInputWithBloc(
+        params: super.params,
+        validListener: super.validListener,
+      );
 }
 
-class _MInputWithBloc extends StatelessWidget {
-  final MDatepickerParams params;
-  final Function(bool)? validListener;
-
-  const _MInputWithBloc({
-    Key? key,
-    required this.params,
-    this.validListener,
-  }) : super(key: key);
+class _MInputWithBloc extends MInputWithBloc<DateTime, MDatepickerParams> {
+  _MInputWithBloc({
+    super.key,
+    required super.params,
+    super.validListener,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    var state = context.read<MInputBloc>().state;
-    if (validListener != null && state is MInputValueState) {
-      validListener!(state.errors.isEmpty);
-    }
+  List<Widget> buildBody(
+      BuildContext context, MInputValueState<DateTime> state) {
+    return [
+      Row(
+        children: [
+          Expanded(
+            child: TextFormField(
+              enabled: false,
+              decoration: InputDecoration(
+                hintText: DateFormat("dd. MM. yyyy", "sl").format(state.value),
+              ),
+            ),
+          ),
+          IconButton(
+              onPressed: () => selectDate(context),
+              icon: Icon(
+                FlutterRemix.calendar_line,
+                color: ThemeColors.jet,
+              ))
+        ],
+      )
+    ];
+  }
 
-    return RowSliver(
-        title: params.title,
-        icon: params.icon,
-        child: BlocBuilder<MInputBloc, MInputState>(
-          builder: (context, state) {
-            if (state is MInputInitialState) {
-              context.read<MInputBloc>().add(
-                MInputOnValueChangedEvent(
-                    MInputValueState(params.initialValue,
-                        validators: params.validators),
-                    params.initialValue),
-              );
-              return Container();
-            } else {
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                ],
-              );
-            }
-          },
-        ));
+  Future<void> selectDate(BuildContext context) async {
+    final pickedDate = await showDatePicker(
+      context: context,
+      initialDate: params.initialValue,
+      firstDate: params.initialValue,
+      lastDate: DateTime(2022, 12, 31),
+    );
+
+    if (pickedDate != null) {
+      final state = context.read<MInputBloc<DateTime>>().state
+          as MInputValueState<DateTime>;
+
+      context
+          .read<MInputBloc<DateTime>>()
+          .add(MInputOnValueChangedEvent<DateTime>(state, pickedDate));
+
+      // if (validListener != null) {
+      //   validListener!(pickedDate);
+      // }
+    }
   }
 }

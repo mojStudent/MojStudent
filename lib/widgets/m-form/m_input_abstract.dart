@@ -15,7 +15,7 @@ class MInput<T, P extends MInputParams> extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-        create: (context) => MInputBloc<String>(), child: blocChild());
+        create: (context) => MInputBloc<T>(), child: blocChild());
   }
 
   MInputWithBloc<T, P> blocChild() => MInputWithBloc<T, P>(

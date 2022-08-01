@@ -4,13 +4,13 @@ part of 'm_input_bloc.dart';
 abstract class MInputEvent<T> {}
 
 class MInputOnValueChangedEvent<T> extends MInputEvent<T> {
-  final MInputValueState state;
+  final MInputValueState<T> state;
   final T changedValue;
 
   MInputOnValueChangedEvent(this.state, this.changedValue);
 
   MInputOnValueChangedEvent<T> copyWith(
-          MInputValueState? state, T? changedValue) =>
+          MInputValueState<T>? state, T? changedValue) =>
       MInputOnValueChangedEvent<T>(
         state ?? this.state,
         changedValue ?? this.changedValue,
