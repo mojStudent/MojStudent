@@ -46,10 +46,12 @@ import 'package:moj_student/services/internet/admin/nas/iadmin_nas_bloc.dart';
 import 'package:moj_student/services/internet/admin/users/iadmin_users_bloc.dart';
 import 'package:moj_student/services/internet/internet_help/internet_help_bloc.dart';
 import 'package:moj_student/services/internet/internet_traffic/internet_traffic_bloc.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(statusBarIconBrightness: Brightness.light));
+  initializeDateFormatting('sl');
   runApp(MyApp());
 }
 
